@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Doctor;
 
 class DoctorController extends Controller
 {
@@ -17,7 +18,7 @@ class DoctorController extends Controller
         ]);
 
 
-        $channellingcenter = ChannellingCenter::create([
+        $doctor = Doctor::create([
             'doctorName' => $validatedData['doctorName'],
             'doctorDistrict' => $validatedData['doctorDistrict'],
             'doctorCity' => $validatedData['doctorCity'],
@@ -35,7 +36,7 @@ class DoctorController extends Controller
         $district = $request->input('doctorDistrict');
         $city = $request->input('doctorCity');
 
-        $query = ChannellingCenter::query();
+        $query = Doctor::query();
 
         if ($district) {
             $query->where('doctorDistrict', $district);

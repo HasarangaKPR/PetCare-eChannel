@@ -9,7 +9,7 @@ class DoctorAppointment extends Model
 {
     use HasFactory;
 
-    //protected $table = 'doctorappointments';
+    protected $table = 'doctorappointments';
 
     protected $fillable = [
         'appointmentId',

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\DoctorAppointment;
 
 class DoctorAppointmentController extends Controller
 {
@@ -17,10 +18,10 @@ class DoctorAppointmentController extends Controller
         'status' => 'required|string|max:255',
         ]);
 
-        $channellingCenterId = $request->input('doctorId');
+        $doctorId = $request->input('doctorId');
         $date = $request->input('date');
         $time = $request->input('time');
-        $isBooked = ChannellingCenterAppointment::where('doctorId', $channellingCenterId)->where('date', $date)->where('time', $time)->exists();
+        $isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)->where('time', $time)->exists();
 
         if($isBooked){
             return response()->json(['success' => false , 'message' => 'This time is not available yet.']);
@@ -45,7 +46,7 @@ class DoctorAppointmentController extends Controller
     {
         $channellingCenterId = $request->input('doctorId');
 
-        $appointments = ChannellingCenterAppointment::where('doctorId', $channellingCenterId)->get();
+        $appointments = DoctorAppointment::where('doctorId', $channellingCenterId)->get();
         return response()->json(['appointments' => $appointments]);
     }
     
@@ -53,7 +54,7 @@ class DoctorAppointmentController extends Controller
     {
         $userId = $request->input('userId');
 
-        $appointments = ChannellingCenterAppointment::where('userId', $userId)->get();
+        $appointments = DoctorAppointment::where('userId', $userId)->get();
         return response()->json(['appointments' => $appointments]);
     }
 }

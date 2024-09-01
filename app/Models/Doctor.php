@@ -9,7 +9,7 @@ class Doctor extends Model
 {
     use HasFactory;
 
-    //protected $table = 'channellingcenters';
+    protected $table = 'doctors';
 
     protected $fillable = [
         'doctorName',

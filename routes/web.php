@@ -4,6 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\DoctorAppointmentController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
