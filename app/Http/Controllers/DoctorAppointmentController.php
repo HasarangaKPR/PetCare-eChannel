@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DoctorAppointment;
+use Carbon\Carbon;
 
 class DoctorAppointmentController extends Controller
 {
@@ -14,14 +15,22 @@ class DoctorAppointmentController extends Controller
         'userId' => 'required|string|max:255',
         'doctorId' => 'required|string|max:255',
         'date' => 'required|date',
-        'time' => 'required|date_format:H:i',
+        'appointmentTime' => 'required|date_format:H:i',
         'status' => 'required|string|max:255',
         ]);
 
+
+        //Set end time for the appointment
+        $averageTime=10;
+        $appointmentTime = $request->input('appointmentTime');
+        $appointmentTime = Carbon::createFromFormat('H:i', $appointmentTime);
+        $endTime = $appointmentTime->copy()->addMinutes($averageTime);
+
+        // Check if the time slot is already booked
         $doctorId = $request->input('doctorId');
         $date = $request->input('date');
-        $time = $request->input('time');
-        $isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)->where('time', $time)->exists();
+        $appointmentTime = $request->input('appointmentTime');
+        $isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)->where('appointmentTime', $appointmentTime)->exists();
 
         if($isBooked){
             return response()->json(['success' => false , 'message' => 'This time is not available yet.']);
@@ -32,7 +41,8 @@ class DoctorAppointmentController extends Controller
             'userId' => $validatedData['userId'],
             'doctorId' => $validatedData['doctorId'],
             'date' => $validatedData['date'],
-            'time' => $validatedData['time'],
+            'appointmentTime' => $validatedData['appointmentTime'],
+            'endTime' => $endTime,
             'status' => $validatedData['status'],
             
         ]);
@@ -44,7 +54,7 @@ class DoctorAppointmentController extends Controller
 
     public function displayToDoctorAppointment(Request $request)
     {
-        $channellingCenterId = $request->input('doctorId');
+        $doctorId = $request->input('doctorId');
 
         $appointments = DoctorAppointment::where('doctorId', $channellingCenterId)->get();
         return response()->json(['appointments' => $appointments]);

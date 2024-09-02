@@ -16,7 +16,8 @@ class DoctorAppointment extends Model
         'userId',
         'doctorId',
         'date',
-        'time',
+        'appointmentTime',
+        'endTime',
         'status',
     ];
 }
