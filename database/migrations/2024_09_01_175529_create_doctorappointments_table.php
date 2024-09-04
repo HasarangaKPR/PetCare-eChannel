@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('doctorId');
             $table->date('date');
             $table->time('appointmentTime');
-            $table->time('endTime')->default('12:00');
+            $table->time('endTime');
             $table->string('status');
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DoctorAppointment;
+use App\Models\Doctor;
 use Carbon\Carbon;
 
 class DoctorAppointmentController extends Controller
@@ -21,7 +22,8 @@ class DoctorAppointmentController extends Controller
 
 
         //Set end time for the appointment
-        $averageTime=10;
+        $doctorId = $request->input('doctorId');
+        $averageTime=Doctor::where('doctorId', $doctorId)->value('averageTime');
         $appointmentTime = $request->input('appointmentTime');
         $appointmentTime = Carbon::createFromFormat('H:i', $appointmentTime);
         $endTime = $appointmentTime->copy()->addMinutes($averageTime);
@@ -30,7 +32,10 @@ class DoctorAppointmentController extends Controller
         $doctorId = $request->input('doctorId');
         $date = $request->input('date');
         $appointmentTime = $request->input('appointmentTime');
-        $isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)->where('appointmentTime', $appointmentTime)->exists();
+        //$isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)->where('appointmentTime', $appointmentTime)->exists();
+        $isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)
+        ->whereRaw('appointmentTime < ? AND endTime > ?', [$endTime, $appointmentTime])->exists();
+        
 
         if($isBooked){
             return response()->json(['success' => false , 'message' => 'This time is not available yet.']);
@@ -56,7 +61,7 @@ class DoctorAppointmentController extends Controller
     {
         $doctorId = $request->input('doctorId');
 
-        $appointments = DoctorAppointment::where('doctorId', $channellingCenterId)->get();
+        $appointments = DoctorAppointment::where('doctorId', $doctorId)->get();
         return response()->json(['appointments' => $appointments]);
     }
     

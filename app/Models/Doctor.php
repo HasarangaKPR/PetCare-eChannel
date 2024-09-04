@@ -17,5 +17,6 @@ class Doctor extends Model
         'doctorCity',
         'doctorContactNumber',
         'doctorEmail',
+        'averageTime',
     ];
 }
