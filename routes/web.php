@@ -27,6 +27,26 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/systemadmin/dashboard', function () {
+    return Inertia::render('SystemAdmin/SAdashboard');
+})->name('systemadmin.dashboard');
+
+Route::get('/systemadmin/profile', function () {
+    return Inertia::render('SystemAdmin/SAProfile');
+})->name('systemadmin.profile');
+
+Route::get('/systemadmin/doctors', function () {
+    return Inertia::render('SystemAdmin/SADoctors');
+})->name('systemadmin.doctors');
+
+Route::get('/systemadmin/daycare-admin', function () {
+    return Inertia::render('SystemAdmin/SADaycareAdmin');
+})->name('systemadmin.daycareadmin');
+
+Route::get('/systemadmin/users', function () {
+    return Inertia::render('SystemAdmin/SAUsers');
+})->name('systemadmin.users');
+
 require __DIR__.'/auth.php';
 
 //Add or Display Users
