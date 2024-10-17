@@ -16,6 +16,8 @@ class DoctorController extends Controller
         'doctorContactNumber' => 'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
         'doctorEmail' => 'required|string|email|max:255',
         'averageTime' => 'required|integer',
+        'openTime' => 'required|date_format:H:i',
+        'closeTime' => 'required|date_format:H:i',
         ]);
 
 
@@ -25,7 +27,9 @@ class DoctorController extends Controller
             'doctorCity' => $validatedData['doctorCity'],
             'doctorContactNumber' => $validatedData['doctorContactNumber'],
             'doctorEmail' => $validatedData['doctorEmail'],
-            'averageTime' => $validatedData['averageTime'],            
+            'averageTime' => $validatedData['averageTime'],   
+            'openTime' => $validatedData['openTime'],  
+            'closeTime' => $validatedData['closeTime'], 
         ]);
 
         //return redirect()->route('dashboard')->with('success', 'Added successfully.');

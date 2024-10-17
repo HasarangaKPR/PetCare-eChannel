@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('doctorContactNumber');
             $table->string('doctorEmail');
             $table->integer('averageTime');
+            $table->time('openTime');
+            $table->time('closeTime');
             $table->timestamps();
         });
     }

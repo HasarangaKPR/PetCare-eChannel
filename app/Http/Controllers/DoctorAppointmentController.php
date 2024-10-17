@@ -28,16 +28,26 @@ class DoctorAppointmentController extends Controller
         $appointmentTime = Carbon::createFromFormat('H:i', $appointmentTime);
         $endTime = $appointmentTime->copy()->addMinutes($averageTime);
 
+        
         // Check if the time slot is already booked
         $doctorId = $request->input('doctorId');
         $date = $request->input('date');
         $appointmentTime = $request->input('appointmentTime');
+
+        
         //$isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)->where('appointmentTime', $appointmentTime)->exists();
+        
         $isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)
         ->whereRaw('appointmentTime < ? AND endTime > ?', [$endTime, $appointmentTime])->exists();
-        
 
-        if($isBooked){
+
+        //Set open time and close time for the doctor
+        $openTime = Doctor::where('doctorId', $doctorId)->value('openTime');
+        $closeTime = Doctor::where('doctorId', $doctorId)->value('closeTime');
+        
+        
+        // Check if the appointment time is within the doctor's working and available time
+        if($isBooked || $appointmentTime < $openTime || $appointmentTime > $closeTime){
             return response()->json(['success' => false , 'message' => 'This time is not available yet.']);
         }else{
 
