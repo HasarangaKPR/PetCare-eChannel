@@ -1,0 +1,54 @@
+/* Basic styling */
+.sidelist-container {
+    background-color: white;
+    color: black;
+    height: 100vh;
+    width: 250px;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidelist-container ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidelist-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Icon color when not selected (gray) */
+.sidelist-item-icon {
+    margin-right: 10px;
+    color:#737B83;
+}
+
+/* Default link style */
+.sidelist-item a {
+    text-decoration: none;
+    color: #737B83; /* Gray color for the text when not selected */
+    font-weight: 500;
+}
+
+/* Hover effect */
+.sidelist-item:hover {
+    background-color: #DEF2F1;
+}
+
+/* Active (selected) link style */
+.sidelist-item.active {
+    background-color: #156862; /* Green highlight for selected link */
+    color: white; /* Change text color to white when selected */
+}
+
+/* Active link text and icon color */
+.sidelist-item.active a,
+.sidelist-item.active .sidelist-item-icon {
+    color: white; /* Text and icon change to white when selected */
+}
