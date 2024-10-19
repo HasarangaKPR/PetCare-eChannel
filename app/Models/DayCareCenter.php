@@ -9,7 +9,7 @@ class DayCareCenter extends Model
 {
     use HasFactory;
 
-    //protected $table = 'daycarecenters';
+    protected $table = 'daycarecenters';
 
     protected $fillable = [
         'dayCareCenterName',
