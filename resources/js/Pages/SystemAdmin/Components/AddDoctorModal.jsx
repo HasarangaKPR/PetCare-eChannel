@@ -79,7 +79,7 @@ const AddDoctorModal = ({ isOpen, onClose, onAddDoctor }) => {
                             type="submit"
                             className="bg-[#22AAA1] text-white py-2 px-4 rounded hover:bg-[#156862] transition-colors"
                         >
-                            Add Doctor
+                            Add
                         </button>
                     </div>
                 </form>

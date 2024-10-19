@@ -23,7 +23,7 @@ const SideList = () => {
                 </li>
                 <li className={`sidelist-item ${url === '/systemadmin/daycare-admin' ? 'active' : ''}`}>
                     <FaHospital className="sidelist-item-icon" />
-                    <Link href="/systemadmin/daycare-admin">Daycare Admins</Link>
+                    <Link href="/systemadmin/daycare-admin">Daycare</Link>
                 </li>
                 <li className={`sidelist-item ${url === '/systemadmin/users' ? 'active' : ''}`}>
                     <FaUsers className="sidelist-item-icon" />
