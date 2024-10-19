@@ -12,7 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pet_ads', function (Blueprint $table) {
-            $table->id();
+            $table->id('adId');
+            $table->string('name');
+            $table->string('address');
+            $table->string('breed');
+            $table->text('description');
+            $table->string('contactnumber');
+            $table->decimal('price',8,2);
             $table->timestamps();
         });
     }
