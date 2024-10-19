@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorAppointmentController;
 use App\Http\Controllers\DayCareCenterController;
+use App\Http\Controllers\DayCareCenterBookingController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -26,3 +27,8 @@ Route::get('/displayToUserDoctorAppointment', [DoctorAppointmentController::clas
 
 //Add DayCareCenter & Search DayCareCenter
 Route::post('/addDayCareCenter', [DayCareCenterController::class, 'addDayCareCenter'])->name('addDayCareCenter');
+
+//Add DayCareCenter Appointments
+Route::post('/addDayCareCenterBooking', [DayCareCenterBookingController::class, 'addDayCareCenterBooking'])->name('addDayCareCenterBooking');
+//Route::get('/displayToDayCareCenterAppointment', [DayCareCenterAppointmentController::class, 'displayToDayCareCenterAppointment'])->name('displayToDayCareCenterAppointment');
+//Route::get('/displayToUserDayCareCenterAppointment', [DayCareCenterAppointmentController::class, 'displayToUserDayCareCenterAppointment'])->name('displayToUserDayCareCenterAppointment');
