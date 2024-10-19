@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use App\Models\User;
 
 class DoctorController extends Controller
 {
@@ -52,5 +53,10 @@ class DoctorController extends Controller
         $doctors = $query->get();
 
         return response()->json(['doctors' => $doctors]);
+    }
+    public function index()
+    {
+        $doctors = User::all();
+        return response()->json(['users' => $doctors]);
     }
 }
