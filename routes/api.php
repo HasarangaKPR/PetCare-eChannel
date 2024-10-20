@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 
 //add pet ad
 Route::post('/createAd',[PetAdController::class, 'createAd'])->name('createAd');
+//Route::post('/createAd','PetAdController@createAd');
