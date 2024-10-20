@@ -15,7 +15,7 @@ class PetAdController extends Controller
         'breed' => 'required',
         'description' => 'required|string|max:255',
         'contactnumber'=>'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
-        'price' => 'required|decimal',
+        'price' => 'required|decimal:2',
         //'image' => 'image|max:2048', // Validate image
     ]);
 
