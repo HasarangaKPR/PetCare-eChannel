@@ -28,6 +28,6 @@ class PetAdController extends Controller
         'price' => $validated['price'],
 
     ]);
-    return response()->json(['success'=>true]);    
+    return response()->json(['success'=>true,'message' => 'Ad posted successfully']);    
     }
 }
