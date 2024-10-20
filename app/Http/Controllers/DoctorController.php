@@ -54,9 +54,9 @@ class DoctorController extends Controller
 
         return response()->json(['doctors' => $doctors]);
     }
-    public function index()
-    {
-        $doctors = User::all();
-        return response()->json(['users' => $doctors]);
-    }
+    public function viewDoctors()
+{
+    $doctors = User::where('userType', 'doctor')->get();
+    return response()->json(['users' => $doctors]);
+}
 }

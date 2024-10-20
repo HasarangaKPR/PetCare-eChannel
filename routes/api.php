@@ -19,7 +19,7 @@ Route::get('/allUsers', [UserController::class, 'allUsers'])->name('allUsers');
 //Add Doctors & Search Doctors
 Route::post('/addDoctor', [DoctorController::class, 'addDoctor'])->name('addDoctor');
 Route::get('/searchDoctor', [DoctorController::class, 'searchDoctor'])->name('searchDoctor');
-Route::get('/viewDoctors', [DoctorController::class, 'index'])->name('viewDoctors');
+Route::get('/viewDoctors', [DoctorController::class, 'viewDoctors'])->name('viewDoctors');
 
 //Add Doctors Appointments
 Route::post('/addDoctorAppointment', [DoctorAppointmentController::class, 'addDoctorAppointment'])->name('addDoctorAppointment');
