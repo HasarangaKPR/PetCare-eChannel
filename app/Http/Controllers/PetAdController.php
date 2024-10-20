@@ -9,6 +9,7 @@ class PetAdController extends Controller
 {
     public function createAd(Request $request)
     {
+        $petAd= new PetAd();
     $validated = $request->validate([
         'name' => 'required|string|max:255',
         'address' => 'required|string|max:255',
@@ -28,6 +29,7 @@ class PetAdController extends Controller
         'price' => $validated['price'],
 
     ]);
+    $petAd->save();
     return response()->json(['success'=>true,'message' => 'Ad posted successfully']);    
     }
     public function updateAd(Request $request){
@@ -53,18 +55,18 @@ class PetAdController extends Controller
         return response()->json(['success'=>true,'message' => 'Ad updated successfully']);
 
     }
-    public function ediAd(Request $request){
+    public function ediAd(){
 
     }
-    public function showAd(Request $request){
-
+    public function showAd(){
+        $petAd = PetAd::all();
     }
     public function destroyAd(PetAd $petAd){
         $petAd->delete();
         return response()->json(['success'=>true,'message' => 'Ad delete successfully']);
     }
     public function index(){
-         // Retrieve all th ads from the database
+         // Retrieve all the ads from the database
          PetAd::all();
     }
 }
