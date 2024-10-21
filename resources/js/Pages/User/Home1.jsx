@@ -1,12 +1,12 @@
 import { Link, Head } from '@inertiajs/react';
-import banner from './Assets/banner.png';
+import banner1 from './Assets/banner01.png';
 import logo from './Assets/image.png';
 import icon1 from './Assets/Ellipse 4-1.png';
 import icon2 from './Assets/Ellipse 4-2.png';
 import icon3 from './Assets/Ellipse 4.png';
 import icon4 from './Assets/Ellipse 6.png';
-import SearchBar from './Components/SearchBar';
 import BlogSection from './Components/BlogSection';
+import SearchBarDoctor from './Components/SearchBarDoctor';
 
 export default function Home1({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
@@ -39,6 +39,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                                         <Link
                                             href={route('login')}
                                             className="px-3 py-2 text-[#22AAA1] hover:text-white"
+                            
                                         >
                                             Appointments
                                         </Link>
@@ -89,7 +90,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
 
                         <main className=" "> {/* Added padding to the main content */}
                             <img
-                                    src={banner}
+                                    src={banner1}
                                     alt="Banner Image"
                                     className="w-full h-auto object-cover"
                             />
@@ -97,7 +98,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                             {/* Cards Section */}
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 px-8">
                                 {/* Card 1 */}
-                                <Link href="/services" className="flex items-center bg-[#156862] shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
+                                <Link  href={route('user.home1')} className="flex items-center bg-[#156862] shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
                                     <img
                                         src={icon3}
                                         alt="Service Icon"
@@ -110,7 +111,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                                 </Link>
 
                                 {/* Card 2 */}
-                                <Link href="/appointments" className="flex items-center bg-white shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
+                                <Link href={route('user.home2')} className="flex items-center bg-white shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
                                     <img
                                         src={icon4}
                                         alt="Appointments Icon"
@@ -123,7 +124,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                                 </Link>
 
                                 {/* Card 3 */}
-                                <Link href="/bookings" className="flex items-center bg-white shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
+                                <Link href={route('user.home3')} className="flex items-center bg-white shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
                                     <img
                                         src={icon1}
                                         alt="Bookings Icon"
@@ -151,7 +152,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                             </div>
 
                             <div className='px-8'>
-                                <SearchBar/>
+                                <SearchBarDoctor/>
                             </div>
 
                             <BlogSection/>

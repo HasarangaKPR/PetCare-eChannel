@@ -1,7 +1,7 @@
 // SearchBar.jsx
 import React from 'react';
 
-const SearchBar = () => {
+const SearchBarDoctor = () => {
     return (
         <div className="bg-[#156862] shadow-md rounded-lg p-6 mx-auto w-full m-4 "> {/* Full width, with max-width */}
             <div className="flex flex-col md:flex-row md:items-end gap-4">
@@ -56,4 +56,4 @@ const SearchBar = () => {
     );
 };
 
-export default SearchBar;
+export default SearchBarDoctor;

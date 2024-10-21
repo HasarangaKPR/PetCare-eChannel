@@ -29,3 +29,21 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 })->name('user.home1');
+
+Route::get('/home2', function () {
+    return Inertia::render('User/Home2', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('user.home2');
+
+Route::get('/home3', function () {
+    return Inertia::render('User/Home3', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('user.home3');
