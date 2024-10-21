@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PetAdController;
 use App\Http\Controllers\ProfileController;
+use App\Models\PetAd;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,10 +27,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::resource('/Ads', PetAdController::class);
 //add pet ad edit ad delete ad update ad 
-Route::post('/createAd',[PetAdController::class, 'createAd'])->name('createAd');
-Route::get('/showAd/{id}',[PetAdController::class, 'showAd'])->name('showAd');
-Route::put('/updateAd/{id}',[PetAdController::class, 'updateAd'])->name('updateAd');
-Route::get('/editAd',[PetAdController::class, 'editAd'])->name('editAd');
-Route::delete('/deleteAd/{id}',[PetAdController::class, 'deleteAd'])->name('deleteAd');
-Route::get('/viewAds', [PetAdController::class, 'index'])->name('viewAds'); 
+//Route::post('/createAd',[PetAdController::class, 'createAd'])->name('createAd');
+//Route::get('/showAd/{id}',[PetAdController::class, 'showAd'])->name('showAd');
+//Route::put('/updateAd/{id}',[PetAdController::class, 'updateAd'])->name('updateAd');
+//Route::get('/editAd',[PetAdController::class, 'editAd'])->name('editAd');
+//Route::delete('/deleteAd/{id}',[PetAdController::class, 'deleteAd'])->name('deleteAd');
+//Route::get('/viewAds', [PetAdController::class, 'index'])->name('viewAds'); 
