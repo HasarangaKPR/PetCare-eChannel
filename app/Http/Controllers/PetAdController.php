@@ -9,8 +9,8 @@ class PetAdController extends Controller
 {
     public function store(Request $request)
     {
-       // $petAd= new PetAd();
-    $validated = $request->validate([
+       //$petAd= new PetAd();
+       $validated=$request->validate([
         'name' => 'required|string|max:255',
         'address' => 'required|string|max:255',
         'breed' => 'required',
@@ -21,6 +21,7 @@ class PetAdController extends Controller
     ]);
 
     PetAd::create([
+        
         'name' => $validated['name'],
         'address' => $validated['address'],
         'breed' => $validated['breed'],
@@ -30,8 +31,8 @@ class PetAdController extends Controller
 
     ]);
     //$petAd->save();
-    //return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
-    return redirect('/Ads')->with('status','Ad updated successfully');   
+    return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
+    //return redirect('Ads')->with('status','Ad updated successfully');   
     }
     public function updateAd(Request $request){
         $validated = $request->validate([
@@ -67,7 +68,7 @@ class PetAdController extends Controller
         return response()->json(['success'=>true,'message' => 'Ad delete successfully']);
     }
     public function index(){
-         // Retrieve all the ads from the database
+        // Retrieve all the ads from the database
         // return PetAd::all();
         return view('Ads.index');
     }
