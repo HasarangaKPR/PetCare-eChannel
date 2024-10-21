@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class PetAdController extends Controller
 {
-    public function createAd(Request $request)
+    public function store(Request $request)
     {
        // $petAd= new PetAd();
     $validated = $request->validate([
@@ -30,7 +30,8 @@ class PetAdController extends Controller
 
     ]);
     //$petAd->save();
-    return response()->json(['success'=>true,'message' => 'Ad posted successfully']);    
+    //return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
+    return redirect('/Ads')->with('status','Ad updated successfully');   
     }
     public function updateAd(Request $request){
         $validated = $request->validate([
@@ -52,10 +53,8 @@ class PetAdController extends Controller
             'price' => $validated['price'],
     
         ]);
-        return response()->json(['success'=>true,'message' => 'Ad updated successfully']);
-
-    }
-    public function editAd(){
+       return response()->json(['success'=>true,'message' => 'Ad updated successfully']);
+       
 
     }
     public function showAd($id){
@@ -69,6 +68,10 @@ class PetAdController extends Controller
     }
     public function index(){
          // Retrieve all the ads from the database
-         PetAd::all();
+        // return PetAd::all();
+        return view('Ads.index');
+    }
+    public function create(){
+        return view('Ads.create');
     }
 }
