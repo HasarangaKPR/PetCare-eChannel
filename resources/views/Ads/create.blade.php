@@ -6,11 +6,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Pet Ads
-                            <a href="{{url('Ads/create')}}" class="btn btn-primary float-end">Create Ad</a>
+                            <a href="{{url('Ads/create')}}" class="btn btn-primary float-end">Back</a>
                         </h4>   
                     </div>
                     <div class="card-body">
-                        <form action="{{route(Ads.store)}}" method="post">
+                        <form action="{{route('Ads.store')}}" method="post">
                             @csrf
                             <div class="mb-3">
                                <label>Name</label> 
