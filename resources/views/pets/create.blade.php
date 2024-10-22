@@ -36,7 +36,7 @@
                 <input type="text" name="owner_name" required />
             </div>
             <div>
-                <label>Owner Contact:</label>
+                <label>Contact Number:</label>
                 <input type="text" name="owner_contact" required />
             </div>
             <div>
