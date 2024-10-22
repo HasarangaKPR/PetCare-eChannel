@@ -1,91 +1,124 @@
-// Components/AddDoctorModal.jsx
+// AddDoctorModal.jsx
+import { useForm } from '@inertiajs/react';
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
 
-import React, { useState } from 'react';
-
-const AddDoctorModal = ({ isOpen, onClose, onAddDoctor }) => {
-    const [doctorData, setDoctorData] = useState({
+export default function AddDoctorModal({ isOpen, onClose, onAddDoctor }) {
+    const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
-        profileImage: null, // Change to store file object
+        password: '',
+        password_confirmation: '',
+        userType: 'test',
+        profile_picture: null,
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setDoctorData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            setDoctorData((prevData) => ({ ...prevData, profileImage: file }));
-        }
-    };
-
-    const handleSubmit = (e) => {
+    const submit = (e) => {
         e.preventDefault();
-        // Call the function to add a doctor
-        onAddDoctor(doctorData);
-        onClose(); // Close the modal after adding
+        post(route('addUser'), {
+            onFinish: () => {
+                onAddDoctor(data);
+                reset('password', 'password_confirmation', 'profile_picture');
+            },
+        });
     };
-
-    if (!isOpen) return null; // Don't render if not open
 
     return (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-8 rounded shadow-lg w-96"> {/* Increased width for larger popup */}
-                <h2 className="text-xl font-bold mb-4">Add New Doctor</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                        <label className="block mb-1">Name</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={doctorData.name}
-                            onChange={handleChange}
-                            className="border rounded w-full p-2"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-1">Email</label>
-                        <input
-                            type="email"
-                            name="email"
-                            value={doctorData.email}
-                            onChange={handleChange}
-                            className="border rounded w-full p-2"
-                            required
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block mb-1">Profile Image</label>
-                        <input
-                            type="file"
-                            accept="image/*" // Accept only image files
-                            onChange={handleFileChange}
-                            className="border rounded w-full p-2"
-                            required
-                        />
-                    </div>
-                    <div className="flex justify-between">
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            className="bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-500"
-                        >
-                            Cancel
-                        </button>
-                        <button
-                            type="submit"
-                            className="bg-[#22AAA1] text-white py-2 px-4 rounded hover:bg-[#156862] transition-colors"
-                        >
-                            Add
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    );
-};
+        isOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+                <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md relative">
+                    <form onSubmit={submit}>
+                        <div>
+                            <InputLabel htmlFor="name" value="Name" />
+                            <TextInput
+                                id="name"
+                                name="name"
+                                value={data.name}
+                                className="mt-1 block w-full"
+                                autoComplete="name"
+                                isFocused={true}
+                                onChange={(e) => setData('name', e.target.value)}
+                                required
+                            />
+                            <InputError message={errors.name} className="mt-2" />
+                        </div>
 
-export default AddDoctorModal;
+                        <div className="mt-4">
+                            <InputLabel htmlFor="email" value="Email" />
+                            <TextInput
+                                id="email"
+                                type="email"
+                                name="email"
+                                value={data.email}
+                                className="mt-1 block w-full"
+                                autoComplete="username"
+                                onChange={(e) => setData('email', e.target.value)}
+                                required
+                            />
+                            <InputError message={errors.email} className="mt-2" />
+                        </div>
+
+                        <div className="mt-4">
+                            <InputLabel htmlFor="password" value="Password" />
+                            <TextInput
+                                id="password"
+                                type="password"
+                                name="password"
+                                value={data.password}
+                                className="mt-1 block w-full"
+                                autoComplete="new-password"
+                                onChange={(e) => setData('password', e.target.value)}
+                                required
+                            />
+                            <InputError message={errors.password} className="mt-2" />
+                        </div>
+
+                        <div className="mt-4">
+                            <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
+                            <TextInput
+                                id="password_confirmation"
+                                type="password"
+                                name="password_confirmation"
+                                value={data.password_confirmation}
+                                className="mt-1 block w-full"
+                                autoComplete="new-password"
+                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                required
+                            />
+                            <InputError message={errors.password_confirmation} className="mt-2" />
+                        </div>
+
+                        <div className="mt-4">
+                            <InputLabel htmlFor="profile_picture" value="Profile Picture" />
+                            <input
+                                id="profile_picture"
+                                type="file"
+                                name="profile_picture"
+                                className="mt-1 block w-full"
+                                onChange={(e) => setData('profile_picture', e.target.files[0])}
+                            />
+                            <InputError message={errors.profile_picture} className="mt-2" />
+                        </div>
+
+                        <div className="flex items-center justify-between mt-4">
+                            <PrimaryButton className="ml-4" disabled={processing}>
+                                Register
+                            </PrimaryButton>
+
+                            {/* Cancel button that closes the modal */}
+                            <button
+                                type="button"
+                                className="ml-4 bg-gray-500 text-white py-2 px-4 rounded"
+                                onClick={onClose} // Calls onClose to close the modal
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        )
+    );
+}

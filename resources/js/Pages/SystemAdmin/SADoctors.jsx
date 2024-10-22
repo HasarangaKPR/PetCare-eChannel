@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
-import Footer from './Components/Footer'; 
 import { Head } from '@inertiajs/react';
 import './SAdashboard.css'; 
 import DBphoto from './Assets/image.png'; 
