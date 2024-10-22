@@ -32,7 +32,7 @@
                 <textarea name="description" required></textarea>
             </div>
             <div>
-                <label>Owner Name:</label>
+                <label>Owner's Name:</label>
                 <input type="text" name="owner_name" required />
             </div>
             <div>
@@ -48,7 +48,7 @@
                 <input type="number" name="price" step="0.01" required />
             </div>
             <div>
-                <label>Add Pet Picture Here:</label>
+                <label> Add Pet Picture Here :</label>
                 <input type="file" name="picture" accept="image/*" required />
             </div>
             <button type="submit"> Post Ad </button>
