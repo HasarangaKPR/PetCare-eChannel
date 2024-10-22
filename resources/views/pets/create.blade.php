@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Pet</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 </head>
 <body>
     <div class="container">
@@ -50,7 +51,7 @@
                 <label>Pet Picture:</label>
                 <input type="file" name="picture" accept="image/*" required />
             </div>
-            <button type="submit">Add Pet</button>
+            <button type="submit">Add Pet Ads </button>
         </form>
     </div>
 </body>
