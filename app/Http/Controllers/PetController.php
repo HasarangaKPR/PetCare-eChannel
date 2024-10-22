@@ -10,14 +10,13 @@ class PetController extends Controller
     // Method to show all pet ads
     public function index()
     {
-        $pets = Pet::all();  // Fetch all pets from the database
-        return view('pets.index', compact('pets'));  // Pass pets to the view
+        $pets = Pet::all();
+        return view('pets.index', compact('pets'));
     }
 
     // Method to store a new pet ad
     public function store(Request $request)
     {
-        // Validation rules
         $request->validate([
             'name' => 'required',
             'breed' => 'required',
@@ -29,10 +28,7 @@ class PetController extends Controller
             'price' => 'required|numeric',
         ]);
 
-        // Save the new pet ad in the database
         Pet::create($request->all());
-
-        // Redirect back to the pet ads list
         return redirect('/pets')->with('success', 'Pet ad has been posted successfully!');
     }
 }

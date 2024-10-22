@@ -17,12 +17,13 @@ return new class extends Migration
         $table->string('breed');
         $table->string('species');
         $table->text('description');
-        $table->string('owner_name');
+        $table->string('owner_name');      // Ensure this is present
         $table->string('owner_contact');
         $table->string('district');
         $table->decimal('price', 8, 2);
         $table->timestamps();
     });
+    
 }
 
 

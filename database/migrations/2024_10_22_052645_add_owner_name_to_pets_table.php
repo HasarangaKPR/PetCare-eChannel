@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('pets', function (Blueprint $table) {
             $table->id();
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('breed');
             $table->string('species');
             $table->text('description');
-            $table->string('owner_name');      // Ensure this is present
+            $table->string('owner_name');      // Make sure this is included
             $table->string('owner_contact');
             $table->string('district');
             $table->decimal('price', 8, 2);
@@ -25,15 +25,12 @@ return new class extends Migration
         });
         
     }
-
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    
+    public function down()
     {
-        Schema::dropIfExists('pets');
+        Schema::table('pets', function (Blueprint $table) {
+            $table->dropColumn('owner_name');  // Rollback by dropping the column
+        });
     }
+    
 };
-
-
-

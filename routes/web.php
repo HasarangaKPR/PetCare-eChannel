@@ -1,17 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\PetController;
+use App\Http\Controllers\PetController;
 
-// Home route (optional)
-Route::get('/', function () {
-    return view('welcome'); // Change to your desired welcome view
+Route::get('/pets', [PetController::class, 'index']);  // Route to show the list of all pets
+Route::get('/pets/create', function () {
+    return view('pets.create');  // Route to display the pet ad creation form
 });
+Route::post('/pets', [PetController::class, 'store']);  // Route to handle form submission and save the new pet
 
-// Route to show all pet ads
-Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
 
-// Route to handle form submission for posting a new pet ad
-Route::post('/pets', [PetController::class, 'store'])->name('pets.store');
 
