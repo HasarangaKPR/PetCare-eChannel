@@ -20,7 +20,7 @@
                 <input type="text" name="name" required />
             </div>
             <div>
-                <label>Breed:</label>
+                <label>Breed (Cat/Dog/etc):</label>
                 <input type="text" name="breed" required />
             </div>
             <div>
