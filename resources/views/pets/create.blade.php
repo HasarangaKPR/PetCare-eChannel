@@ -48,7 +48,7 @@
                 <input type="number" name="price" step="0.01" required />
             </div>
             <div>
-                <label>Pet Picture:</label>
+                <label>Add Pet Picture Here:</label>
                 <input type="file" name="picture" accept="image/*" required />
             </div>
             <button type="submit"> Post Ad </button>
