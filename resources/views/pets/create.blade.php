@@ -44,7 +44,7 @@
                 <input type="text" name="district" required />
             </div>
             <div>
-                <label>Price:</label>
+                <label>Price (LKR):</label>
                 <input type="number" name="price" step="0.01" required />
             </div>
             <div>
