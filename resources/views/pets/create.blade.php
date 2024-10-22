@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Add New Pet</h1>
+        <h1>Create</h1>
 
         <!-- Form Submission -->
         <form action="{{ route('pets.store') }}" method="POST" enctype="multipart/form-data">
