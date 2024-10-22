@@ -51,7 +51,7 @@
                 <label>Pet Picture:</label>
                 <input type="file" name="picture" accept="image/*" required />
             </div>
-            <button type="submit">Add Pet Ads </button>
+            <button type="submit"> Post Ad </button>
         </form>
     </div>
 </body>
