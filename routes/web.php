@@ -2,11 +2,9 @@
 
 use App\Http\Controllers\PetController;
 
-Route::get('/pets', [PetController::class, 'index']);  // Route to show the list of all pets
-Route::get('/pets/create', function () {
-    return view('pets.create');  // Route to display the pet ad creation form
-});
-Route::post('/pets', [PetController::class, 'store']);  // Route to handle form submission and save the new pet
+Route::get('/pets', [PetController::class, 'index'])->name('pets.index'); // Display all pets
+Route::get('/pets/create', [PetController::class, 'create'])->name('pets.create'); // Show form to create a new pet
+Route::post('/pets', [PetController::class, 'store'])->name('pets.store'); // Handle form submission and save new pet
 
 
 
