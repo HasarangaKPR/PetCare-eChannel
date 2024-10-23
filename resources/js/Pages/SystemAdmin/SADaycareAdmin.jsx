@@ -1,32 +1,36 @@
-// Inside SADoctors.jsx
-
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
 import { Head } from '@inertiajs/react';
 import './SAdashboard.css'; 
-import DBphoto from './Assets/image.png'; 
-import AddDoctorModal from './Components/AddDoctorModal';
-import EditDoctorModal from './Components/EditDoctorModal';
+import AddDaycareModal from './Components/AddDaycareModal';
 
-const SADaycareAdmin = () => {
-    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-    const [currentDoctor, setCurrentDoctor] = useState(null);
+const SADoctors = () => {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        try {
+            const id = 2;
+            const response = await fetch(route('viewDoctors', { id }));
+            const data = await response.json();
+            setUsers(data.users);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Function to handle adding a new doctor (after the form is submitted)
     const handleAddDoctor = (newDoctor) => {
-        // Logic to add the new doctor
-        console.log(newDoctor);
-    };
-
-    const handleEditDoctor = (doctor) => {
-        setCurrentDoctor(doctor);
-        setIsEditModalOpen(true);
-    };
-
-    const handleUpdateDoctor = (updatedDoctor) => {
-        // Logic to update the doctor
-        console.log(updatedDoctor);
+        setUsers((prevUsers) => [...prevUsers, newDoctor]);
+        setIsModalOpen(false); // Close the modal after submission
     };
 
     return (
@@ -38,10 +42,10 @@ const SADaycareAdmin = () => {
                     <SideList />
                     <div className="flex-grow p-6">
                         <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-2xl font-bold">Daycare Table</h2>
+                            <h2 className="text-2xl font-bold">Doctors Table</h2>
                             <button
-                                onClick={() => setIsAddModalOpen(true)}
-                                className="bg-[#22AAA1] text-white py-2 px-4 rounded hover:bg-[#156862] transition-colors"
+                                className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
+                                onClick={() => setIsModalOpen(true)} // Open the modal on button click
                             >
                                 Add Daycare
                             </button>
@@ -50,7 +54,6 @@ const SADaycareAdmin = () => {
                         <table className="w-full bg-white shadow-md rounded">
                             <thead className="bg-gray-200 text-left">
                                 <tr>
-                                    <th className="p-3">Profile</th>
                                     <th className="p-3">Name</th>
                                     <th className="p-3">Email</th>
                                     <th className="p-3">Created At</th>
@@ -58,49 +61,33 @@ const SADaycareAdmin = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* Example Doctor Row */}
-                                <tr className="border-t">
-                                    <td className="p-3">
-                                        <img src={DBphoto} alt="Doctor" className="w-12 h-12 rounded-full" />
-                                    </td>
-                                    <td className="p-3">Dr. John Doe</td>
-                                    <td className="p-3">john.doe@example.com</td>
-                                    <td className="p-3">2024-10-18</td>
-                                    <td className="p-3">
-                                        <button
-                                            onClick={() => handleEditDoctor({ name: 'Dr. John Doe', email: 'john.doe@example.com' })}
-                                            className="bg-[#22AAA1] text-white py-1 px-3 rounded hover:bg-[#156862] transition-colors mr-2"
-                                        >
-                                            Edit
-                                        </button>
-                                        <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors">
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                                {/* Repeat for other doctors */}
+                                {users.map((user) => (
+                                    <tr key={user.id} className="border-t">
+                                        <td className="p-3">{user.name}</td>
+                                        <td className="p-3">{user.email}</td>
+                                        <td className="p-3">{user.created_at}</td>
+                                        <td className="p-3">
+                                            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
 
-            {/* Add Doctor Modal */}
-            <AddDoctorModal 
-                isOpen={isAddModalOpen} 
-                onClose={() => setIsAddModalOpen(false)} 
-                onAddDoctor={handleAddDoctor} 
+            {/* AddDoctorModal component */}
+            <AddDaycareModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)} // Close the modal
+            onAddDoctor={handleAddDoctor} // Handle new doctor submission
             />
-
-            {/* Edit Doctor Modal */}
-            <EditDoctorModal 
-                isOpen={isEditModalOpen} 
-                onClose={() => setIsEditModalOpen(false)} 
-                doctor={currentDoctor} 
-                onUpdateDoctor={handleUpdateDoctor} 
-            />
+        
         </>
     );
 };
 
-export default SADaycareAdmin;
+export default SADoctors;
