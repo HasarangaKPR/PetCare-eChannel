@@ -9,7 +9,7 @@ const AdProfile = ({ id }) => {
     // Fetch the single ad data
     useEffect(() => {
         axios
-            .get(`/ads/${id}`)
+            .get(`/selling/home/${id}`)
             .then((response) => {
                 setAd(response.data);
                 setLoading(false);

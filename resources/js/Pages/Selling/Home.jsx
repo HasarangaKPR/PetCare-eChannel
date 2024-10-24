@@ -46,7 +46,7 @@ const Home = () => {
                 </div>
 
                 <div className="flex space-x-4">
-                    <Link href="/selling/postad" className="flex-none px-4 py-2 bg-[#9747FF] text-white rounded-3xl hover:bg-teal-600 mx-8">
+                    <Link href="/selling/postad" className="flex-none px-4 py-2 bg-[#9747FF] text-white rounded-3xl hover:bg-[#7437c5] mx-8">
                         Post Ad
                     </Link>
                 </div>
