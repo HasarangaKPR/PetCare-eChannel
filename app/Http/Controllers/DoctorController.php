@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Doctor;
+use App\Models\User;
 
 class DoctorController extends Controller
 {
@@ -53,4 +54,9 @@ class DoctorController extends Controller
 
         return response()->json(['doctors' => $doctors]);
     }
+    public function viewDoctors()
+{
+    $doctors = User::where('userType', 'doctor')->get();
+    return response()->json(['users' => $doctors]);
+}
 }
