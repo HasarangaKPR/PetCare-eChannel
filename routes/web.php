@@ -30,7 +30,7 @@ require __DIR__.'/auth.php';
 
 //Route::resource('Ads', PetAdController::class);
 //add pet ad edit ad delete ad update ad 
-Route::post('/Ads/create',[PetAdController::class, 'store'])->name('store');
+Route::post('/Ads',[PetAdController::class, 'store'])->name('Ads.store');
 //Route::get('/showAd/{id}',[PetAdController::class, 'showAd'])->name('showAd');
 //Route::put('/updateAd/{id}',[PetAdController::class, 'updateAd'])->name('updateAd');
 //Route::get('/editAd',[PetAdController::class, 'editAd'])->name('editAd');
