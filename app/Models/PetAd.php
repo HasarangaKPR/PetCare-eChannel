@@ -10,6 +10,7 @@ class PetAd extends Model
     use HasFactory;
     protected $table = 'pet_ads';
     protected $fillable = [
+        //'adId',
         'name',
         'address',
         'breed',
