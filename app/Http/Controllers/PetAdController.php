@@ -84,4 +84,13 @@ class PetAdController extends Controller
         $petAd = PetAd::all();
          return response()->json($petAd);
     }
+    public function searchPet(Request $request){
+        $breed = $request->input('breed');
+        $query = PetAd::query();
+        if($breed){
+            $query->where('breed',$breed);
+        }
+        $breed = $query->get();
+        return response()->json([]);
+    }
 }
