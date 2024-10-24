@@ -3,7 +3,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 
-export default function AddDoctorModal({ isOpen, onClose, onAddDoctor }) {
+export default function AddUserModal({ isOpen, onClose, onAddDoctor }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
@@ -106,7 +106,7 @@ export default function AddDoctorModal({ isOpen, onClose, onAddDoctor }) {
                                 className=" bg-[#22AAA1] hover:bg-[#156862] text-white py-2 px-4 rounded disabled:opacity-50"
                                 disabled={processing}
                             >
-                                Add Doctor
+                                Add User
                             </button>
 
                             <button
