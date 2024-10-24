@@ -76,7 +76,8 @@ class PetAdController extends Controller
         if (!$petAd){
             return response()->json(['message' => 'Ad not found'],404);
         }
-        $petAd->destroy();
+            $petAd->destroy();
+        
         return response()->json(['success'=>true,'message' => 'Ad delete successfully']);
     }
     public function index(){
