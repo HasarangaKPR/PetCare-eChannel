@@ -10,14 +10,6 @@ use App\Http\Controllers\DoctorAppointmentController;
 use App\Http\Controllers\DayCareCenterController;
 use App\Http\Controllers\DayCareCenterBookingController;
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -53,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__.'/auth.php';
 
+
 //Add or Display Users
 Route::post('/addUser', [UserController::class, 'addUser'])->name('addUser');
 Route::get('/allUsers', [UserController::class, 'allUsers'])->name('allUsers');
@@ -74,3 +67,34 @@ Route::post('/addDayCareCenter', [DayCareCenterController::class, 'addDayCareCen
 Route::post('/addDayCareCenterBooking', [DayCareCenterBookingController::class, 'addDayCareCenterBooking'])->name('addDayCareCenterBooking');
 //Route::get('/displayToDayCareCenterAppointment', [DayCareCenterAppointmentController::class, 'displayToDayCareCenterAppointment'])->name('displayToDayCareCenterAppointment');
 //Route::get('/displayToUserDayCareCenterAppointment', [DayCareCenterAppointmentController::class, 'displayToUserDayCareCenterAppointment'])->name('displayToUserDayCareCenterAppointment');
+
+
+
+//Home roughts
+Route::get('/', function () {
+    return Inertia::render('User/Home1', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('user.home1');
+
+Route::get('/home2', function () {
+    return Inertia::render('User/Home2', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('user.home2');
+
+Route::get('/home3', function () {
+    return Inertia::render('User/Home3', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+})->name('user.home3');
+
