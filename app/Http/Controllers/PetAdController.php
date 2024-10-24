@@ -9,7 +9,6 @@ class PetAdController extends Controller
 {
     public function store(Request $request)
     {
-       //$petAd= new PetAd();
        $validated=$request->validate([
         'name' => 'required|string|max:255',
         'address' => 'required|string|max:255',
@@ -30,9 +29,9 @@ class PetAdController extends Controller
         'price' => $validated['price'],
 
     ]);
-    //$petAd->save();
-    return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
-    //return redirect('Ads')->with('status','Ad updated successfully');   
+    
+    //return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
+    return redirect()->with('status','Ad updated successfully');   
     }
     public function updateAd(Request $request){
         $validated = $request->validate([
