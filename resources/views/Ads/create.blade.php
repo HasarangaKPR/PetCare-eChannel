@@ -10,7 +10,7 @@
                         </h4>   
                     </div>
                     <div class="card-body">
-                        <form action="{{route('Ads.store')}}" method="post">
+                        <form action="{{route('store')}}" method="post">
                             @csrf
                             <div class="mb-3">
                                <label>Name</label> 
