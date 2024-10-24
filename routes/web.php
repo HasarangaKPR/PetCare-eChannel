@@ -62,6 +62,7 @@ Route::get('/displayToUserDoctorAppointment', [DoctorAppointmentController::clas
 
 //Add DayCareCenter & Search DayCareCenter
 Route::post('/addDayCareCenter', [DayCareCenterController::class, 'addDayCareCenter'])->name('addDayCareCenter');
+Route::post('/bookroom', [DayCareCenterBookingController::class, 'bookRoom'])->name('bookroom');
 
 //Add DayCareCenter Appointments
 Route::post('/addDayCareCenterBooking', [DayCareCenterBookingController::class, 'addDayCareCenterBooking'])->name('addDayCareCenterBooking');

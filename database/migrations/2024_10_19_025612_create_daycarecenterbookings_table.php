@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('daycarecenterbookings', function (Blueprint $table) {
             $table->id('bookingID');
-            $table->integer('dayCareCenterId');
-            $table->integer('userId');
-            $table->date('startDate');
-            $table->date('endDate');
-            $table->string('status');
+            $table->integer('room_number'); // Room number
+            $table->date('start_date')->nullable(); // Booking start date
+            $table->date('end_date')->nullable(); // Booking end date
             $table->timestamps();
         });
     }
