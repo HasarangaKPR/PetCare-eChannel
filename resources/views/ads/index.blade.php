@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
-        <h1 class="text-3xl font-bold mb-6">Welcome to the Pets Worlds</h1>
+        <h1 class="text-3xl font-bold mb-6"> <i>Welcome to the Pets Worlds</i></h1>
         
         @if ($ads->isEmpty())
             <p>No ads available at the moment.</p>
