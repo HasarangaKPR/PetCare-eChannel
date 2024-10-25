@@ -87,7 +87,7 @@
             
             <!-- Pet Photos -->
             <div class="mb-4">
-                <label class="block text-sm font-medium">Pet Photos</label>
+                <label class="block text-sm font-medium">Add Pet Photo</label>
                 <input type="file" name="pet_photos[]" multiple class="mt-1 block w-full p-2 border rounded-md">
                 @error('pet_photos')
                     <p class="text-red-500">{{ $message }}</p>
@@ -96,7 +96,7 @@
             
             <!-- Seller Name -->
             <div class="mb-4">
-                <label class="block text-sm font-medium">Seller Name</label>
+                <label class="block text-sm font-medium">Owners Name</label>
                 <input type="text" name="seller_name" class="mt-1 block w-full p-2 border rounded-md" value="{{ old('seller_name') }}" required>
                 @error('seller_name')
                     <p class="text-red-500">{{ $message }}</p>
