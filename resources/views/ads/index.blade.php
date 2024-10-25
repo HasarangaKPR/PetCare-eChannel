@@ -14,7 +14,7 @@
                     <h2 class="text-2xl font-semibold">{{ $ad->pet_name }}</h2>
                     <p class="text-gray-700">{{ $ad->description }}</p>
                     <p class="text-gray-500">Price: ${{ number_format($ad->price, 2) }}</p>
-                    <a href="{{ route('ads.show', $ad->id) }}" class="text-blue-500 hover:underline">View Details</a>
+                    <a href="{{ route('ads.show', $ad->id) }}" class="text-blue-500 hover:underline">More Details</a>
                 </div>
             @endforeach
         @endif
