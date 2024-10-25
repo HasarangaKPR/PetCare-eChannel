@@ -124,7 +124,7 @@
             <!-- Submit Button -->
             <div class="text-center">
                 <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                    Submit Ad
+                    Post Your Ad
                 </button>
             </div>
         </form>
