@@ -22,7 +22,7 @@
         @endif
 
         <div class="mt-6">
-            <a href="{{ route('ads.index') }}" class="text-blue-500 hover:underline">Back to All Ads</a>
+            <a href="{{ route('ads.index') }}" class="text-blue-500 hover:underline">Show Me the All Ads</a>
         </div>
     </div>
 @endsection
