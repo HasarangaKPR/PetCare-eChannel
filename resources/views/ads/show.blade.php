@@ -9,9 +9,10 @@
         <p class="mb-2"><strong>Price:</strong> ${{ number_format($ad->price, 2) }}</p>
         <p class="mb-2"><strong>Seller:</strong> {{ $ad->seller_name }}</p>
         <p class="mb-4"><strong>Contact:</strong> {{ $ad->phone_number }}</p>
+        <p class="mb-1"><strong>Location:</strong> {{ $ad->location }}</p>
 
         @if ($ad->pet_photos)
-            <h2 class="text-xl font-semibold mb-2">Photos:</h2>
+            <h2 class="text-xl font-semibold mb-2"></h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 @foreach ($ad->pet_photos as $photo)
                     <div class="w-full h-48 bg-gray-200 rounded-lg overflow-hidden">
