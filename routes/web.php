@@ -1,10 +1,8 @@
 <?php
 
-use App\Http\Controllers\PetController;
+use App\Http\Controllers\AdController;
 
-Route::get('/pets', [PetController::class, 'index'])->name('pets.index'); // Display all pets
-Route::get('/pets/create', [PetController::class, 'create'])->name('pets.create'); // Show form to create a new pet
-Route::post('/pets', [PetController::class, 'store'])->name('pets.store'); // Handle form submission and save new pet
-
-
-
+Route::get('/ads/create', [AdController::class, 'create'])->name('ads.create');
+Route::post('/ads', [AdController::class, 'store'])->name('ads.store');
+Route::get('/ads', [AdController::class, 'index'])->name('ads.index'); // To list all ads
+Route::resource('ads', AdController::class); // post ad 
