@@ -12,10 +12,9 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::all();
+        $ads = Ad::all(); // Fetch all ads
         return view('ads.index', compact('ads'));
     }
-    
 
     /**
      * Show the form for creating a new ad.

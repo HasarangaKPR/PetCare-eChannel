@@ -29,4 +29,3 @@ class Ad extends Model
         'pet_photos' => 'array',
     ];
 }
-
