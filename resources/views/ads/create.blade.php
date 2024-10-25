@@ -69,7 +69,7 @@
             
             <!-- Price -->
             <div class="mb-4">
-                <label class="block text-sm font-medium">Price (in USD)</label>
+                <label class="block text-sm font-medium">Price (in LKR)</label>
                 <input type="number" name="price" class="mt-1 block w-full p-2 border rounded-md" value="{{ old('price') }}" required>
                 @error('price')
                     <p class="text-red-500">{{ $message }}</p>
