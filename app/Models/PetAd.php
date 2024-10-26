@@ -10,6 +10,8 @@ class PetAd extends Model
     use HasFactory;
     // Define the table name (optional if the table name matches the pluralized model name)
     protected $table = 'pet_ads';
+    // Specify the primary key if it is not 'id'
+    protected $primaryKey = 'adId'; // Change this to your actual primary key column name
     // Define the fillable fields to allow mass assignment
     protected $fillable = [
         'pet_name',
@@ -24,6 +26,7 @@ class PetAd extends Model
         'phone_number',
         'location',
     ];
+
      // Cast 'pet_photos' as an array
      //protected $casts = [
        // 'pet_photos' => 'array',
