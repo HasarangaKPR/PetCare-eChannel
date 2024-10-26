@@ -57,10 +57,8 @@ class PetAdController extends Controller
     
     return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
     }
+    //final code but want to add images
     public function updateAd(Request $request,PetAd $adId){
-        //$petAd = PetAd::find($adId);
-        /*$adId = $request->input('adId');
-        $petAd = PetAd::where('adId',$adId)->get();*/
         if(!$adId){
             return response()->json(['message' => 'Ad not found'],404);
         }
@@ -101,7 +99,7 @@ class PetAdController extends Controller
        
 
     }
-    //final
+    //final code but want to look
     public function showAd(Request $request) {
         $adId = $request->input('adId');
     
@@ -115,7 +113,7 @@ class PetAdController extends Controller
     
         return response()->json(['petAd' => $petAd]); // Return the found pet ad as JSON
     }
-    
+    //final code
     public function destroy(Request $request, $adId)
     {
         // Find the PetAd by its ID
@@ -132,7 +130,7 @@ class PetAdController extends Controller
         // Return a success response
         return response()->json(['success' => true, 'message' => 'Ad deleted successfully', 'adId' => $adId]);
     }
-    //final
+    //final code
     public function index()
     {
         // Retrieve all the ads from the database
