@@ -12,6 +12,6 @@ Route::get('/user', function (Request $request) {
 //add pet ad edit ad delete ad update ad
 Route::get('/CreateAd', [PetAdController::class, 'index'])->name('CreateAd'); 
 Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
-Route::get('/showAd/{id}',[PetAdController::class, 'showAd'])->name('showAd');
+Route::get('/showAd',[PetAdController::class, 'showAd'])->name('showAd');
 Route::put('/updateAd/{id}',[PetAdController::class, 'updateAd'])->name('updateAd');
-Route::delete('/deleteAd/{id}',[PetAdController::class, 'destroy'])->name('deleteAd');
+Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
