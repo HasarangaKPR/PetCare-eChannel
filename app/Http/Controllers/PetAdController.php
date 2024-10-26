@@ -11,87 +11,137 @@ class PetAdController extends Controller
     public function store(Request $request)
     {
        $validated=$request->validate([
-        'name' => 'required|string|max:255',
-        'address' => 'required|string|max:255',
+        'pet_name' => 'required|string|max:255',
+        'pet_type' => 'required|string|max:255',
         'breed' => 'required|string|max:255',
-        'description' => 'required|string|max:255',
-        'contactnumber'=>'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
-        'price' => 'required|decimal:2',
-        //'image' => 'image|max:2048', // Validate image
+        'age'=>'required|integer',
+        'gender'=>'required|string',
+        'price' => 'required|numeric',
+        'description' => 'nullable|string|max:255',
+        //'pet_photos'=>'image|max:2048',
+        'seller_name'=>'required|string|max:255',
+        'phone_number'=>'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
+        'location'=>'required|string|max:255',
+        
     ]);
+    /*$photos = [];
+    if ($request->hasFile('pet_photos')) {
+        foreach ($request->file('pet_photos') as $file) {
+            $path = $file->store('pet_photos', 'public');
+            $photos[] = $path;
+        }
+    }
+
+    // Create the ad with form data and uploaded images
+    PetAd::create(array_merge($request->except('pet_photos'), [
+        'pet_photos' => $photos,
+    ]));*/
 
     PetAd::create([
         
-        'name' => $validated['name'],
-        'address' => $validated['address'],
+        'pet_name' => $validated['pet_name'],
+        'pet_type' => $validated['pet_type'],
         'breed' => $validated['breed'],
-        'description' => $validated['description'],
-        'contactnumber'=>$validated['contactnumber'],
+        'age' => $validated['age'],
+        'gender'=>$validated['gender'],
         'price' => $validated['price'],
+        'description'=>$validated['description'],
+        //'pet_photos'=>$validated['pet_photos'],
+        'seller_name'=>$validated['seller_name'],
+        'phone_number'=>$validated['phone_number'],
+        'location'=>$validated['location'],
+        
 
     ]);
     
     return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
     }
-    public function updateAd(Request $request, $adId){
+    public function updateAd(Request $request,PetAd $adId){
         //$petAd = PetAd::find($adId);
-        $adId = $request->input('adId');
-        $petAd = PetAd::where('adId',$adId)->get();
-        if(!$petAd){
+        /*$adId = $request->input('adId');
+        $petAd = PetAd::where('adId',$adId)->get();*/
+        if(!$adId){
             return response()->json(['message' => 'Ad not found'],404);
         }
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
-            'breed' => 'required',
-            'description' => 'required|string|max:255',
-            'contactnumber'=>'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
-            'price' => 'required|decimal:2',
-            //'image' => 'image|max:2048', // Validate image
+       $validated = $request->validate([
+            'pet_name' => 'required|string|max:255',
+            'pet_type' => 'required|string|max:255',
+            'breed' => 'required|string|max:255',
+            'age'=>'required|integer',
+            'gender'=>'required|string',
+            'price' => 'required|numeric',
+            'description' => 'nullable|string|max:255',
+            //'pet_photos'=>'image|max:2048',
+            'seller_name'=>'required|string|max:255',
+            'phone_number'=>'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
+            'location'=>'required|string|max:255',
         ]);
+       
+        //$adId->update($validated);
+
     
-        PetAd::updateAd([
-            'name' => $validated['name'],
-            'address' => $validated['address'],
-            'breed' => $validated['breed'],
-            'description' => $validated['description'],
-            'contactnumber'=>$validated['contactnumber'],
-            'price' => $validated['price'],
+        $adId->update([
+            
+        'pet_name' => $validated['pet_name'],
+        'pet_type' => $validated['pet_type'],
+        'breed' => $validated['breed'],
+        'age' => $validated['age'],
+        'gender'=>$validated['gender'],
+        'price' => $validated['price'],
+        'description'=>$validated['description'],
+        //'pet_photos'=>$validated['pet_photos'],
+        'seller_name'=>$validated['seller_name'],
+        'phone_number'=>$validated['phone_number'],
+        'location'=>$validated['location'],
     
         ]);
+
        return response()->json(['success'=>true,'message' => 'Ad updated successfully']);
        
 
     }
-    public function showAd(Request $request,$adId){
-        //$petAd = PetAd::find($adId);
+    public function showAd(Request $request) {
         $adId = $request->input('adId');
-        $petAd = PetAd::where('adId',$adId)->get();
-        return response()->json(['petAd'=> $petAd]);
+    
+        // Use first() to get a single instance instead of a collection
+        $petAd = PetAd::where('adId', $adId)->first(); // Ensure 'id' is the correct column name
+    
+        // Check if the pet ad exists
+        if (!$petAd) {
+            return response()->json(['message' => 'Ad not found'], 404);
+        }
+    
+        return response()->json(['petAd' => $petAd]); // Return the found pet ad as JSON
     }
+    
     public function destroy(Request $request,$adId){
-       //$petAd = PetAd::find($adId);
-        $adId = $request->input('adId');
-        $petAd = PetAd::where('adId',$adId)->get();
+        $petAd = PetAd::find($adId);
+       /* $adId = $request->input('adId');
+        $petAd = PetAd::where('adId',$adId)->first();
         if (!$petAd){
             return response()->json(['message' => 'Ad not found'],404);
-        }
-            $petAd->destroy();
+        }*/
+            $petAd->delete();
+            
         
-        return response()->json(['success'=>true,'message' => 'Ad delete successfully']);
+        return response()->json(['success'=>true,'message' => 'Ad delete successfully',$petAd]);
     }
     public function index(){
         // Retrieve all the ads from the database
         $petAd = PetAd::all();
          return response()->json($petAd);
     }
-    public function searchPet(Request $request){
-        $breed = $request->input('breed');
+    public function searchPet(Request $request) {
+        $petTypeInput = $request->input('pet_type'); // Changed the variable name to avoid conflict
         $query = PetAd::query();
-        if($breed){
-            $query->where('breed',$breed);
+    
+        if ($petTypeInput) {
+            $query->where('pet_type', $petTypeInput);
         }
-        $breed = $query->get();
-        return response()->json([]);
+    
+        $pets = $query->get(); // Fetch the results
+    
+        return response()->json($pets); // Return the results as JSON
     }
+    
 }
