@@ -15,6 +15,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
         document.getElementById('docs-card-content')?.classList.add('!flex-row');
         document.getElementById('background')?.classList.add('!hidden');
     };
+    
 
     return (
         <>

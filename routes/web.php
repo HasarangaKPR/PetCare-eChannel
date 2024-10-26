@@ -98,3 +98,7 @@ Route::get('/home3', function () {
     ]);
 })->name('user.home3');
 
+
+Route::get('/user/searchresults', function () {
+    return Inertia::render('User/SearchResults');
+})->name('user.searchresults');
