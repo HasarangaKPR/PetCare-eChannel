@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class PetAdController extends Controller
 {
+    //not final want add images
     public function store(Request $request)
     {
        $validated=$request->validate([
@@ -100,6 +101,7 @@ class PetAdController extends Controller
        
 
     }
+    //final
     public function showAd(Request $request) {
         $adId = $request->input('adId');
     
@@ -130,7 +132,7 @@ class PetAdController extends Controller
         // Return a success response
         return response()->json(['success' => true, 'message' => 'Ad deleted successfully', 'adId' => $adId]);
     }
-    
+    //final
     public function index()
     {
         // Retrieve all the ads from the database
