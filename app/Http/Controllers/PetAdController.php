@@ -114,18 +114,23 @@ class PetAdController extends Controller
         return response()->json(['petAd' => $petAd]); // Return the found pet ad as JSON
     }
     
-    public function destroy(Request $request,$adId){
+    public function destroy(Request $request, $adId)
+    {
+        // Find the PetAd by its ID
         $petAd = PetAd::find($adId);
-       /* $adId = $request->input('adId');
-        $petAd = PetAd::where('adId',$adId)->first();
-        if (!$petAd){
-            return response()->json(['message' => 'Ad not found'],404);
-        }*/
-            $petAd->delete();
-            
         
-        return response()->json(['success'=>true,'message' => 'Ad delete successfully',$petAd]);
+        // Check if the ad exists
+        if (!$petAd) {
+            return response()->json(['message' => 'Ad not found'], 404);
+        }
+    
+        // Delete the pet ad
+        $petAd->delete();
+        
+        // Return a success response
+        return response()->json(['success' => true, 'message' => 'Ad deleted successfully', 'adId' => $adId]);
     }
+    
     public function index(){
         // Retrieve all the ads from the database
         $petAd = PetAd::all();
