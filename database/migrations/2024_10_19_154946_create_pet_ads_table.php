@@ -13,12 +13,17 @@ return new class extends Migration
     {
         Schema::create('pet_ads', function (Blueprint $table) {
             $table->id('adId');
-            $table->string('name');
-            $table->string('address');
+            $table->string('pet_name');
+            $table->string('pet_type');
             $table->string('breed');
-            $table->text('description');
-            $table->string('contactnumber');
+            $table->integer('age');
+            $table->string('gender');
             $table->decimal('price',8,2);
+            $table->text('description')->nullable();
+           // $table->json('pet_photos')->nullable();
+            $table->string('seller_name');
+            $table->string('phone_number');
+            $table->string('location');
             $table->timestamps();
         });
     }
