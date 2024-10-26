@@ -131,7 +131,8 @@ class PetAdController extends Controller
         return response()->json(['success' => true, 'message' => 'Ad deleted successfully', 'adId' => $adId]);
     }
     
-    public function index(){
+    public function index()
+    {
         // Retrieve all the ads from the database
         $petAd = PetAd::all();
          return response()->json($petAd);
