@@ -8,35 +8,30 @@ use App\Models\User;
 
 class DoctorController extends Controller
 {
-    public function addDoctor(Request $request)
+        public function updateDoctor(Request $request)
     {
         $validatedData = $request->validate([
-        'doctorName' => 'required|string|max:255',
-        'doctorDistrict' => 'required|string|max:255',
-        'doctorCity' => 'required|string|max:255',
-        'doctorContactNumber' => 'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
-        'doctorEmail' => 'required|string|email|max:255',
-        'averageTime' => 'required|integer',
-        'openTime' => 'required|date_format:H:i',
-        'closeTime' => 'required|date_format:H:i',
+            'doctorName' => 'required|string|max:255',
+            'doctorDistrict' => 'required|string|max:255',
+            'doctorCity' => 'required|string|max:255',
+            'doctorContactNumber' => 'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
+            'doctorEmail' => 'required|string|email|max:255',
+            'averageTime' => 'required|integer',
+            'openTime' => 'required|date_format:H:i',
+            'closeTime' => 'required|date_format:H:i',
         ]);
 
+        // Find the doctor by ID
+        $userId = $request->input('userId');
+        $doctorId = Doctor::where('userId', $userId)->first();
 
-        $doctor = Doctor::create([
-            'doctorName' => $validatedData['doctorName'],
-            'doctorDistrict' => $validatedData['doctorDistrict'],
-            'doctorCity' => $validatedData['doctorCity'],
-            'doctorContactNumber' => $validatedData['doctorContactNumber'],
-            'doctorEmail' => $validatedData['doctorEmail'],
-            'averageTime' => $validatedData['averageTime'],   
-            'openTime' => $validatedData['openTime'],  
-            'closeTime' => $validatedData['closeTime'], 
-        ]);
+        // Update doctor details
+        $doctorId->update($validatedData);
 
-        //return redirect()->route('dashboard')->with('success', 'Added successfully.');
-        return response()->json(['success' => true]);
-
+        // Return a success response
+        return response()->json(['success' => true, 'message' => 'Successfully Updated.']);
     }
+
         public function searchDoctor(Request $request)
     {
         $district = $request->input('doctorDistrict');
