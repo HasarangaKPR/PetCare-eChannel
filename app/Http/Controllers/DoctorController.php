@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\User;
+use App\Models\DoctorAppointment;
+use Carbon\Carbon;
 
 class DoctorController extends Controller
 {
@@ -47,11 +49,47 @@ class DoctorController extends Controller
         }
         $doctors = $query->get();
 
-        return response()->json(['doctors' => $doctors]);
+        $date = $request->input('date');
+        $appointmentTime = $request->input('appointmentTime');
+
+        $availability = [];
+    
+        foreach ($doctors as $doctor) {
+            $doctorId = $doctor->doctorId;
+    
+            // Check if the doctor has a booking at the given date & time
+            $isBooked = DoctorAppointment::where('doctorId', $doctorId)
+                ->where('date', $date)
+                ->where('appointmentTime', $appointmentTime)
+                ->exists();
+    
+            // Get doctor details
+            $doctorName = Doctor::where('doctorId', $doctorId)->value('doctorName');
+            $doctorContactNumber = Doctor::where('doctorId', $doctorId)->value('doctorContactNumber');
+            $openTime = Doctor::where('doctorId', $doctorId)->value('openTime');
+            $closeTime = Doctor::where('doctorId', $doctorId)->value('closeTime');
+    
+            // Check if the appointment time is within the doctor's working and available time
+            if ($isBooked || $appointmentTime < $openTime || $appointmentTime > $closeTime) {               
+            } else {
+                $availability[] = [
+                                    'doctorId' => $doctor->doctorId,
+                                    'name' => $doctor->doctorName,
+                                    'averageTime' => $doctor->averageTime,
+                                    'openTime' => $doctor->openTime,
+                                    'closeTime' => $doctor->closeTime,
+                                    'contact' => $doctor->doctorContactNumber,
+                                ];
+            }
+        }
+    
+        return response()->json(['success' => true, 'availability' => $availability]);
     }
-    public function viewDoctors()
-{
-    $doctors = User::where('userType', 'doctor')->get();
-    return response()->json(['users' => $doctors]);
-}
-}
+
+
+        public function viewDoctors()
+    {
+        $doctors = User::where('userType', 'doctor')->get();
+        return response()->json(['users' => $doctors]);
+    }
+    }
