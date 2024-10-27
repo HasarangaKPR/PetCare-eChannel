@@ -51,7 +51,7 @@ Route::post('/addUser', [UserController::class, 'addUser'])->name('addUser');
 Route::get('/allUsers', [UserController::class, 'allUsers'])->name('allUsers');
 
 //Add Doctors & Search Doctors
-Route::post('/addDoctor', [DoctorController::class, 'addDoctor'])->name('addDoctor');
+Route::put('/updateDoctor', [DoctorController::class, 'updateDoctor'])->name('updateDoctor');
 Route::get('/searchDoctor', [DoctorController::class, 'searchDoctor'])->name('searchDoctor');
 Route::get('/viewDoctors', [DoctorController::class, 'viewDoctors'])->name('viewDoctors');
 
