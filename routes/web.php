@@ -100,5 +100,5 @@ Route::get('/home3', function () {
 
 
 Route::get('/user/searchresults', function () {
-    return Inertia::render('User/SearchResults');
+    return Inertia::render('User/SearchResultsDoctor');
 })->name('user.searchresults');

@@ -153,7 +153,8 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                             </div>
 
                             <div className='px-8'>
-                                <SearchBarDoctor/>
+                            <SearchBarDoctor />
+
                             </div>
 
                             <BlogSection/>
