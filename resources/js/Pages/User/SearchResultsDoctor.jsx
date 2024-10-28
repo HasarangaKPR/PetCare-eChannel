@@ -1,77 +1,48 @@
 import React from 'react';
 
-const SearchResultsDoctor = ({ /*doctors*/ }) => {
-
-     // Dummy data for testing
-     const doctors = [
-        {
-            id: 1,
-            name: 'Dr. Samantha Williams',
-            profile_picture: 'https://randomuser.me/api/portraits/women/21.jpg',
-            contact: '555-1234',
-            city: 'New York',
-            address: '123 Main St, New York, NY',
-            available_times: ['9:00 AM', '12:00 PM', '3:00 PM'],
-        },
-        {
-            id: 2,
-            name: 'Dr. Michael Roberts',
-            profile_picture: 'https://randomuser.me/api/portraits/men/45.jpg',
-            contact: '555-5678',
-            city: 'Los Angeles',
-            address: '456 Elm St, Los Angeles, CA',
-            available_times: ['9:00 AM', '11:00 AM', '4:00 PM'],
-        },
-        {
-            id: 3,
-            name: 'Dr. Angela Davis',
-            profile_picture: 'https://randomuser.me/api/portraits/women/34.jpg',
-            contact: '555-9012',
-            city: 'Chicago',
-            address: '789 Oak St, Chicago, IL',
-            available_times: ['10:00 AM', '1:00 PM', '5:00 PM'],
-        },
-        
-    ];
+const SearchResultsDoctor = ({ results }) => {
+    if (results.length === 0) {
+        return <div className="text-center text-gray-500 mt-8">No doctors found. Try adjusting your search criteria.</div>;
+    }
 
     return (
-        <div className="bg-white py-8">
-            <div className="container mx-auto px-4">
-                <h2 className="text-2xl font-bold mb-6 text-[#156862]">Search Results</h2>
-
-                {doctors.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {doctors.map((doctor) => (
-                            <div key={doctor.id} className="bg-gray-100 shadow-md rounded-lg p-6 hover:shadow-lg transition">
-                                <img
-                                    src={doctor.profile_picture}
-                                    alt={`${doctor.name}'s profile`}
-                                    className="w-24 h-24 rounded-full mx-auto mb-4"
-                                />
-                                <h3 className="text-xl font-semibold text-center text-[#156862] mb-2">{doctor.name}</h3>
-                                <p className="text-center text-gray-600 mb-2">City: {doctor.city}</p>
-                                <p className="text-center text-gray-600 mb-2">Contact: {doctor.contact}</p>
-                                <p className="text-center text-gray-600 mb-2">Address: {doctor.address}</p>
-                                <div className="text-center">
-                                    <p className="font-bold text-[#156862]">Available Time Slots</p>
-                                    <ul className="text-sm text-gray-500">
-                                        {doctor.available_times.map((time, index) => (
-                                            <li key={index}>{time}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <div className="text-center mt-4">
-                                    <button className="bg-[#22AAA1] text-white px-4 py-2 rounded-lg hover:bg-[#156862]">
-                                        Book Appointment
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+            {results.map((doctor) => (
+                <div key={doctor.id} className="bg-white shadow-md rounded-lg p-4">
+                    {/* Profile Picture */}
+                    <div className="flex items-center justify-center mb-4">
+                        <img 
+                            src={doctor.profilePic} 
+                            alt={`${doctor.name}'s profile`} 
+                            className="w-24 h-24 rounded-full object-cover"
+                        />
                     </div>
-                ) : (
-                    <p className="text-center text-gray-500">No doctors found matching your criteria.</p>
-                )}
-            </div>
+
+                    {/* Doctor Information */}
+                    <div className="text-center">
+                        <h2 className="text-xl font-semibold mb-2">{doctor.name}</h2>
+                        <p className="text-gray-600 mb-2">{doctor.address}</p>
+                        <p className="text-gray-500 mb-4">Contact: {doctor.contact}</p>
+
+                        {/* Available Channeling Times */}
+                        <div className="text-gray-600">
+                            <p className="font-semibold">Available Times:</p>
+                            <ul className="mt-2">
+                                {doctor.availableTimes.map((time, index) => (
+                                    <li key={index} className="bg-gray-200 text-gray-800 rounded-full px-3 py-1 inline-block m-1">
+                                        {time}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Appointment Button */}
+                        <button className="mt-4 bg-[#22AAA1] text-white px-4 py-2 rounded-lg hover:bg-[#156862] transition">
+                            Book Appointment
+                        </button>
+                    </div>
+                </div>
+            ))}
         </div>
     );
 };
