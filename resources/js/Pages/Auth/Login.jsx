@@ -22,12 +22,13 @@ export default function Login({ status, canResetPassword }) {
     };
 
     return (
-        <GuestLayout>
+        <GuestLayout >
             <Head title="Log in" />
 
-            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
+            {status && <div className="mb-4 font-medium text-sm">{status}</div>}
 
-            <form onSubmit={submit}>
+            <form onSubmit={submit} >
+                
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
@@ -86,6 +87,7 @@ export default function Login({ status, canResetPassword }) {
                         Log in
                     </PrimaryButton>
                 </div>
+                
             </form>
         </GuestLayout>
     );
