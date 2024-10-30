@@ -84,7 +84,10 @@ class DoctorController extends Controller
         }
     
         //return response()->json(['success' => true, 'availability' => $availability]);
-        return response()->json(['availability' => $availability]);
+        if($date && $appointmentTime){
+            return response()->json(['availability' => $availability]);
+        }
+        
     }
 
 
