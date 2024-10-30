@@ -83,7 +83,8 @@ class DoctorController extends Controller
             }
         }
     
-        return response()->json(['success' => true, 'availability' => $availability]);
+        //return response()->json(['success' => true, 'availability' => $availability]);
+        return response()->json(['availability' => $availability]);
     }
 
 
