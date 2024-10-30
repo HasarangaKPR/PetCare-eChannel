@@ -18,7 +18,10 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
 
     useEffect(() => {
         if (shouldBook) {
-            post(route('addDoctorAppointment'));
+            post(route('addDoctorAppointment'))
+                // Reset shouldBook after the post request is complete
+                setShouldBook(false);
+            
         }
     }, [shouldBook]);
 
@@ -43,7 +46,9 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
         <div className="bg-white py-8">
             <div className="container mx-auto px-4">
                 <h2 className="text-2xl font-bold mb-6 text-[#156862]">Search Results</h2>
-                {doctors.length > 0 ? (
+                {loading ? (
+                    <p className="text-center text-gray-500">Loading...</p>
+                ) : doctors.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {doctors.map((doctor) => (
                             <div key={doctor.doctorId} className="bg-gray-100 shadow-md rounded-lg p-6 hover:shadow-lg transition">
