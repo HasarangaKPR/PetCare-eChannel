@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/react';
 
 const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity }) => {
-    const [availability, setAvailability] = useState([]);
+    const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [shouldBook, setShouldBook] = useState(false);
     
@@ -26,7 +26,7 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
         try {
             const response = await fetch(route('searchDoctor', { appointmentTime, date, doctorDistrict, doctorCity }));
             const result = await response.json();
-            setAvailability(result.availability);
+            setDoctors(result.doctors);
         } catch (error) {
             console.error('Error fetching users:', error);
         } finally {
@@ -43,14 +43,14 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
         <div className="bg-white py-8">
             <div className="container mx-auto px-4">
                 <h2 className="text-2xl font-bold mb-6 text-[#156862]">Search Results</h2>
-                {availability.length > 0 ? (
+                {doctors.length > 0 ? (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {availability.map((user) => (
-                            <div key={user.doctorId} className="bg-gray-100 shadow-md rounded-lg p-6 hover:shadow-lg transition">
-                                <h3 className="text-xl font-semibold text-center text-[#156862] mb-2">{user.name}</h3>
+                        {doctors.map((doctor) => (
+                            <div key={doctor.doctorId} className="bg-gray-100 shadow-md rounded-lg p-6 hover:shadow-lg transition">
+                                <h3 className="text-xl font-semibold text-center text-[#156862] mb-2">{doctor.name}</h3>
                                 <div className="text-center mt-4">
                                     <button
-                                        onClick={() => handleBookAppointment(user.doctorId)}
+                                        onClick={() => handleBookAppointment(doctor.doctorId)}
                                         className="bg-[#22AAA1] text-white px-4 py-2 rounded-lg hover:bg-[#156862]"
                                         disabled={processing}
                                     >
