@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-//add pet ad edit ad delete ad update ad 
+//add post delete update view route 
 Route::get('/ViewallAd', [PetAdController::class, 'index'])->name('ViewallAd'); 
 Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
 Route::get('/showAd/{adId}',[PetAdController::class, 'showAd'])->name('showAd');
