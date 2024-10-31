@@ -28,11 +28,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-//Route::resource('Ads', PetAdController::class);
 //add pet ad edit ad delete ad update ad 
-Route::get('/CreateAd', [PetAdController::class, 'index'])->name('CreateAd'); 
+Route::get('/ViewallAd', [PetAdController::class, 'index'])->name('ViewallAd'); 
 Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
-Route::get('/showAd/{id}',[PetAdController::class, 'showAd'])->name('showAd');
-Route::put('/updateAd/{id}',[PetAdController::class, 'updateAd'])->name('updateAd');
-Route::delete('/deleteAd/{id}',[PetAdController::class, 'destroyAd'])->name('deleteAd');
+Route::get('/showAd/{adId}',[PetAdController::class, 'showAd'])->name('showAd');
+Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updateAd');
+Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
 
