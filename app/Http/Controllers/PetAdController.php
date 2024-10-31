@@ -76,7 +76,7 @@ class PetAdController extends Controller
             'location'=>'required|string|max:255',
         ]);
        
-        //$adId->update($validated);
+        
 
     
         $adId->update([
