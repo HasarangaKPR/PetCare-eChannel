@@ -20,6 +20,7 @@ Route::get('/allUsers', [UserController::class, 'allUsers'])->name('allUsers');
 Route::put('/updateDoctor', [DoctorController::class, 'updateDoctor'])->name('updateDoctor');
 Route::get('/searchDoctor', [DoctorController::class, 'searchDoctor'])->name('searchDoctor');
 Route::get('/viewDoctors', [DoctorController::class, 'viewDoctors'])->name('viewDoctors');
+Route::delete('/deleteDoctor/{userId}', [DoctorController::class, 'deleteDoctor'])->name('deleteDoctor/{userId}');
 
 //Add Doctors Appointments
 Route::post('/addDoctorAppointment', [DoctorAppointmentController::class, 'addDoctorAppointment'])->name('addDoctorAppointment');

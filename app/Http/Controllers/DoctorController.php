@@ -96,4 +96,19 @@ class DoctorController extends Controller
         $doctors = User::where('userType', 'doctor')->get();
         return response()->json(['users' => $doctors]);
     }
+
+    public function deleteDoctor(Request $request, $userId) {
+        // Get doctor associated with the user
+        $doctor = Doctor::where('userId', $userId)->first();
+        $user = User::find($userId);
+    
+            //delete data from doctor & user tables
+            $user->delete();
+            $doctor->delete();
+    
+        // Return a success response
+        return response()->json(['success' => true, 'message' => 'Successfully Deleted.']);
     }
+    
+    
+}

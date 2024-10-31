@@ -16,8 +16,7 @@ const SADoctors = () => {
 
     const fetchUsers = async () => {
         try {
-            const id = 2;
-            const response = await fetch(route('viewDoctors', { id }));
+            const response = await fetch(route('viewDoctors'));
             const data = await response.json();
             setUsers(data.users);
         } catch (error) {
@@ -32,6 +31,26 @@ const SADoctors = () => {
         setUsers((prevUsers) => [...prevUsers, newDoctor]);
         setIsModalOpen(false); // Close the modal after submission
     };
+
+
+    const handleDeleteDoctor = async (userId) => {
+        try {
+            const response = await fetch(`/deleteDoctor/${userId}`, {
+                method: 'DELETE',
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setMessage(data.message); // Assuming setMessage is defined in your context
+            } else {
+                const errorData = await response.json();
+                setMessage(`Error: ${errorData.message}`);
+            }
+        } catch (error) {
+            setMessage(`Request failed: ${error.message}`);
+        }
+    };
+    
 
     return (
         <>
@@ -67,7 +86,10 @@ const SADoctors = () => {
                                         <td className="p-3">{user.email}</td>
                                         <td className="p-3">{user.created_at}</td>
                                         <td className="p-3">
-                                            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors">
+                                        <button 
+                                                className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors"
+                                                onClick={() => handleDeleteDoctor(user.id)} // Call delete function
+                                            >
                                                 Delete
                                             </button>
                                         </td>
