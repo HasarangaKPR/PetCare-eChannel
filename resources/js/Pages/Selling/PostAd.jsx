@@ -18,7 +18,7 @@ const PostAd = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post('/ads', {
+        post('/CreateAd', {
             onSuccess: () => {
                 setData({
                     pet_name: '',
