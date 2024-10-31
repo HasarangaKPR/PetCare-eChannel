@@ -23,5 +23,6 @@ class Doctor extends Model
         'averageTime',
         'openTime',
         'closeTime',
+        'photo',
     ];
 }

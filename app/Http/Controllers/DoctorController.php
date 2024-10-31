@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class DoctorController extends Controller
 {
-        public function updateDoctor(Request $request)
+    public function updateDoctor(Request $request)
     {
         $validatedData = $request->validate([
             'doctorName' => 'required|string|max:255',
@@ -21,9 +21,17 @@ class DoctorController extends Controller
             'averageTime' => 'required|integer',
             'openTime' => 'required|date_format:H:i',
             'closeTime' => 'required|date_format:H:i',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for profile photo
         ]);
 
+            $photoPath = null;
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('photos', 'public');
+                $validatedData['photo'] = $photoPath; // Add the photo path to the data
+            }
+
         //get logged doctorId
+        //$userId = $request->input('userId');
         $userId = auth()->id();
         $doctorId = Doctor::where('userId', $userId)->first();
 

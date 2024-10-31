@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('averageTime')->nullable();
             $table->time('openTime')->nullable();
             $table->time('closeTime')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
