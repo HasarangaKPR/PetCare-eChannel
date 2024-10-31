@@ -49,15 +49,19 @@ class PetAdController extends Controller
     PetAd::create(array_merge($request->except('pet_photos'), [
     'pet_photos' => json_encode($photos),
     ]));*/
-     /*// Handle the photo upload
-     if ($request->hasFile('pet_photo')) {
-        $path = $request->file('pet_photo')->store('pet_photos', 'public');
+    
+    // Handle file upload
+    if ($request->hasFile('pet_photo') && $request->file('pet_photo')->isValid()) {
+    // Store the file in the `public` disk under `pet_photos` directory
+    $path = $request->file('pet_photo')->store('pet_photos', 'public');
 
-        // Create the pet ad entry in the database
-        $petAd = PetAd::create(array_merge($request->except('pet_photo'), [
-            'pet_photo' => $path,
-        ]));
-    }*/
+    // Save the file path to the validated data
+    $validatedData['pet_photo'] = $path;
+    } else {
+    return response()->json(['success' => false, 'message' => 'Invalid file upload.'], 400);
+    }
+
+
     PetAd::create([
         
         'pet_name' => $validated['pet_name'],
