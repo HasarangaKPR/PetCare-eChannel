@@ -43,6 +43,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('systemadmin.users');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/doctor/dashboard', function () {
+        return Inertia::render('Doctors/Ddashboard');
+    })->name('doctor.dashboard');
+
+    Route::get('/doctor/profile', function () {
+        return Inertia::render('Doctors/DProfile');
+    })->name('doctor.profile');
+
+    Route::get('/doctor/appointments', function () {
+        return Inertia::render('Doctors/DAppointments');
+    })->name('doctor.Appointments');
+});
+
 require __DIR__.'/auth.php';
 
 
