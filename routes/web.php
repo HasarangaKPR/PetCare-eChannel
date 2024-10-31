@@ -49,7 +49,7 @@ require __DIR__.'/auth.php';
 //add post delete update view route 
 Route::get('/ViewallAd', [PetAdController::class, 'index'])->name('ViewallAd'); 
 Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
-Route::get('/showAd/{adId}',[PetAdController::class, 'showAd'])->name('showAd');
+Route::get('/showAd',[PetAdController::class, 'showAd'])->name('showAd');
 Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updateAd');
 Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
 
