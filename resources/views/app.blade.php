@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pet Care eChannel</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}"> <!-- Assuming you have some CSS -->
+    <title>Blog Application</title>
+    @vite('resources/js/app.js')
 </head>
 <body>
-    <div class="container">
-        @yield('content')
-    </div>
+    @inertia
 </body>
 </html>
+
 
