@@ -79,7 +79,7 @@
         <label for="image">Image:</label>
         <input type="file" id="image" name="image">
 
-        <button type="submit">Submit Blog</button>
+        <button type="submit">Post Blog</button>
     </form>
 </body>
 </html>
