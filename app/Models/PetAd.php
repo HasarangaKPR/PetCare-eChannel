@@ -21,7 +21,7 @@ class PetAd extends Model
         'gender',
         'price',
         'description',
-       // 'pet_photos',
+        'pet_photos',
         'seller_name',
         'phone_number',
         'location',
@@ -29,6 +29,6 @@ class PetAd extends Model
 
      // Cast 'pet_photos' as an array
      //protected $casts = [
-       // 'pet_photos' => 'array',
-    // ];
+       //'pet_photos' => 'array',
+    //];
 }
