@@ -7,14 +7,14 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            background-color: #1de4e4;
             color: #333;
             margin: 0;
             padding: 20px;
         }
         h1 {
             text-align: center;
-            color: #4A90E2;
+            color: #1d0c68;
             margin-bottom: 20px;
         }
         form {
