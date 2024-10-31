@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('doctorappointments', function (Blueprint $table) {
             $table->id('appointmentId');
             $table->string('userId')->nullable();
+            $table->string('customerName')->nullable();
             $table->integer('doctorId')->nullable();
             $table->date('date')->nullable();
             $table->time('appointmentTime')->nullable();
