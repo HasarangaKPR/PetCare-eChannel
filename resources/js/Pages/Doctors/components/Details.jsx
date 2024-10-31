@@ -17,7 +17,7 @@ const Details = () => {
         e.preventDefault();
         // Replace 'updateEndpoint' with your actual update API endpoint
         put(route('updateDoctor'), {
-            onFinish: () => reset(),
+            //onFinish: () => reset(),
         });
      
     };
