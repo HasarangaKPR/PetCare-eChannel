@@ -114,7 +114,7 @@ class PetAdController extends Controller
         return response()->json(['petAd' => $petAd]); // Return the found pet ad as JSON
     }
     //final code
-    public function destroy(Request $request, $adId)
+    public function destroy($adId)
     {
         // Find the PetAd by its ID
         $petAd = PetAd::find($adId);
