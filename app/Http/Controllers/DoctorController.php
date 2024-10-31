@@ -23,8 +23,8 @@ class DoctorController extends Controller
             'closeTime' => 'required|date_format:H:i',
         ]);
 
-        // Find the doctor by ID
-        $userId = $request->input('userId');
+        //get logged doctorId
+        $userId = auth()->id();
         $doctorId = Doctor::where('userId', $userId)->first();
 
         // Update doctor details

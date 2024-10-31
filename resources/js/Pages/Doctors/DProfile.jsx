@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from '../SystemAdmin/Components/Header';
 import SideList from './components/SideList';
+import Details from './components/Details'; // Import the new Details component
+
 const DProfile = () => {
     return (
         <>
@@ -41,66 +43,8 @@ const DProfile = () => {
                                 </form>
                             </div>
 
-                            {/* Additional info Section */}
-                            <div className="bg-[#DEF2F1] p-6 rounded-lg shadow-md">
-                                <h2 className="text-2xl font-semibold text-[#08101A] mb-4">Additional Information</h2>
-                                <form className="flex flex-col gap-4">
-                                    <div className="flex flex-col">
-                                        <label htmlFor="address" className="font-medium text-[#333]">Address</label>
-                                        <input 
-                                            type="text" 
-                                            id="address" 
-                                            placeholder="Enter Your Address" 
-                                            className="mt-2 p-3 rounded-md border border-gray-300"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="city" className="font-medium text-[#333]">City</label>
-                                        <input 
-                                            type="text" 
-                                            id="city" 
-                                            placeholder="Enter Your City" 
-                                            className="mt-2 p-3 rounded-md border border-gray-300"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="contactNumber" className="font-medium text-[#333]">Contact Number</label>
-                                        <input 
-                                            type="tel" 
-                                            id="contactNumber" 
-                                            placeholder="Enter Your Contact Number" 
-                                            className="mt-2 p-3 rounded-md border border-gray-300"
-                                            pattern="[0-9]{10}" 
-                                            title="Please enter a valid 10-digit phone number"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="openTime" className="font-medium text-[#333]">Open Time</label>
-                                        <input 
-                                            type="time" 
-                                            id="openTime" 
-                                            className="mt-2 p-3 rounded-md border border-gray-300"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <label htmlFor="closeTime" className="font-medium text-[#333]">Close Time</label>
-                                        <input 
-                                            type="time" 
-                                            id="closeTime" 
-                                            className="mt-2 p-3 rounded-md border border-gray-300"
-                                        />
-                                    </div>
-                                    <button 
-                                        className="bg-[#22AAA1] text-white font-bold py-2 px-4 rounded-md w-36 hover:bg-[#156862] transition duration-300"
-                                        type="submit"
-                                    >
-                                        Save
-                                    </button>
-                                </form>
-                            </div>
-
-
-                
+                            {/* Additional Info Section - Now using Details component */}
+                            <Details />
 
                             {/* Password Section */}
                             <div className="bg-[#DEF2F1] p-6 rounded-lg shadow-md">
@@ -141,7 +85,7 @@ const DProfile = () => {
                                     Before deleting your account, please ensure you have downloaded any data or information you wish to retain.
                                 </p>
                                 <button 
-                                    className=" bg-red-600 text-white font-bold py-2 px-4 rounded-md w-40 hover:bg-red-800 transition duration-300"
+                                    className="bg-red-600 text-white font-bold py-2 px-4 rounded-md w-40 hover:bg-red-800 transition duration-300"
                                 >
                                     Delete Account
                                 </button>
