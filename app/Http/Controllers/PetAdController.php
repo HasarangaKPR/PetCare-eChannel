@@ -19,7 +19,7 @@ class PetAdController extends Controller
         'gender'=>'required|string',
         'price' => 'required|numeric',
         'description' => 'nullable|string|max:255',
-        //'pet_photos'=>'image|max:2048',
+        'pet_photos'=>'image|mimes:jpeg,png,jpg,gif|max:2048',
         'seller_name'=>'required|string|max:255',
         'phone_number'=>'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
         'location'=>'required|string|max:255',
@@ -37,7 +37,27 @@ class PetAdController extends Controller
     PetAd::create(array_merge($request->except('pet_photos'), [
         'pet_photos' => $photos,
     ]));*/
+    /*$photos = [];
+    if ($request->hasFile('pet_photos')) {
+    foreach ($request->file('pet_photos') as $file) {
+        $path = $file->store('pet_photos', 'public');
+        $photos[] = $path;
+    }
+    }
 
+    // Convert the array to JSON for database storage
+    PetAd::create(array_merge($request->except('pet_photos'), [
+    'pet_photos' => json_encode($photos),
+    ]));*/
+     /*// Handle the photo upload
+     if ($request->hasFile('pet_photo')) {
+        $path = $request->file('pet_photo')->store('pet_photos', 'public');
+
+        // Create the pet ad entry in the database
+        $petAd = PetAd::create(array_merge($request->except('pet_photo'), [
+            'pet_photo' => $path,
+        ]));
+    }*/
     PetAd::create([
         
         'pet_name' => $validated['pet_name'],
@@ -47,7 +67,7 @@ class PetAdController extends Controller
         'gender'=>$validated['gender'],
         'price' => $validated['price'],
         'description'=>$validated['description'],
-        //'pet_photos'=>$validated['pet_photos'],
+        'pet_photos'=>$validated['pet_photos'],
         'seller_name'=>$validated['seller_name'],
         'phone_number'=>$validated['phone_number'],
         'location'=>$validated['location'],
