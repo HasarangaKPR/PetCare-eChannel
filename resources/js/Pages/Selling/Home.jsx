@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/react';
 
 const Home = () => {
     // Simulate fetching ads data (replace with actual API fetch in future)
-    const [ads, setAds] = useState([]);
+    /*const [ads, setAds] = useState([]);
 
     useEffect(() => {
         // Simulated data (Replace with API call to get ads when backend is ready)
@@ -20,6 +20,25 @@ const Home = () => {
             // Add more ads here as needed
         ];
         setAds(fetchedAds);
+    }, []);*/
+    const [ads, setAds] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // Fetch data from API endpoint
+        const fetchAds = async () => {
+            try {
+                const response = await fetch('/ViewallAd'); // Replace with your API endpoint
+                const data = await response.json();
+                setAds(data);
+            } catch (error) {
+                console.error("Error fetching ads:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAds();
     }, []);
 
     return (
