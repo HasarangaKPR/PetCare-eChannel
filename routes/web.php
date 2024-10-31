@@ -74,6 +74,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('daycare.Bookings');
 });
 
+//services dashboard routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/services/dashboard', function () {
+        return Inertia::render('Services/SDashboard');
+    })->name('services.dashboard');
+
+    Route::get('/services/profile', function () {
+        return Inertia::render('Services/SProfile');
+    })->name('services.profile');
+
+    Route::get('/services/bookings', function () {
+        return Inertia::render('Services/SBookings');
+    })->name('services.bookings');
+});
+
 require __DIR__.'/auth.php';
 
 
