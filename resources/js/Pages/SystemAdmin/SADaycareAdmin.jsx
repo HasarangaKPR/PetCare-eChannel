@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/react';
 import './SAdashboard.css'; 
 import AddDaycareModal from './Components/AddDaycareModal';
 
-const SADoctors = () => {
+const SADaycareAdmin = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
@@ -16,10 +16,9 @@ const SADoctors = () => {
 
     const fetchUsers = async () => {
         try {
-            const id = 2;
-            const response = await fetch(route('viewDoctors', { id }));
+            const response = await fetch(route('viewDayCare'));
             const data = await response.json();
-            setUsers(data.users);
+            setUsers(data.daycares);
         } catch (error) {
             console.error('Error fetching users:', error);
         } finally {
@@ -90,4 +89,4 @@ const SADoctors = () => {
     );
 };
 
-export default SADoctors;
+export default SADaycareAdmin;
