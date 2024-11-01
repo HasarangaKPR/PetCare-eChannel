@@ -21,6 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+//SystemAdmin dashboard routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/systemadmin/dashboard', function () {
         return Inertia::render('SystemAdmin/SAdashboard');
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('systemadmin.users');
 });
 
+//Doctor dashboard routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/doctor/dashboard', function () {
         return Inertia::render('Doctors/Ddashboard');
@@ -55,6 +57,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/doctor/appointments', function () {
         return Inertia::render('Doctors/DAppointments');
     })->name('doctor.Appointments');
+});
+
+//Daycare dashboard routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/daycare/dashboard', function () {
+        return Inertia::render('Daycare/CDashboard');
+    })->name('daycare.dashboard');
+
+    Route::get('/daycare/profile', function () {
+        return Inertia::render('Daycare/CProfile');
+    })->name('daycare.profile');
+
+    Route::get('/daycare/bookings', function () {
+        return Inertia::render('Daycare/CBookings');
+    })->name('daycare.Bookings');
 });
 
 require __DIR__.'/auth.php';
