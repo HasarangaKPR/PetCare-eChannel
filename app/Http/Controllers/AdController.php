@@ -10,11 +10,20 @@ class AdController extends Controller
     /**
      * Display a listing of the ads.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $ads = Ad::all(); // Fetch all ads
+        $query = Ad::query();
+    
+        // Check if a pet_type filter is applied
+        if ($request->filled('pet_type')) {
+            $query->where('pet_type', $request->input('pet_type'));
+        }
+    
+        $ads = $query->get();
+    
         return view('ads.index', compact('ads'));
     }
+    
 
     /**
      * Show the form for creating a new ad.

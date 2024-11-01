@@ -5,7 +5,21 @@
 @section('content')
     <div class="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg">
         <h1 class="text-3xl font-bold mb-6"> <i>Welcome to the Pets Worlds</i></h1>
-        
+
+        <!-- Search form for pet type -->
+        <form action="{{ route('ads.index') }}" method="GET" class="mb-4">
+            <div class="flex items-center">
+                <select name="pet_type" class="border rounded-md p-2 mr-2">
+                    <option value="">All Types</option>
+                    <option value="Dog">Dog</option>
+                    <option value="Cat">Cat</option>
+                    <option value="Bird">Bird</option>
+                    <!-- Add more pet types as needed -->
+                </select>
+                <button type="submit" class="bg-blue-500 text-white rounded-md px-4 py-2">Search</button>
+            </div>
+        </form>
+
         @if ($ads->isEmpty())
             <p>No ads available at the moment.</p>
         @else
@@ -22,7 +36,7 @@
                         {{-- Show image if it exists --}}
                         @if (!empty($photos[0]))
                             <img src="{{ asset('storage/' . $photos[0]) }}" alt="{{ $ad->pet_name }}"
-                                class="w-64 h-64 mb-2 rounded-md object-cover"> <!-- Set medium width and height -->
+                                class="w-64 h-64 mb-2 rounded-md object-cover">
                         @endif
                     @endif
 
@@ -34,6 +48,8 @@
         @endif
     </div>
 @endsection
+
+
 
 
 
