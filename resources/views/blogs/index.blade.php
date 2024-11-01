@@ -7,30 +7,30 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
+            background-color: #e9eef2;
             color: #333;
             margin: 0;
             padding: 20px;
         }
         h1 {
             text-align: center;
-            color: #4A90E2;
+            color: #184375;
             margin-bottom: 20px;
         }
         .blog-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background-color: white;
+            background-color: rgb(36, 211, 100);
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         .blog-post {
             margin-bottom: 20px;
             padding: 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #75ece0;
             border-radius: 5px;
-            background-color: #f9f9f9;
+            background-color: #80e3ea;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .blog-post:hover {
@@ -60,6 +60,7 @@
             <div class="blog-post">
                 <h2>{{ $blog->title }}</h2>
                 <p><strong>Description:</strong> {{ $blog->description }}</p>
+                <p> </p>
                 <p><strong>Date:</strong> {{ $blog->date }}</p>
                 @if ($blog->image)
                     <img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image">

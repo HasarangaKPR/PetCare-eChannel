@@ -21,7 +21,7 @@
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #1de4e4;
+            background-color: #3cdbdb;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
@@ -59,7 +59,7 @@
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #357ABD;
+            background-color: #1a8d4e;
         }
     </style>
 </head>
