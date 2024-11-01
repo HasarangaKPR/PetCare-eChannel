@@ -25,10 +25,7 @@
                     <option value="">Select Pet Type</option>
                     <option value="Dog">Dog</option>
                     <option value="Cat">Cat</option>
-                    <option value="Bird">Bird</option>
-                    <option value="Fish">Fish</option>
-                    <option value="Rabbit">Rabbit</option>
-                    <option value="Other">Other</option>
+                
                 </select>
                 @error('pet_type')
                     <p class="text-red-500">{{ $message }}</p>

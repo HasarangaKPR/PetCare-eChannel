@@ -13,10 +13,7 @@
                     <option value="">All Types</option>
                     <option value="Dog">Dog</option>
                     <option value="Cat">Cat</option>
-                    <option value="Bird">Bird</option>
-                    <option value="fish">Fish</option>
-                    <option value="rabit">Rabit</option>
-                    <option value="Other">Other</option>
+                   
                     <!-- Add more pet types as needed -->
                 </select>
                 <button type="submit" class="bg-yellow-500 text-white rounded-md px-4 py-2 hover:bg-yellow-600">
