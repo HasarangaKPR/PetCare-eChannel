@@ -9,7 +9,7 @@ export default function AddUserModal({ isOpen, onClose, onAddDoctor }) {
         email: '',
         password: '',
         password_confirmation: '',
-        userType: 'test',
+        userType: 'user',
         profile_picture: null,
     });
 
