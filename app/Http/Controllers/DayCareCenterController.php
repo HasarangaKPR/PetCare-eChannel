@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DayCareCenter;
+use App\Models\User;
 
 class DayCareCenterController extends Controller
 {
-    public function addDayCareCenter(Request $request)
+    public function updateDayCareCenter(Request $request)
     {
         $validatedData = $request->validate([
         'dayCareCenterName' => 'required|string|max:255',
@@ -18,11 +19,24 @@ class DayCareCenterController extends Controller
         'noOfRooms' => 'required|integer',
         ]);
 
+        //get logged doctorId
+        //$userId = $request->input('userId');
+        $userId = auth()->id();
+        $dayCareCenterId = DayCareCenter::where('userId', $userId)->first();
 
-        DayCareCenter::create($validatedData);
+        // Update doctor details
+        $dayCareCenterId->update($validatedData);
+
+
+        // DayCareCenter::create($validatedData);
 
         //return redirect()->route('dashboard')->with('success', 'Added successfully.');
         return response()->json(['success' => true]);
 
+    }
+    public function viewDayCare()
+    {
+        $daycares = User::where('userType', 'daycare')->get();
+        return response()->json(['daycares' => $daycares]);
     }
 }

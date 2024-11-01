@@ -39,6 +39,9 @@ class AuthenticatedSessionController extends Controller
         if($request->user()->userType == 'doctor') {
             return redirect('/doctor/dashboard');
         }
+        if($request->user()->userType == 'daycare') {
+            return redirect('/daycare/dashboard');
+        }
         
 
         return redirect()->intended(route('user.home1', absolute: false));
