@@ -75,9 +75,9 @@ class DoctorAppointmentController extends Controller
             
         ]);
          // Send confirmation email to the user
-         $userEmail = User::where('id', $userId)->value('email');
-         $doctor = Doctor::find($doctorId);
-         Mail::to($userEmail)->send(new AppointmentConfirmationMail($doctorAppointment, $doctor));
+          $userEmail = User::where('id', $userId)->value('email');
+          $doctor = Doctor::find($doctorId);
+         Mail::to($userEmail)->send(new AppointmentConfirmationMail($doctorappointment, $doctor));
          
          //return redirect()->route('dashboard')->with('success', 'Added successfully.');
          return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.']);
