@@ -7,6 +7,8 @@ use App\Models\DoctorAppointment;
 use App\Models\Doctor;
 use App\Models\User;
 use Carbon\Carbon;
+use App\Mail\AppointmentConfirmationMail;
+use Illuminate\Support\Facades\Mail;
 
 class DoctorAppointmentController extends Controller
 {
@@ -72,6 +74,11 @@ class DoctorAppointmentController extends Controller
             'customerName' => $customerName,
             
         ]);
+         // Send confirmation email to the user
+         $userEmail = User::where('id', $userId)->value('email');
+         $doctor = Doctor::find($doctorId);
+         Mail::to($userEmail)->send(new AppointmentConfirmationMail($doctorAppointment, $doctor));
+         
          //return redirect()->route('dashboard')->with('success', 'Added successfully.');
          return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.']);
         }
