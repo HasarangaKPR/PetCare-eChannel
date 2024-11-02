@@ -73,7 +73,7 @@ class DoctorAppointmentController extends Controller
             
         ]);
          //return redirect()->route('dashboard')->with('success', 'Added successfully.');
-         return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.']);
+         return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.'], 201);
         }
 
     }

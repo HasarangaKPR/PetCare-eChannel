@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from '@inertiajs/react';
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity }) => {
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [shouldBook, setShouldBook] = useState(false);
-    
-    const { data, setData, post, processing } = useForm({
+    const [formData, setFormData] = useState({
         doctorId: '',
         appointmentTime: appointmentTime,
         date: date,
     });
+    
 
     useEffect(() => {
         fetchUsers();
@@ -18,10 +20,7 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
 
     useEffect(() => {
         if (shouldBook) {
-            post(route('addDoctorAppointment'))
-                // Reset shouldBook after the post request is complete
-                setShouldBook(false);
-            
+            bookAppointment();
         }
     }, [shouldBook]);
 
@@ -37,14 +36,31 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
         }
     };
 
+    const bookAppointment = async () => {
+        try {
+            const response = await axios.post(route('addDoctorAppointment'), formData);
+            console.log(response.status);
+            if(response.status === 201){
+                toast.success('The appointment has been successfully created.');
+            }
+            else{
+                toast.error('Doctor is not available at the selected time.');
+            }
+            setShouldBook(false); // Reset shouldBook after the post request is complete
+        } catch (error) {
+            console.error('Error booking appointment:', error);
+        }
+    };
+
     const handleBookAppointment = (doctorId) => {
-        setData('doctorId', doctorId); // Set the doctorId
+        setFormData((prevData) => ({ ...prevData, doctorId })); // Set the doctorId in formData
         setShouldBook(true); // Trigger the booking process
     };
 
     return (
         <div className="bg-white py-8">
             <div className="container mx-auto px-4">
+            <ToastContainer position="top-right" autoClose={5000} />
                 <h2 className="text-2xl font-bold mb-6 text-[#156862]">Search Results</h2>
                 {loading ? (
                     <p className="text-center text-gray-500">Loading...</p>
@@ -57,7 +73,7 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
                                     <button
                                         onClick={() => handleBookAppointment(doctor.doctorId)}
                                         className="bg-[#22AAA1] text-white px-4 py-2 rounded-lg hover:bg-[#156862]"
-                                        disabled={processing}
+                                        disabled={shouldBook}
                                     >
                                         Book Appointment
                                     </button>
