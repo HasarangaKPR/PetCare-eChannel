@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from '@inertiajs/react'; // Adjust import based on your setup
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date, end_date }) => {
     const [daycares, setDaycares] = useState([]);
     const [loading, setLoading] = useState(true);
     const [shouldBook, setShouldBook] = useState(false);
-    
-    const { data, setData, post, processing } = useForm({
+    const [formData, setFormData] = useState({
         dayCareCenterId: '',
         start_date: start_date,
         end_date: end_date,
@@ -14,18 +15,17 @@ const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date
 
     useEffect(() => {
         fetchDaycares();
-    }, [dayCareCenterCity, dayCareCenterName, start_date, end_date]); // Fetch when the criteria change
+    }, [dayCareCenterCity, dayCareCenterName, start_date, end_date]); // Fetch when criteria change
 
     useEffect(() => {
         if (shouldBook) {
-            post(route('bookroom')) // Replace with your booking route
-                setShouldBook(false); // Reset shouldBook after the post request is complete
+            bookRoom();
         }
     }, [shouldBook]);
 
     const fetchDaycares = async () => {
         try {
-            const response = await fetch(route('searchDayCareCenter', { dayCareCenterCity, dayCareCenterName })); // Adjust endpoint as needed
+            const response = await fetch(route('searchDayCareCenter', { dayCareCenterCity, dayCareCenterName,  start_date, end_date}));
             const result = await response.json();
             setDaycares(result.dayCareCenters);
         } catch (error) {
@@ -35,14 +35,31 @@ const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date
         }
     };
 
+    const bookRoom = async () => {
+        try {
+            const response = await axios.post(route('bookroom'), formData);
+            if (response.status === 201) {
+                toast.success('The booking has been successfully added.');
+            } else {
+                toast.error('Space is not available.');
+            }
+        } catch (error) {
+            console.error('Error booking room:', error);
+            toast.error('Space is not available.');
+        } finally {
+            setShouldBook(false); // Reset shouldBook after the post request is complete
+        }
+    };
+
     const handleBookAppointment = (dayCareCenterId) => {
-        setData('dayCareCenterId', dayCareCenterId); // Set the daycareId
+        setFormData((prevData) => ({ ...prevData, dayCareCenterId })); // Set the dayCareCenterId in formData
         setShouldBook(true); // Trigger the booking process
     };
 
     return (
         <div className="bg-white py-8">
             <div className="container mx-auto px-4">
+                <ToastContainer position="top-right" autoClose={5000} />
                 <h2 className="text-2xl font-bold mb-6 text-[#156862]">Search Results</h2>
                 {loading ? (
                     <p className="text-center text-gray-500">Loading...</p>
@@ -55,7 +72,7 @@ const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date
                                     <button
                                         onClick={() => handleBookAppointment(daycare.dayCareCenterId)}
                                         className="bg-[#22AAA1] text-white px-4 py-2 rounded-lg hover:bg-[#156862]"
-                                        disabled={processing}
+                                        disabled={shouldBook}
                                     >
                                         Book Appointment
                                     </button>

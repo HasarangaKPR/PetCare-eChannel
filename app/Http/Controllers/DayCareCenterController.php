@@ -39,6 +39,9 @@ class DayCareCenterController extends Controller
     {
         $dayCareCenterName = $request->input('dayCareCenterName');
         $dayCareCenterCity = $request->input('dayCareCenterCity');
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
+        
 
         $query = DayCareCenter::query();
 
@@ -49,8 +52,10 @@ class DayCareCenterController extends Controller
             $query->where('dayCareCenterCity', $dayCareCenterCity);
         }
         $dayCareCenters = $query->get();
-        return response()->json(['dayCareCenters' => $dayCareCenters]);
 
+        if($start_date && $end_date){
+            return response()->json(['dayCareCenters' => $dayCareCenters]);
+        }
     }
 
     public function viewDayCare()

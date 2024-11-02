@@ -3,11 +3,16 @@ import Header from './Components/Header';
 import SideList from './Components/SideList';
 import { Head } from '@inertiajs/react';
 import AddDaycareModal from './Components/AddDaycareModal';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SADaycareAdmin = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+
+
+    
 
     useEffect(() => {
         fetchUsers();
@@ -37,6 +42,7 @@ const SADaycareAdmin = () => {
             <div className="flex flex-col h-screen">
                 <Header />
                 <div className="flex flex-grow">
+                <ToastContainer position="top-right" autoClose={5000} />
                     <SideList />
                     <div className="flex-grow p-6">
                         <div className="flex justify-between items-center mb-4">

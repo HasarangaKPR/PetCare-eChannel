@@ -41,7 +41,7 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
             const response = await axios.post(route('addDoctorAppointment'), formData);
             console.log(response.status);
             if(response.status === 201){
-                toast.success('The appointment has been successfully created.');
+                toast.success('The appointment has been successfully added.');
             }
             else{
                 toast.error('Doctor is not available at the selected time.');

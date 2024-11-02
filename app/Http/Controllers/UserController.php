@@ -46,17 +46,8 @@ class UserController extends Controller
         });
 
 
-
-
-
-
-
-
-
-
-
         //return redirect()->route('dashboard')->with('success', 'Added successfully.');
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true], 201);
 
     }
     public function allUsers()
