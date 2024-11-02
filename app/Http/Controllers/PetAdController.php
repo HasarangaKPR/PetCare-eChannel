@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PetAdController extends Controller
 {
-    //not final want add images
+    // final code
     public function store(Request $request)
     {
        $validated=$request->validate([
@@ -39,19 +39,6 @@ class PetAdController extends Controller
 
         // Add the image name to validated data
         $validated['pet_photos'] = $imagename; 
-   
-    /*
-    // Handle file upload
-    if ($request->hasFile('image') && $request->file('image')->isValid()) {
-    // Store the file in the `public` disk under `pet_photos` directory
-    $path = $request->file('image')->store('image', 'public');
-
-    // Save the file path to the validated data
-    $validatedData['image'] = $path;
-    } else {
-    return response()->json(['success' => false, 'message' => 'Invalid file upload.'], 400);
-    }
-    */
 
     PetAd::create([
         
