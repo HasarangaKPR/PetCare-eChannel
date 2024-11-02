@@ -123,7 +123,7 @@ Route::get('/viewDayCare', [DayCareCenterController::class, 'viewDayCare'])->nam
 //Add DayCareCenter Appointments
 Route::post('/addDayCareCenterBooking', [DayCareCenterBookingController::class, 'addDayCareCenterBooking'])->name('addDayCareCenterBooking');
 Route::get('/displayToDayCareCenterAppointment', [DayCareCenterBookingController::class, 'displayToDayCareCenterAppointment'])->name('displayToDayCareCenterAppointment');
-//Route::get('/displayToUserDayCareCenterAppointment', [DayCareCenterBookingController::class, 'displayToUserDayCareCenterAppointment'])->name('displayToUserDayCareCenterAppointment');
+Route::get('/displayToUserDayCareCenterAppointment', [DayCareCenterBookingController::class, 'displayToUserDayCareCenterAppointment'])->name('displayToUserDayCareCenterAppointment');
 
 
 

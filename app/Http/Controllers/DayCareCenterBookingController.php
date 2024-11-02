@@ -102,8 +102,8 @@ public function displayToDayCareCenterAppointment(Request $request)
 
         //get all appointments for the doctor
         $bookings = DayCareCenterBooking::where('dayCareCenterId', $dayCareCenterId)
-        ->orderBy('start_date', 'asc')
-        ->get();
+                    ->orderBy('start_date', 'asc')
+                    ->get();
        
 
         return response()->json(['bookings' => $bookings]);
@@ -111,9 +111,11 @@ public function displayToDayCareCenterAppointment(Request $request)
     
     public function displayToUserDayCareCenterAppointment(Request $request)
     {
-        $userId = $request->input('userId');
+        $userId = auth()->id();
 
-        $bookings = DayCareCenterBooking::where('userId', $userId)->get();
+        $bookings = DayCareCenterBooking::where('userId', $userId)
+                    ->orderBy('start_date', 'asc')
+                    ->get();
         return response()->json(['bookings' => $bookings]);
     }
     

@@ -94,17 +94,21 @@ class DoctorAppointmentController extends Controller
 
         //get all appointments for the doctor
         $appointments = DoctorAppointment::where('doctorId', $doctorId)
-        ->orderBy('date', 'asc')
-        ->orderBy('appointmentTime', 'asc')
-        ->get();
+                        ->orderBy('date', 'asc')
+                        ->orderBy('appointmentTime', 'asc')
+                        ->get();
         return response()->json(['appointments' => $appointments]);
     }
     
     public function displayToUserDoctorAppointment(Request $request)
     {
-        $userId = $request->input('userId');
+        $userId = auth()->id();
 
-        $appointments = DoctorAppointment::where('userId', $userId)->get();
+        $appointments = DoctorAppointment::where('userId', $userId)
+                        ->orderBy('date', 'asc')
+                        ->orderBy('appointmentTime', 'asc')
+                        ->get();
+        
         return response()->json(['appointments' => $appointments]);
     }
 }
