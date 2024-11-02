@@ -30,7 +30,6 @@ class UserController extends Controller
                 'email' => $validatedData['email'],
                 'password' => Hash::make($validatedData['password']),
             ]);
-    
             // Create the doctor record linked to the user
             if ($validatedData['userType'] == 'doctor') {
                 Doctor::create([
