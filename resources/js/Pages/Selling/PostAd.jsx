@@ -147,6 +147,7 @@ const PostAd = () => {
                         <label className="block text-sm font-medium">Pet Photos</label>
                         <input
                             type="file"
+
                             multiple
                             onChange={(e) => setData('pet_photos', e.target.files)}
                             className="mt-1 block w-full p-2 border rounded-md"
