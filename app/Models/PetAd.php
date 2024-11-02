@@ -26,9 +26,4 @@ class PetAd extends Model
         'phone_number',
         'location',
     ];
-
-     // Cast 'pet_photos' as an array
-     //protected $casts = [
-       //'pet_photos' => 'array',
-    //];
 }
