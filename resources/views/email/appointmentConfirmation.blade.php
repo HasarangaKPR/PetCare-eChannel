@@ -6,7 +6,7 @@
 <body>
     <h1>Appointment Confirmation</h1>
     <p>Dear {{ $appointment->customerName }},</p>
-    <p>Your appointment with Dr. {{ $doctor->name }} has been confirmed.</p>
+    <p>Your appointment with Dr. {{ $doctor->doctorName }} has been confirmed.</p>
     <p><strong>Appointment Details:</strong></p>
     <ul>
         <li>Date: {{ $appointment->date }}</li>
