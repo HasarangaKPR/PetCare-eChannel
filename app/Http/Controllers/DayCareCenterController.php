@@ -12,7 +12,7 @@ class DayCareCenterController extends Controller
     {
         $validatedData = $request->validate([
         'dayCareCenterName' => 'required|string|max:255',
-        'dayCareCenterDistrict' => 'required|string|max:255',
+        'dayCareCenterAddress' => 'required|string|max:255',
         'dayCareCenterCity' => 'required|string|max:255',
         'dayCareCenterContactNumber' => 'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
         'dayCareCenterEmail' => 'required|string|email|max:255',

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('dayCareCenterId');
             $table->integer('userId');
             $table->string('dayCareCenterName')->nullable();
-            $table->string('dayCareCenterDistrict')->nullable();
+            $table->string('dayCareCenterAddress')->nullable();
             $table->string('dayCareCenterCity')->nullable();
             $table->string('dayCareCenterContactNumber')->nullable();
             $table->string('dayCareCenterEmail')->nullable();

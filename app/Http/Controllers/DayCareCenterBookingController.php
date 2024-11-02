@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DayCareCenterBooking;
 use App\Models\DayCareCenter;
+use App\Models\User;
 
 class DayCareCenterBookingController extends Controller
 {
@@ -65,8 +66,25 @@ class DayCareCenterBookingController extends Controller
         ], 409);
     }
 
+    //get userId & name & email
+    $userId = auth()->id();
+    $user = User::find($userId);
+    $customersName = $user->name;
+    $customersEmail = $user->email;
+
+    //get daycarecenter name & email
+    $dayCareCenter = DayCareCenter::find($dayCareCenterId);
+    $dayCareCenterName = $dayCareCenter->name;
+    $dayCareCenterEmail = $dayCareCenter->email;
+
     // If an available room is found, create a new booking
     $booking = DayCareCenterBooking::create([
+        'dayCareCenterId' => $validatedData['dayCareCenterId'],
+        'dayCareCenterName' => $dayCareCenterName,
+        'dayCareCenterEmail' => $dayCareCenterEmail,
+        'userId' => $userId,
+        'customersName' => $customersName,
+        'customersEmail' => $customersEmail,
         'start_date' => $validatedData['start_date'],
         'end_date' => $validatedData['end_date'],
         'room_number' => $roomNumber,
@@ -74,6 +92,30 @@ class DayCareCenterBookingController extends Controller
 
     return response()->json(['message' => 'Room booked successfully', 'room_number' => $booking->room_number], 201);
 }
+
+public function displayToDayCareCenterAppointment(Request $request)
+    {
+        //get logged doctorId
+        $userId = auth()->id();
+        // $userId = $request->input('userId');
+        $dayCareCenterId = DayCareCenter::where('userId', $userId)->value('dayCareCenterId');
+
+        //get all appointments for the doctor
+        $bookings = DayCareCenterBooking::where('dayCareCenterId', $dayCareCenterId)
+        ->orderBy('start_date', 'asc')
+        ->get();
+       
+
+        return response()->json(['bookings' => $bookings]);
+    }
+    
+    public function displayToUserDayCareCenterAppointment(Request $request)
+    {
+        $userId = $request->input('userId');
+
+        $bookings = DayCareCenterBooking::where('userId', $userId)->get();
+        return response()->json(['bookings' => $bookings]);
+    }
     
 
 
