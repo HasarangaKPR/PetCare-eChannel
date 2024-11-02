@@ -31,7 +31,8 @@ class PetAdController extends Controller
         $imagename = time() . '.' . $image->getClientOriginalExtension();
         
         // Store the image in the 'public/photos' directory
-        $image->move(public_path('photos'), $imagename);
+        $image->move(public_path('pet_photos'), $imagename);
+        //$image->storeAs('public/pet_photos', $imagename); // Store in 'storage/app/public/pet_photos'
     } else {
         return response()->json(['success' => false, 'message' => 'Image upload failed.']);
     }

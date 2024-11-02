@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 
 const PostAd = () => {
-    const { data, setData, post, errors } = useForm({
+    const { data, setData, post, processing, errors, reset } = useForm({
         pet_name: '',
         pet_type: '',
         breed: '',
@@ -10,37 +10,37 @@ const PostAd = () => {
         gender: '',
         price: '',
         description: '',
-        pet_photos: null,
+        pet_photos: null, // Initialize as null for file handling
         seller_name: '',
         phone_number: '',
         location: '',
     });
 
+    const handleFileChange = (e) => {
+        setData('pet_photos', e.target.files[0]); // Update to handle only one image file
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        
+        // Create a FormData object to send files correctly
+        const formData = new FormData();
+        Object.keys(data).forEach((key) => {
+            formData.append(key, data[key]);
+        });
+
+        // Submit with post method
         post('/CreateAd', {
-            onSuccess: () => {
-                setData({
-                    pet_name: '',
-                    pet_type: '',
-                    breed: '',
-                    age: '',
-                    gender: '',
-                    price: '',
-                    description: '',
-                    pet_photos: null,
-                    seller_name: '',
-                    phone_number: '',
-                    location: '',
-                });
-            },
+            data: formData,
+            onSuccess: () => reset(),
+            onError: () => console.error("Error submitting form")
         });
     };
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
             <h1 className="text-2xl font-bold mb-6">Post a New Pet Ad</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 {/* Pet Information */}
                 <div className="mb-6">
                     <h2 className="text-xl font-semibold mb-4">Pet Information</h2>
@@ -147,9 +147,7 @@ const PostAd = () => {
                         <label className="block text-sm font-medium">Pet Photos</label>
                         <input
                             type="file"
-
-                            multiple
-                            onChange={(e) => setData('pet_photos', e.target.files)}
+                            onChange={handleFileChange}
                             className="mt-1 block w-full p-2 border rounded-md"
                         />
                         {errors.pet_photos && <p className="text-red-500">{errors.pet_photos}</p>}
@@ -197,6 +195,7 @@ const PostAd = () => {
                 <div className="text-center">
                     <button
                         type="submit"
+                        disabled={processing}
                         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
                     >
                         Submit Ad
