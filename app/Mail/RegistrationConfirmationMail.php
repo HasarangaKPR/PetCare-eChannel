@@ -54,8 +54,7 @@ class RegistrationConfirmationMail extends Mailable
     }
     public function build()
     {
-        return $this//->//subject('Welcome to Our Platform!')
-                    ->view('email.registrationConfirmation')
+        return $this->view('email.registrationConfirmation')
                     ->with(['user' => $this ->user]);
     }
 }
