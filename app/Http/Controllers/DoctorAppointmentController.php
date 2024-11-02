@@ -42,8 +42,8 @@ class DoctorAppointmentController extends Controller
 
 
         //get doctor name & email
-        $doctorName = Doctor::where('doctorId', $doctorId)->value('name');
-        $doctorEmail = Doctor::where('doctorId', $doctorId)->value('email');
+        $doctorName = Doctor::where('doctorId', $doctorId)->value('doctorName');
+        $doctorEmail = Doctor::where('doctorId', $doctorId)->value('doctorEmail');
 
         
         // Check if the time slot is already booked

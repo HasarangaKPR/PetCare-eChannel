@@ -16,7 +16,7 @@ class Doctor extends Model
     protected $fillable = [
         'userId',
         'doctorName',
-        'doctorDistrict',
+        'doctorAddress',
         'doctorCity',
         'doctorContactNumber',
         'doctorEmail',

@@ -15,10 +15,13 @@ class DoctorAppointment extends Model
         'appointmentId',
         'userId',
         'doctorId',
+        'doctorName',
+        'doctorEmail',
+        'customerName',
+        'customerEmail',
         'date',
         'appointmentTime',
         'endTime',
         'status',
-        'customerName',
     ];
 }
