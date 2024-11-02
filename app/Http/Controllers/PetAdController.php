@@ -19,48 +19,38 @@ class PetAdController extends Controller
         'gender'=>'required|string',
         'price' => 'required|numeric',
         'description' => 'nullable|string|max:255',
-        'pet_photos'=>'image|mimes:jpeg,png,jpg,gif|max:2048',
+        'pet_photos'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         'seller_name'=>'required|string|max:255',
         'phone_number'=>'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
         'location'=>'required|string|max:255',
         
     ]);
-    /*$photos = [];
+    $imagename = null;
     if ($request->hasFile('pet_photos')) {
-        foreach ($request->file('pet_photos') as $file) {
-            $path = $file->store('pet_photos', 'public');
-            $photos[] = $path;
-        }
+        $image = $request->file('pet_photos');
+        $imagename = time() . '.' . $image->getClientOriginalExtension();
+        
+        // Store the image in the 'public/photos' directory
+        $image->move(public_path('photos'), $imagename);
+    } else {
+        return response()->json(['success' => false, 'message' => 'Image upload failed.']);
     }
 
-    // Create the ad with form data and uploaded images
-    PetAd::create(array_merge($request->except('pet_photos'), [
-        'pet_photos' => $photos,
-    ]));*/
-    /*$photos = [];
-    if ($request->hasFile('pet_photos')) {
-    foreach ($request->file('pet_photos') as $file) {
-        $path = $file->store('pet_photos', 'public');
-        $photos[] = $path;
-    }
-    }
-
-    // Convert the array to JSON for database storage
-    PetAd::create(array_merge($request->except('pet_photos'), [
-    'pet_photos' => json_encode($photos),
-    ]));*/
-    
+        // Add the image name to validated data
+        $validated['pet_photos'] = $imagename; 
+   
+    /*
     // Handle file upload
-    if ($request->hasFile('pet_photo') && $request->file('pet_photo')->isValid()) {
+    if ($request->hasFile('image') && $request->file('image')->isValid()) {
     // Store the file in the `public` disk under `pet_photos` directory
-    $path = $request->file('pet_photo')->store('pet_photos', 'public');
+    $path = $request->file('image')->store('image', 'public');
 
     // Save the file path to the validated data
-    $validatedData['pet_photo'] = $path;
+    $validatedData['image'] = $path;
     } else {
     return response()->json(['success' => false, 'message' => 'Invalid file upload.'], 400);
     }
-
+    */
 
     PetAd::create([
         
@@ -123,7 +113,7 @@ class PetAdController extends Controller
        
 
     }
-    //final code but want to look
+    //final code
     public function showAd(Request $request) {
         $adId = $request->input('adId');
     
