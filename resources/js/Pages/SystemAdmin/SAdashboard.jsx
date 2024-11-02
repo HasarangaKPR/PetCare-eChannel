@@ -1,10 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
 import { Head } from '@inertiajs/react';
 import DBphoto from './Assets/image.png';
 
 const SAdashboard = () => {
+    const [users, setUsers] = useState([]);
+    const [doctors, setDoctors] = useState([]);
+    const [daycares, setDaycares] = useState([]);
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        try {
+            const response = await fetch(route('adminSummary'));
+            const result = await response.json();
+            setUsers(result.userCount);
+            setDoctors(result.doctorCount);
+            setDaycares(result.daycareCount);
+        } catch (error) {
+            console.error('Error fetching users:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <>
             <Head title="Dashboard" />
@@ -23,16 +45,16 @@ const SAdashboard = () => {
                             </div>
                             <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="bg-teal-600 flex flex-col justify-center items-center p-5 rounded-lg shadow-md text-white">
-                                    <p className="text-lg font-semibold mb-2">Today's Appointments</p>
-                                    <p className="text-2xl font-bold">Output 1</p>
+                                    <p className="text-lg font-semibold mb-2">Total Users</p>
+                                    <p className="text-2xl font-bold">{users}</p>
                                 </div>
                                 <div className="bg-teal-600 flex flex-col justify-center items-center p-5 rounded-lg shadow-md text-white">
-                                    <p className="text-lg font-semibold mb-2">Total Appointments</p>
-                                    <p className="text-2xl font-bold">Output 2</p>
+                                    <p className="text-lg font-semibold mb-2">Total Doctors</p>
+                                    <p className="text-2xl font-bold">{doctors}</p>
                                 </div>
                                 <div className="bg-teal-600 flex flex-col justify-center items-center p-5 rounded-lg shadow-md text-white">
-                                    <p className="text-lg font-semibold mb-2">Today's Bookings</p>
-                                    <p className="text-2xl font-bold">Output 3</p>
+                                    <p className="text-lg font-semibold mb-2">Total Day Care Centers</p>
+                                    <p className="text-2xl font-bold">{daycares}</p>
                                 </div>
                                 <div className="bg-teal-600 flex flex-col justify-center items-center p-5 rounded-lg shadow-md text-white">
                                     <p className="text-lg font-semibold mb-2">Total Bookings</p>
