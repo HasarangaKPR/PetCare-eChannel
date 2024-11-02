@@ -3,7 +3,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity }) => {
+const SearchResultsDoctor = ({ appointmentTime, date, doctorName, doctorCity }) => {
     const [doctors, setDoctors] = useState([]);
     const [loading, setLoading] = useState(true);
     const [shouldBook, setShouldBook] = useState(false);
@@ -25,8 +25,8 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
     }, [shouldBook]);
 
     const fetchUsers = async () => {
-        try {    
-            const response = await fetch(route('searchDoctor', { appointmentTime, date, doctorDistrict, doctorCity }));
+        try {
+            const response = await fetch(route('searchDoctor', { appointmentTime, date, doctorName, doctorCity }));
             const result = await response.json();
             setDoctors(result.doctors);
         } catch (error) {

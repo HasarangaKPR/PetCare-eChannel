@@ -11,7 +11,7 @@ const SearchBarDoctor = () => {
     // State to hold form data to be passed as props
     const [searchData, setSearchData] = useState({
         doctorCity: '',
-        doctorDistrict: '',
+        doctorName: '',
         date: '',
         appointmentTime: ''
     });
@@ -20,7 +20,7 @@ const SearchBarDoctor = () => {
         // Update searchData state with the current form values
         setSearchData({
             doctorCity: selectedCity,
-            doctorDistrict: selectedDoctor,
+            doctorName: selectedDoctor,
             date: selectedDate,
             appointmentTime: selectedTime
         });
@@ -50,16 +50,16 @@ const SearchBarDoctor = () => {
 
                     {/* Doctor Dropdown */}
                     <div className="flex-1">
-                        <label htmlFor="doctor" className="text-sm font-medium text-white mb-2 block">Doctor District</label>
+                        <label htmlFor="doctorName" className="text-sm font-medium text-white mb-2 block">Doctor Name</label>
                         <select
-                            id="doctor"
+                            id="doctorName"
                             value={selectedDoctor}
                             onChange={(e) => setSelectedDoctor(e.target.value)}
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
                         >
                             <option value="">Select Doctor</option>
                             <option value="Dr. Smith">Dr. Smith</option>
-                            <option value="Dr. Johnson">Dr. Johnson</option>
+                            <option value="AAAA">AAAA</option>
                             <option value="Dr. Lee">Dr. Lee</option>
                             <option value="Dr. Patel">Dr. Patel</option>
                             <option value="Dr. Garcia">Dr. Garcia</option>
@@ -109,9 +109,9 @@ const SearchBarDoctor = () => {
 
             {/* Pass searchData as props to SearchResultsDoctor with key to ensure rerender */}
             <SearchResultsDoctor
-                key={`${searchData.doctorCity}-${searchData.doctorDistrict}-${searchData.date}-${searchData.appointmentTime}`}
+                key={`${searchData.doctorCity}-${searchData.doctorName}-${searchData.date}-${searchData.appointmentTime}`}
                 doctorCity={searchData.doctorCity}
-                doctorDistrict={searchData.doctorDistrict}
+                doctorName={searchData.doctorName}
                 date={searchData.date}
                 appointmentTime={searchData.appointmentTime}
             />

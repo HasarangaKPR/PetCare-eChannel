@@ -44,13 +44,13 @@ class DoctorController extends Controller
 
         public function searchDoctor(Request $request)
     {
-        $district = $request->input('doctorDistrict');
+        $doctorName = $request->input('doctorName');
         $city = $request->input('doctorCity');
 
         $query = Doctor::query();
 
-        if ($district) {
-            $query->where('doctorDistrict', $district);
+        if ($doctorName) {
+            $query->where('doctorName', $doctorName);
         }
         if ($city) {
             $query->where('doctorCity', $city);
