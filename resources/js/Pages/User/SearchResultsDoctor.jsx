@@ -25,7 +25,7 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
     }, [shouldBook]);
 
     const fetchUsers = async () => {
-        try {
+        try {    
             const response = await fetch(route('searchDoctor', { appointmentTime, date, doctorDistrict, doctorCity }));
             const result = await response.json();
             setDoctors(result.doctors);
@@ -37,9 +37,8 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorDistrict, doctorCity
     };
 
     const bookAppointment = async () => {
-        try {
+        try {   
             const response = await axios.post(route('addDoctorAppointment'), formData);
-            console.log(response.status);
             if(response.status === 201){
                 toast.success('The appointment has been successfully added.');
             }

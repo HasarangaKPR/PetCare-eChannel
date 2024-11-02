@@ -4,7 +4,7 @@ import { useForm } from '@inertiajs/react'; // Replace with your actual form lib
 const Details = () => {
     const { data, setData, put, processing, errors, reset } = useForm({
         doctorName: '',
-        doctorDistrict: '',
+        doctorAddress: '',
         doctorCity: '',
         doctorContactNumber: '',
         doctorEmail: '',
@@ -41,17 +41,17 @@ const Details = () => {
                 </div>
 
                 <div className="flex flex-col mt-4">
-                    <label htmlFor="doctorDistrict" className="font-medium text-[#333]">Doctor District</label>
+                    <label htmlFor="doctorAddress" className="font-medium text-[#333]">Doctor Address</label>
                     <input
                         type="text"
-                        id="doctorDistrict"
-                        name="doctorDistrict"
-                        value={data.doctorDistrict}
+                        id="doctorAddress"
+                        name="doctorAddress"
+                        value={data.doctorAddress}
                         className="mt-2 p-3 rounded-md border border-gray-300"
-                        onChange={(e) => setData('doctorDistrict', e.target.value)}
+                        onChange={(e) => setData('doctorAddress', e.target.value)}
                         required
                     />
-                    {errors.doctorDistrict && <span className="text-red-500">{errors.doctorDistrict}</span>}
+                    {errors.doctorAddress && <span className="text-red-500">{errors.doctorAddress}</span>}
                 </div>
 
                 <div className="flex flex-col mt-4">

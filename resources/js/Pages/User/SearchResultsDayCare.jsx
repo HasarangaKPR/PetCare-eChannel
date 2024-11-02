@@ -12,6 +12,7 @@ const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date
         start_date: start_date,
         end_date: end_date,
     });
+    
 
     useEffect(() => {
         fetchDaycares();
