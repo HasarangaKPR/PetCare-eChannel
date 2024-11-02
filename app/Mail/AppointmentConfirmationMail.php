@@ -53,9 +53,10 @@ class AppointmentConfirmationMail extends Mailable
     {
         return [];
     }
-    public function build()
+    public function build($appointment)
     {
-        return $this->subject('Appointment Confirmation')
-                    ->view('email.appointmentConfirmation');
+        return $this->view('email.appointmentConfirmation')
+                    ->with(['appointment'=> $this -> $appointment]);
+                    
     }
 }
