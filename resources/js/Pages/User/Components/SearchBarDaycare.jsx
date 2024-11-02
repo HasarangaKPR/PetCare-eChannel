@@ -4,11 +4,13 @@ import SearchResultsDaycare from '../SearchResultsDaycare'; // Adjust import bas
 const SearchBarDaycare = () => {
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedCenter, setSelectedCenter] = useState('');
-    const [selectedDate, setSelectedDate] = useState('');
+    const [selectedStartDate, setSelectedStartDate] = useState('');
+    const [selectedEndDate, setSelectedEndDate] = useState('');
     const [searchData, setSearchData] = useState({
         dayCareCenterCity: '',
         dayCareCenterName: '',
-        date: ''
+        start_date: '',
+        end_date: '',
     });
 
     const handleSearch = () => {
@@ -16,7 +18,8 @@ const SearchBarDaycare = () => {
         setSearchData({
             dayCareCenterCity: selectedCity,
             dayCareCenterName: selectedCenter, // Corrected this line
-            date: selectedDate
+            start_date: selectedStartDate,
+            end_date: selectedEndDate,
         });
     };
 
@@ -58,14 +61,26 @@ const SearchBarDaycare = () => {
                         </select>
                     </div>
 
-                    {/* Date Picker */}
+                    {/* Start Date Picker */}
                     <div className="flex-1">
-                        <label htmlFor="date" className="text-sm font-medium text-white mb-2 block">Date</label>
+                        <label htmlFor="start_date" className="text-sm font-medium text-white mb-2 block">Start Date</label>
                         <input
                             type="date"
-                            id="date"
-                            value={selectedDate}
-                            onChange={(e) => setSelectedDate(e.target.value)}
+                            id="start_date"
+                            value={selectedStartDate}
+                            onChange={(e) => setSelectedStartDate(e.target.value)}
+                            className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                        />
+                    </div>
+
+                    {/* End Date Picker */}
+                    <div className="flex-1">
+                        <label htmlFor="end_date" className="text-sm font-medium text-white mb-2 block">End Date</label>
+                        <input
+                            type="date"
+                            id="end_date"
+                            value={selectedEndDate}
+                            onChange={(e) => setSelectedEndDate(e.target.value)}
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
                         />
                     </div>
@@ -84,10 +99,11 @@ const SearchBarDaycare = () => {
 
             {/* Pass searchData as props to SearchResultsDaycare */}
             <SearchResultsDaycare
-                key={`${searchData.dayCareCenterCity}-${searchData.dayCareCenterName}-${searchData.date}`}
+                key={`${searchData.dayCareCenterCity}-${searchData.dayCareCenterName}-${searchData.start_date}-${searchData.end_date}`}
                 dayCareCenterCity={searchData.dayCareCenterCity}
                 dayCareCenterName={searchData.dayCareCenterName}
-                date={searchData.date}
+                start_date={searchData.start_date}
+                end_date={searchData.end_date}
             />
         </>
     );

@@ -1,31 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from '@inertiajs/react'; // Adjust import based on your setup
 
-const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, date }) => {
-    console.log(dayCareCenterCity, dayCareCenterName, date);
+const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date, end_date }) => {
     const [daycares, setDaycares] = useState([]);
     const [loading, setLoading] = useState(true);
     const [shouldBook, setShouldBook] = useState(false);
     
     const { data, setData, post, processing } = useForm({
-        daycareId: '',
-        date: date,
+        dayCareCenterId: '',
+        start_date: start_date,
+        end_date: end_date,
     });
 
     useEffect(() => {
         fetchDaycares();
-    }, [dayCareCenterCity, dayCareCenterName, date]); // Fetch when the criteria change
+    }, [dayCareCenterCity, dayCareCenterName, start_date, end_date]); // Fetch when the criteria change
 
     useEffect(() => {
         if (shouldBook) {
-            post(route('addDaycareBooking')) // Replace with your booking route
-                .then(() => setShouldBook(false)); // Reset shouldBook after the post request is complete
+            post(route('bookroom')) // Replace with your booking route
+                setShouldBook(false); // Reset shouldBook after the post request is complete
         }
     }, [shouldBook]);
 
     const fetchDaycares = async () => {
         try {
-            const response = await fetch(route('searchDayCareCenter', { dayCareCenterCity, dayCareCenterName, date })); // Adjust endpoint as needed
+            const response = await fetch(route('searchDayCareCenter', { dayCareCenterCity, dayCareCenterName })); // Adjust endpoint as needed
             const result = await response.json();
             setDaycares(result.dayCareCenters);
         } catch (error) {
@@ -35,8 +35,8 @@ const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, date }) =>
         }
     };
 
-    const handleBookAppointment = (daycareId) => {
-        setData('daycareId', daycareId); // Set the daycareId
+    const handleBookAppointment = (dayCareCenterId) => {
+        setData('dayCareCenterId', dayCareCenterId); // Set the daycareId
         setShouldBook(true); // Trigger the booking process
     };
 
