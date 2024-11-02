@@ -34,6 +34,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Selling/AdProfile');
     })->name('selling.adprofile');
 
+
+
 });
 
 
