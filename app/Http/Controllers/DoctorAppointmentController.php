@@ -111,4 +111,18 @@ class DoctorAppointmentController extends Controller
         
         return response()->json(['appointments' => $appointments]);
     }
+
+    public function doctorSummary(Request $request){
+        
+        $userId = auth()->id();
+        $doctorId = Doctor::where('userId', $userId)->value('doctorId');
+
+        $totalCount = DoctorAppointment::where('doctorId', $doctorId)->count();
+        
+        $todayCount = DoctorAppointment::where('doctorId', $doctorId)
+            ->whereDate('date', Carbon::today())
+            ->count();
+
+        return response()->json(['totalCount' => $totalCount, 'todayCount' => $todayCount]);
+    }
 }

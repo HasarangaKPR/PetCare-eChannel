@@ -55,4 +55,12 @@ class UserController extends Controller
         $users = User::all();
         return response()->json(['users' => $users]);
     }
+
+    public function adminSummary(){
+        
+        $userCount = User::count();
+        $doctorCount = User::where('userType', 'doctor')->count();
+        $daycareCount = User::where('userType', 'daycare')->count();
+        return response()->json(['userCount' => $userCount, 'doctorCount' => $doctorCount, 'daycareCount' => $daycareCount]);
+    }
 }

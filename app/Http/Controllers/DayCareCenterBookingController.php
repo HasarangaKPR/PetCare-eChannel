@@ -119,6 +119,26 @@ public function displayToDayCareCenterAppointment(Request $request)
         return response()->json(['bookings' => $bookings]);
     }
     
+    public function dayCareSummary(Request $request){
 
+        $userId = auth()->id();
+        $dayCareCenterId = DayCareCenter::where('userId', $userId)->value('dayCareCenterId');
+        
+        $totalCount = DayCareCenterBooking::where('dayCareCenterId', $dayCareCenterId)->count();
+
+        // Get today's date
+        $today = now()->startOfDay();
+
+        // Get the count of today's bookings
+        $todayCount = DayCareCenterBooking::where('dayCareCenterId', $dayCareCenterId)
+            ->where('start_date', '>=', $today)
+            ->where('start_date', '<=', now()->endOfDay())
+            ->count();
+
+        // Return the booking counts as a JSON response
+        return response()->json(['totalCount' => $totalCount, 'todayCount' => $todayCount,
+        ]);
+
+    }
 
 }

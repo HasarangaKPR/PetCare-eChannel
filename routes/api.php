@@ -39,3 +39,7 @@ Route::get('/displayToDayCareCenterAppointment', [DayCareCenterBookingController
 Route::get('/displayToUserDayCareCenterAppointment', [DayCareCenterBookingController::class, 'displayToUserDayCareCenterAppointment'])->name('displayToUserDayCareCenterAppointment');
 
 
+//summary
+Route::get('/adminSummary', [UserController::class, 'adminSummary'])->name('adminSummary');
+Route::get('/doctorSummary', [DoctorAppointmentController::class, 'doctorSummary'])->name('doctorSummary');
+Route::get('/dayCareSummary', [DayCareCenterBookingController::class, 'dayCareSummary'])->name('dayCareSummary');
