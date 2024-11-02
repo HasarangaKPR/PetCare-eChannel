@@ -40,7 +40,7 @@ class AppointmentConfirmationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'email.appointmentConfirmation',
         );
     }
 
@@ -56,6 +56,6 @@ class AppointmentConfirmationMail extends Mailable
     public function build()
     {
         return $this->subject('Appointment Confirmation')
-                    ->view('emails.appointmentConfirmation');
+                    ->view('email.appointmentConfirmation');
     }
 }
