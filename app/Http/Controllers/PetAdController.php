@@ -38,7 +38,8 @@ class PetAdController extends Controller
     }
 
         // Add the image name to validated data
-        $validated['pet_photos'] = $imagename; 
+        $validated['pet_photos'] = '/pet_photos/' . $imagename;
+ 
 
     PetAd::create([
         
