@@ -78,7 +78,7 @@ const Home = () => {
                         {ads.map((ad) => (
                             <div key={ad.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
                                 <img
-                                    src={ad.image}
+                                    src={ad.pet_photos}
                                     alt={ad.breed}
                                     className="w-full h-48 object-cover"
                                 />
