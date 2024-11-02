@@ -14,7 +14,7 @@ class DoctorController extends Controller
     {
         $validatedData = $request->validate([
             'doctorName' => 'required|string|max:255',
-            'doctorDistrict' => 'required|string|max:255',
+            'doctorAddress' => 'required|string|max:255',
             'doctorCity' => 'required|string|max:255',
             'doctorContactNumber' => 'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
             'doctorEmail' => 'required|string|email|max:255',

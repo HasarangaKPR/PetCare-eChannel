@@ -35,9 +35,15 @@ class DoctorAppointmentController extends Controller
         $appointmentTime = Carbon::createFromFormat('H:i', $appointmentTime);
         $endTime = $appointmentTime->copy()->addMinutes($averageTime);
 
-        //get customer name
+        //get customer name & email
         $userId = auth()->id();
         $customerName = User::where('id', $userId)->value('name');
+        $customerEmail = User::where('id', $userId)->value('email');
+
+
+        //get doctor name & email
+        $doctorName = Doctor::where('doctorId', $doctorId)->value('name');
+        $doctorEmail = Doctor::where('doctorId', $doctorId)->value('email');
 
         
         // Check if the time slot is already booked
@@ -68,9 +74,11 @@ class DoctorAppointmentController extends Controller
             'date' => $validatedData['date'],
             'appointmentTime' => $validatedData['appointmentTime'],
             'endTime' => $endTime,
-            //'status' => $validatedData['status'],
             'customerName' => $customerName,
-            
+            'customerEmail' => $customerEmail,
+            'doctorName' => $doctorName,
+            'doctorEmail' => $doctorEmail,
+             //'status' => $validatedData['status'],
         ]);
          //return redirect()->route('dashboard')->with('success', 'Added successfully.');
          return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.'], 201);
