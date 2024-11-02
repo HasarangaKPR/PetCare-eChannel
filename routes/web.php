@@ -76,11 +76,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 //User dashboard routes
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/user/dashboard', function () {
-        return Inertia::render('UserDashboard/UDashboard');
-    })->name('user.dashboard');
+  
 
-    Route::get('/user/profile', function () {
+      Route::get('/user/profile', function () {
         return Inertia::render('UserDashboard/UProfile');
     })->name('daycare.profile');
 
