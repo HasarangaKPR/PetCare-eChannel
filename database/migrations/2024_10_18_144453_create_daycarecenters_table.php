@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::create('daycarecenters', function (Blueprint $table) {
             $table->id('dayCareCenterId');
-            $table->string('dayCareCenterName');
-            $table->string('dayCareCenterDistrict');
-            $table->string('dayCareCenterCity');
-            $table->string('dayCareCenterContactNumber');
-            $table->string('dayCareCenterEmail');
-            $table->integer('noOfRooms');
+            $table->integer('userId');
+            $table->string('dayCareCenterName')->nullable();
+            $table->string('dayCareCenterDistrict')->nullable();
+            $table->string('dayCareCenterCity')->nullable();
+            $table->string('dayCareCenterContactNumber')->nullable();
+            $table->string('dayCareCenterEmail')->nullable();
+            $table->integer('noOfRooms')->nullable();
             $table->timestamps();
         });
     }

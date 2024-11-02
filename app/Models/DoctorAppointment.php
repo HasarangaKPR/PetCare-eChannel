@@ -19,5 +19,6 @@ class DoctorAppointment extends Model
         'appointmentTime',
         'endTime',
         'status',
+        'customerName',
     ];
 }

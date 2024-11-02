@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class DoctorController extends Controller
 {
-        public function updateDoctor(Request $request)
+    public function updateDoctor(Request $request)
     {
         $validatedData = $request->validate([
             'doctorName' => 'required|string|max:255',
@@ -21,10 +21,18 @@ class DoctorController extends Controller
             'averageTime' => 'required|integer',
             'openTime' => 'required|date_format:H:i',
             'closeTime' => 'required|date_format:H:i',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for profile photo
         ]);
 
-        // Find the doctor by ID
-        $userId = $request->input('userId');
+            $photoPath = null;
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('photos', 'public');
+                $validatedData['photo'] = $photoPath; // Add the photo path to the data
+            }
+
+        //get logged doctorId
+        //$userId = $request->input('userId');
+        $userId = auth()->id();
         $doctorId = Doctor::where('userId', $userId)->first();
 
         // Update doctor details
@@ -96,4 +104,19 @@ class DoctorController extends Controller
         $doctors = User::where('userType', 'doctor')->get();
         return response()->json(['users' => $doctors]);
     }
+
+    public function deleteDoctor(Request $request, $userId) {
+        // Get doctor associated with the user
+        $doctor = Doctor::where('userId', $userId)->first();
+        $user = User::find($userId);
+    
+            //delete data from doctor & user tables
+            $user->delete();
+            $doctor->delete();
+    
+        // Return a success response
+        return response()->json(['success' => true, 'message' => 'Successfully Deleted.']);
     }
+    
+    
+}

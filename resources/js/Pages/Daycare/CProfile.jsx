@@ -5,8 +5,11 @@ import DeleteUserForm from './Components/DeleteUserForm';
 import UpdatePasswordForm from './Components/UpdatePasswordForm';
 import UpdateProfileInformation from './components/UpdateProfileInformation';
 import { Head } from '@inertiajs/react';
+import Details from './components/Details';
+
 
 const CProfile = ({ auth, mustVerifyEmail, status }) => {
+
     return (
         <>
             <Head title="DProfile" />
@@ -16,6 +19,7 @@ const CProfile = ({ auth, mustVerifyEmail, status }) => {
                 <div className="flex flex-grow">
                     {/* Sidebar for larger screens, hide on small screens */}
                     <SideList className="hidden md:flex" />
+
 
                     {/* Main content area */}
                     <div className="flex-1 py-6 px-4 sm:px-6 lg:px-8">
@@ -28,6 +32,10 @@ const CProfile = ({ auth, mustVerifyEmail, status }) => {
                                     className="max-w-full md:max-w-xl"
                                 />
                             </div>
+
+                            {/* Additional info Section */}
+                            <Details />
+
 
                             {/* Update Password Form */}
                             <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">

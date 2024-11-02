@@ -9,7 +9,7 @@ export default function AddDaycareModal({ isOpen, onClose, onAddDoctor }) {
         email: '',
         password: '',
         password_confirmation: '',
-        userType: 'test',
+        userType: 'daycare',
         profile_picture: null,
     });
 

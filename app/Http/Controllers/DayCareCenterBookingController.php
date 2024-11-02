@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DayCareCenterBooking;
+use App\Models\DayCareCenter;
 
 class DayCareCenterBookingController extends Controller
 {
@@ -26,6 +27,7 @@ class DayCareCenterBookingController extends Controller
 {
     // Validate the incoming request
     $validatedData = $request->validate([
+        'dayCareCenterId' => 'integer|max:255',
         'start_date' => 'required|date',
         'end_date' => 'required|date|after_or_equal:start_date',
     ]);
@@ -43,9 +45,13 @@ class DayCareCenterBookingController extends Controller
     // Create an array to hold booked room numbers
     $bookedRoomNumbers = $conflictingBookings->pluck('room_number')->toArray();
 
-    // Find the first available room number (1 to 100)
+    //get no of rooms from database
+    $dayCareCenterId = $validatedData['dayCareCenterId'];
+    $noOfRooms = DayCareCenter::where('dayCareCenterId', $dayCareCenterId)->value('noOfRooms');
+
+    // Find the first available room number
     $roomNumber = null;
-    for ($i = 1; $i <= 100; $i++) {
+    for ($i = 1; $i <= $noOfRooms; $i++) {
         if (!in_array($i, $bookedRoomNumbers)) {
             $roomNumber = $i;
             break;
@@ -68,6 +74,7 @@ class DayCareCenterBookingController extends Controller
 
     return response()->json(['message' => 'Room booked successfully', 'room_number' => $booking->room_number]);
 }
+    
 
 
 }
