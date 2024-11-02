@@ -68,14 +68,14 @@ class DayCareCenterBookingController extends Controller
 
     //get userId & name & email
     $userId = auth()->id();
-    $user = User::find($userId);
-    $customersName = $user->name;
-    $customersEmail = $user->email;
+    $customersName = User::where('id', $userId)->value('name');
+    $customersEmail = User::where('id', $userId)->value('email');
+  
 
     //get daycarecenter name & email
     $dayCareCenter = DayCareCenter::find($dayCareCenterId);
-    $dayCareCenterName = $dayCareCenter->name;
-    $dayCareCenterEmail = $dayCareCenter->email;
+    $dayCareCenterName = DayCareCenter::where('dayCareCenterId', $dayCareCenterId)->value('dayCareCenterName');
+    $dayCareCenterEmail = DayCareCenter::where('dayCareCenterId', $dayCareCenterId)->value('dayCareCenterEmail');
 
     // If an available room is found, create a new booking
     $booking = DayCareCenterBooking::create([

@@ -16,7 +16,7 @@ class DayCareCenter extends Model
     protected $fillable = [
         'userId',
         'dayCareCenterName',
-        'dayCareCenterDistrict',
+        'dayCareCenterAddress',
         'dayCareCenterCity',
         'dayCareCenterContactNumber',
         'dayCareCenterEmail',
