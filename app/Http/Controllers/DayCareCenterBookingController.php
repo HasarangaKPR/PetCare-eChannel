@@ -68,6 +68,7 @@ class DayCareCenterBookingController extends Controller
 
     return response()->json(['message' => 'Room booked successfully', 'room_number' => $booking->room_number]);
 }
+    
 
 
 }

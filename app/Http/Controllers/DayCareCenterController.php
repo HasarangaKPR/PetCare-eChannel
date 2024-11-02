@@ -34,6 +34,25 @@ class DayCareCenterController extends Controller
         return response()->json(['success' => true]);
 
     }
+
+    public function searchDayCareCenter(Request $request)
+    {
+        $dayCareCenterName = $request->input('dayCareCenterName');
+        $dayCareCenterCity = $request->input('dayCareCenterCity');
+
+        $query = DayCareCenter::query();
+
+        if ($dayCareCenterName) {
+            $query->where('dayCareCenterName', $dayCareCenterName);
+        }
+        if ($dayCareCenterCity) {
+            $query->where('dayCareCenterCity', $dayCareCenterCity);
+        }
+        $dayCareCenters = $query->get();
+        return response()->json(['dayCareCenters' => $dayCareCenters]);
+
+    }
+
     public function viewDayCare()
     {
         $daycares = User::where('userType', 'daycare')->get();
