@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
 import { Head } from '@inertiajs/react';
+import './SAdashboard.css'; 
 import AddDaycareModal from './Components/AddDaycareModal';
 
 const SADoctors = () => {

@@ -1,46 +1,57 @@
 import React from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
-import DeleteUserForm from './Components/DeleteUserForm';
-import UpdatePasswordForm from './Components/UpdatePasswordForm';
-import UpdateProfileInformationForm from './Components/UpdateProfileInformationForm';
-import { Head } from '@inertiajs/react';
+import Footer from './Components/Footer'; // Import Footer
+import './SAProfile.css'; // Import the separate CSS file for Profile
 
-const SAProfile = ({ auth, mustVerifyEmail, status }) => {
+const SAProfile = () => {
     return (
         <>
-            <Head title="SAProfile" />
-
             <div className="flex flex-col h-screen">
                 <Header />
                 <div className="flex flex-grow">
-                    {/* Sidebar for larger screens, hide on small screens */}
-                    <SideList className="hidden md:flex" />
-
-                    {/* Main content area */}
-                    <div className="flex-1 py-6 px-4 sm:px-6 lg:px-8">
-                        <div className="max-w-7xl mx-auto space-y-6">
-                            {/* Profile Information Form */}
-                            <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                                <UpdateProfileInformationForm
-                                    mustVerifyEmail={mustVerifyEmail}
-                                    status={status}
-                                    className="max-w-full md:max-w-xl"
-                                />
+                    <SideList />
+                    <div className="flex-grow p-6">
+                        <div className="dashboard-container">
+                            <div className="profile-section">
+                                <h2>Profile Information</h2>
+                                <form className="profile-form">
+                                    <div>
+                                        <label htmlFor="fullName">Full Name</label>
+                                        <input type="text" id="fullName" placeholder="Enter Your Full Name" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email">Email</label>
+                                        <input type="email" id="email" placeholder="Enter Your Email" />
+                                    </div>
+                                    <button className="save-btn" type="submit">Save</button>
+                                </form>
                             </div>
 
-                            {/* Update Password Form */}
-                            <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                                <UpdatePasswordForm className="max-w-full md:max-w-xl" />
+                            <div className="password-section">
+                                <h2>Update Password</h2>
+                                <form className="password-form">
+                                    <div>
+                                        <label htmlFor="currentPassword">Current Password</label>
+                                        <input type="password" id="currentPassword" placeholder="Enter Your Current Password" />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="newPassword">New Password</label>
+                                        <input type="password" id="newPassword" placeholder="Enter Your New Password" />
+                                    </div>
+                                    <button className="save-btn" type="submit">Save</button>
+                                </form>
                             </div>
 
-                            {/* Delete User Form */}
-                            <div className="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                                <DeleteUserForm className="max-w-full md:max-w-xl" />
+                            <div className="delete-section">
+                                <h2>Delete Account</h2>
+                                <p>Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please ensure you have downloaded any data or information you wish to retain.</p>
+                                <button className="delete-btn">Delete Account</button>
                             </div>
                         </div>
                     </div>
                 </div>
+               
             </div>
         </>
     );
