@@ -3,7 +3,6 @@ import Header from './Components/Header';
 import SideList from './Components/SideList';
 import AddDoctorModal from './Components/AddDoctorModal'; // Import the AddDoctorModal component
 import { Head } from '@inertiajs/react';
-import './SAdashboard.css'; 
 
 const SADoctors = () => {
     const [users, setUsers] = useState([]);
