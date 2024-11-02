@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('gender');
             $table->decimal('price',8,2);
             $table->text('description')->nullable();
-           $table->string('pet_photos')->nullable();
+            $table->string('pet_photos')->nullable();
             $table->string('seller_name');
             $table->string('phone_number');
             $table->string('location');
