@@ -5,23 +5,27 @@ import { Link } from '@inertiajs/react';
 const Home = () => {
     const [ads, setAds] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [searchTerm, setSearchTerm] = useState(''); // New state for search term
+
+    const fetchAds = async (breed) => {
+        try {
+            const response = await fetch(route('SearchPet', { breed })); // Fetch data with breed as parameter
+            const data = await response.json();
+            setAds(data);
+        } catch (error) {
+            console.error("Error fetching ads:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        // Fetch data from API endpoint
-        const fetchAds = async () => {
-            try {
-                const response = await fetch('/ViewallAd'); // Replace with your API endpoint
-                const data = await response.json();
-                setAds(data);
-            } catch (error) {
-                console.error("Error fetching ads:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchAds();
+        fetchAds(''); // Initial fetch with an empty search term
     }, []);
+
+    const handleSearch = () => {
+        fetchAds(searchTerm); // Fetch ads based on the search term
+    };
 
     return (
         <>
@@ -37,8 +41,13 @@ const Home = () => {
                             type="text"
                             placeholder="Search for pets..."
                             className="w-80 px-4 py-2 rounded-3xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)} // Update search term
                         />
-                        <button className="ml-2 p-2 bg-teal-500 text-white rounded-full hover:bg-teal-600 focus:outline-none">
+                        <button
+                            className="ml-2 p-2 bg-teal-500 text-white rounded-full hover:bg-teal-600 focus:outline-none"
+                            onClick={handleSearch} // Call handleSearch on click
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35" />
                             </svg>
@@ -73,7 +82,7 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="p-4 border-t">
-                                    <Link href={`/selling/adprofile/${ad.adId}`} className="w-full">
+                                     <Link href={`/selling/adprofile/${ad.adId}`} className="w-full">
                                         <button className="w-full bg-teal-500 text-white py-2 rounded-3xl hover:bg-teal-600">
                                             View Details
                                         </button>
