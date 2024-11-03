@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchResultsDaycare from '../SearchResultsDaycare'; // Adjust import based on your structure
 
 const SearchBarDaycare = () => {
@@ -6,6 +6,9 @@ const SearchBarDaycare = () => {
     const [selectedCenter, setSelectedCenter] = useState('');
     const [selectedStartDate, setSelectedStartDate] = useState('');
     const [selectedEndDate, setSelectedEndDate] = useState('');
+    const [daycareCenters, setDaycareCenters] = useState([]); // State to store daycare centers based on city selection
+    const [loading, setLoading] = useState(false); // State to manage loading while fetching data
+
     const [searchData, setSearchData] = useState({
         dayCareCenterCity: '',
         dayCareCenterName: '',
@@ -17,6 +20,29 @@ const SearchBarDaycare = () => {
         startDate: false,
         endDate: false,
     });
+
+    useEffect(() => {
+        const fetchUsers = async () => {
+            setLoading(true);
+            try {
+                const response = await fetch(route('cityDaycare', { city: selectedCity }));
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const result = await response.json();
+                setDaycareCenters(result.dayCareCenters);
+                console.log(result);
+            } catch (error) {
+                console.error('Error fetching doctors:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+    
+        fetchUsers();
+        
+    }, [selectedCity]);
+    
 
     const handleSearch = () => {
         // Check for validation
@@ -69,10 +95,9 @@ const SearchBarDaycare = () => {
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
                         >
                             <option value="">Select Daycare Center</option>
-                            <option value="hospital1">Hospital 1</option>
-                            <option value="hospital2">Hospital 2</option>
-                            <option value="hospital3">Hospital 3</option>
-                            <option value="hospital4">Hospital 4</option>
+                            {daycareCenters.map((center) => (
+                                <option key={center.dayCareCenterId} value={center.dayCareCenterName}>{center.dayCareCenterName}</option>
+                            ))}
                         </select>
                     </div>
 

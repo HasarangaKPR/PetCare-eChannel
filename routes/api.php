@@ -19,6 +19,7 @@ Route::get('/allUsers', [UserController::class, 'allUsers'])->name('allUsers');
 //Add Doctors & Search Doctors
 Route::put('/updateDoctor', [DoctorController::class, 'updateDoctor'])->name('updateDoctor');
 Route::get('/searchDoctor', [DoctorController::class, 'searchDoctor'])->name('searchDoctor');
+Route::get('/cityDoctors', [DoctorController::class, 'cityDoctors'])->name('cityDoctors');
 Route::get('/viewDoctors', [DoctorController::class, 'viewDoctors'])->name('viewDoctors');
 Route::delete('/deleteDoctor/{userId}', [DoctorController::class, 'deleteDoctor'])->name('deleteDoctor/{userId}');
 
@@ -30,6 +31,7 @@ Route::get('/displayToUserDoctorAppointment', [DoctorAppointmentController::clas
 //Add DayCareCenter & Search DayCareCenter
 Route::put('/updateDayCareCenter', [DayCareCenterController::class, 'updateDayCareCenter'])->name('updateDayCareCenter');
 Route::get('/searchDayCareCenter', [DayCareCenterController::class, 'searchDayCareCenter'])->name('searchDayCareCenter');
+Route::get('/cityDaycare', [DayCareCenterController::class, 'cityDaycare'])->name('cityDaycare');
 Route::post('/bookroom', [DayCareCenterBookingController::class, 'bookRoom'])->name('bookroom');
 Route::get('/viewDayCare', [DayCareCenterController::class, 'viewDayCare'])->name('viewDayCare');
 

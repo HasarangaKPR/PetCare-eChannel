@@ -58,6 +58,19 @@ class DayCareCenterController extends Controller
         }
     }
 
+    public function cityDaycare(Request $request)
+    {
+        $city = $request->input('city');
+
+        if ($city) {
+            $dayCareCenters = DayCareCenter::where('dayCareCenterCity', $city)->get();
+        } else {
+            $dayCareCenters = DayCareCenter::all();
+        }
+
+        return response()->json(['dayCareCenters' => $dayCareCenters]);
+    }
+
     public function viewDayCare()
     {
         $daycares = User::where('userType', 'daycare')->get();

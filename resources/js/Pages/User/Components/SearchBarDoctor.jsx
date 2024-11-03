@@ -90,7 +90,6 @@ const SearchBarDoctor = () => {
                             value={selectedDoctor}
                             onChange={(e) => setSelectedDoctor(e.target.value)}
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
-                            // disabled={loading || !doctors.length}
                         >
                             <option value="">Select Doctor</option>
                             {doctors.map((doctor) => (

@@ -110,6 +110,19 @@ class DoctorController extends Controller
         return response()->json(['users' => $doctors]);
     }
 
+    public function cityDoctors(Request $request)
+    {
+        $city = $request->input('city');
+
+        if ($city) {
+            $doctors = Doctor::where('doctorCity', $city)->get();
+        } else {
+            $doctors = Doctor::all();
+        }
+
+        return response()->json(['doctors' => $doctors]);
+    }
+
     public function deleteDoctor(Request $request, $userId) {
         // Get doctor associated with the user
         $doctor = Doctor::where('userId', $userId)->first();
