@@ -21,14 +21,14 @@ class DoctorController extends Controller
             'averageTime' => 'required|integer',
             'openTime' => 'required|date_format:H:i',
             'closeTime' => 'required|date_format:H:i',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for profile photo
+            //'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for profile photo
         ]);
 
-            $photoPath = null;
-            if ($request->hasFile('photo')) {
-                $photoPath = $request->file('photo')->store('photos', 'public');
-                $validatedData['photo'] = $photoPath; // Add the photo path to the data
-            }
+            // $photoPath = null;
+            // if ($request->hasFile('photo')) {
+            //     $photoPath = $request->file('photo')->store('photos', 'public');
+            //     $validatedData['photo'] = $photoPath; // Add the photo path to the data
+            // }
 
         //get logged doctorId
         //$userId = $request->input('userId');
