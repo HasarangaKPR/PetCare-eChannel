@@ -33,6 +33,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/selling/adprofile', function () {
         return Inertia::render('Selling/AdProfile');
     })->name('selling.adprofile');
+   
+    // Route to display ad profile page with Inertia
+    /*Route::get('/selling/adprofile/{adId}', function ($id) {
+    return Inertia::render('AdProfile', ['id' => $id]);
+    })->name('adprofile.show');*/
 
 
 
@@ -51,7 +56,7 @@ require __DIR__.'/auth.php';
 //add post delete update view route 
 Route::get('/ViewallAd', [PetAdController::class, 'index'])->name('ViewallAd'); 
 Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
-Route::get('/showAd',[PetAdController::class, 'showAd'])->name('showAd');
+Route::get('/selling/home/{adId}',[PetAdController::class, 'showAd'])->name('showAd');
 Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updateAd');
 Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
 
