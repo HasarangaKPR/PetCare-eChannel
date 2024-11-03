@@ -3,24 +3,6 @@ import logo from './Assets/image.png';
 import { Link } from '@inertiajs/react';
 
 const Home = () => {
-    // Simulate fetching ads data (replace with actual API fetch in future)
-    /*const [ads, setAds] = useState([]);
-
-    useEffect(() => {
-        // Simulated data (Replace with API call to get ads when backend is ready)
-        const fetchedAds = [
-            {
-                id: 1,
-                price: '80,000 LKR',
-                breed: 'Golden Retriever',
-                location: 'Moratuwa',
-                time: '1 Day ago',
-                image: '/path/to/image1.jpg', // Replace with actual image path
-            },
-            // Add more ads here as needed
-        ];
-        setAds(fetchedAds);
-    }, []);*/
     const [ads, setAds] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -76,7 +58,7 @@ const Home = () => {
                     <h1 className="text-3xl font-bold mb-6">Available Pets for Sale</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {ads.map((ad) => (
-                            <div key={ad.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                            <div key={ad.adId} className="bg-white shadow-lg rounded-lg overflow-hidden">
                                 <img
                                     src={ad.pet_photos}
                                     alt={ad.breed}
@@ -91,7 +73,7 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="p-4 border-t">
-                                    <Link href={`/selling/adprofile/${ad.id}`} className="w-full">
+                                    <Link href={`/selling/adprofile/${ad.adId}`} className="w-full">
                                         <button className="w-full bg-teal-500 text-white py-2 rounded-3xl hover:bg-teal-600">
                                             View Details
                                         </button>
