@@ -102,8 +102,8 @@ class PetAdController extends Controller
 
     }
     //final code
-    public function showAd(Request $request) {
-        $adId = $request->input('adId');
+    public function showAd(Request $request, $adId) {
+        // $adId = $request->input('adId');
     
         // Use first() to get a single instance instead of a collection
         $petAd = PetAd::where('adId', $adId)->first(); // Ensure 'id' is the correct column name
