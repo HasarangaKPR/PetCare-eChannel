@@ -38,7 +38,7 @@ const AddDoctorModal = ({ isOpen, onClose, onAddDoctor }) => {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
             if (response.status === 201) {
-                toast.success('Doctor added successfully!');
+                toast.success('Doctor Added Successfully!');
                 onAddDoctor(formData);
                 setFormData({
                     name: '',

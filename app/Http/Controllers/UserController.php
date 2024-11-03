@@ -52,7 +52,7 @@ class UserController extends Controller
     }
     public function allUsers()
     {
-        $users = User::all();
+        $users = User::where('userType', 'user')->get();
         return response()->json(['users' => $users]);
     }
 
@@ -62,5 +62,16 @@ class UserController extends Controller
         $doctorCount = User::where('userType', 'doctor')->count();
         $daycareCount = User::where('userType', 'daycare')->count();
         return response()->json(['userCount' => $userCount, 'doctorCount' => $doctorCount, 'daycareCount' => $daycareCount]);
+    }
+
+    public function deleteUser(Request $request, $userId) {
+        // Get user details
+        $user = User::where('id', $userId)->first();
+    
+            //delete data from user tables
+            $user->delete();
+    
+        // Return a success response
+        return response()->json(['success' => true, 'message' => 'Successfully Deleted.']);
     }
 }

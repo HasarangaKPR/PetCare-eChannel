@@ -75,4 +75,17 @@ class DayCareCenterController extends Controller
         $daycares = User::where('userType', 'daycare')->get();
         return response()->json(['daycares' => $daycares]);
     }
+
+    public function deleteDayCare(Request $request, $userId) {
+        // Get daycarecenter associated with the user
+        $dayCare = DayCareCenter::where('userId', $userId)->first();
+        $user = User::where('id', $userId)->first();
+    
+            //delete data from daycarecenter & user tables
+            $user->delete();
+            $dayCare->delete();
+    
+        // Return a success response
+        return response()->json(['success' => true, 'message' => 'Successfully Deleted.']);
+    }
 }

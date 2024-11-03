@@ -3,7 +3,7 @@ import Header from './Components/Header';
 import SideList from './Components/SideList';
 import { Head } from '@inertiajs/react';
 import AddDaycareModal from './Components/AddDaycareModal';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SADaycareAdmin = () => {
@@ -29,6 +29,20 @@ const SADaycareAdmin = () => {
             setLoading(false);
         }
     };
+
+
+    const handleDeleteDoctor = async (userId) => {
+        try {
+            const response = await axios.delete(`/deleteDayCare/${userId}`);
+            if (response.status === 200) {
+                toast.success('DayCare Center Deleted Successfully!');
+            }
+            } 
+            catch (error) {
+
+        }
+    };
+
 
     // Function to handle adding a new doctor (after the form is submitted)
     const handleAddDoctor = (newDoctor) => {
@@ -71,7 +85,9 @@ const SADaycareAdmin = () => {
                                         <td className="p-3">{user.email}</td>
                                         <td className="p-3">{user.created_at}</td>
                                         <td className="p-3">
-                                            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors">
+                                            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors"
+                                                    onClick={() => handleDeleteDoctor(user.id)}
+                                            >
                                                 Delete
                                             </button>
                                         </td>
