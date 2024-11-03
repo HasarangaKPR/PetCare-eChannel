@@ -75,10 +75,10 @@ const SearchBarDoctor = () => {
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
                         >
                             <option value="">Select City</option>
-                            <option value="new_york">New York</option>
-                            <option value="los_angeles">Los Angeles</option>
-                            <option value="chicago">Chicago</option>
-                            <option value="houston">Houston</option>
+                            <option value="Matara">Matara</option>
+                            <option value="Galle">Galle</option>
+                            <option value="Kandy">Kandy</option>
+                            <option value="Colombo">Colombo</option>
                         </select>
                     </div>
 
