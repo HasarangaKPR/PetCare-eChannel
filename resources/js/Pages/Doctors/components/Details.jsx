@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react'; // Replace with your actual form library
+import { ToastContainer, toast } from 'react-toastify'; // Import toast components
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for styling
 
 const Details = () => {
     const { data, setData, put, processing, errors, reset } = useForm({
@@ -17,13 +19,14 @@ const Details = () => {
         e.preventDefault();
         // Replace 'updateEndpoint' with your actual update API endpoint
         put(route('updateDoctor'), {
-            //onFinish: () => reset(),
+            onFinish: () => toast.success('Doctor Data updated Successfully!'),
         });
      
     };
 
     return (
         <div className="bg-[#DEF2F1] p-6 rounded-lg shadow-md">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2 className="text-2xl font-semibold text-[#08101A] mb-4">Additional Information</h2>
             <form onSubmit={submit}>
                 <div className="flex flex-col">

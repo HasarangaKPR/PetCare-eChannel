@@ -39,7 +39,7 @@ class DoctorController extends Controller
         $doctorId->update($validatedData);
 
         // Return a success response
-        return response()->json(['success' => true, 'message' => 'Successfully Updated.']);
+        // return response()->json(['success' => true, 'message' => 'Successfully Updated.']);
     }
 
         public function searchDoctor(Request $request)
