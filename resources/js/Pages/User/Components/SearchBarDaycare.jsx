@@ -12,15 +12,30 @@ const SearchBarDaycare = () => {
         start_date: '',
         end_date: '',
     });
+    
+    const [formErrors, setFormErrors] = useState({
+        startDate: false,
+        endDate: false,
+    });
 
     const handleSearch = () => {
-        // Update searchData state with the current form values
-        setSearchData({
-            dayCareCenterCity: selectedCity,
-            dayCareCenterName: selectedCenter, // Corrected this line
-            start_date: selectedStartDate,
-            end_date: selectedEndDate,
-        });
+        // Check for validation
+        const errors = {
+            startDate: !selectedStartDate,
+            endDate: !selectedEndDate,
+        };
+
+        setFormErrors(errors);
+
+        if (!errors.startDate && !errors.endDate) {
+            // Update searchData state with the current form values
+            setSearchData({
+                dayCareCenterCity: selectedCity,
+                dayCareCenterName: selectedCenter,
+                start_date: selectedStartDate,
+                end_date: selectedEndDate,
+            });
+        }
     };
 
     return (
@@ -69,8 +84,10 @@ const SearchBarDaycare = () => {
                             id="start_date"
                             value={selectedStartDate}
                             onChange={(e) => setSelectedStartDate(e.target.value)}
-                            className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                            className={`w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1] ${formErrors.startDate ? 'border-red-500' : ''}`}
+                            required
                         />
+                        {formErrors.startDate && <small className="text-red-500">Start date is required.</small>}
                     </div>
 
                     {/* End Date Picker */}
@@ -81,8 +98,10 @@ const SearchBarDaycare = () => {
                             id="end_date"
                             value={selectedEndDate}
                             onChange={(e) => setSelectedEndDate(e.target.value)}
-                            className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                            className={`w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1] ${formErrors.endDate ? 'border-red-500' : ''}`}
+                            required
                         />
+                        {formErrors.endDate && <small className="text-red-500">End date is required.</small>}
                     </div>
 
                     {/* Search Button */}

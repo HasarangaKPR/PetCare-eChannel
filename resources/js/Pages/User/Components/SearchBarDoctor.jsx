@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchResultsDoctor from '../SearchResultsDoctor';
 
 const SearchBarDoctor = () => {
@@ -16,15 +16,29 @@ const SearchBarDoctor = () => {
         appointmentTime: ''
     });
 
-    const handleSearch = () => {
-        // Update searchData state with the current form values
-        setSearchData({
-            doctorCity: selectedCity,
-            doctorName: selectedDoctor,
-            date: selectedDate,
-            appointmentTime: selectedTime
-        });
+    const [formErrors, setFormErrors] = useState({
+        date: false,
+        appointmentTime: false
+    });
 
+    const handleSearch = () => {
+        // Check for validation
+        const errors = {
+            date: !selectedDate,
+            appointmentTime: !selectedTime
+        };
+
+        setFormErrors(errors);
+
+        if (!errors.date && !errors.appointmentTime) {
+            // Update searchData state with the current form values
+            setSearchData({
+                doctorCity: selectedCity,
+                doctorName: selectedDoctor,
+                date: selectedDate,
+                appointmentTime: selectedTime
+            });
+        }
     };
 
     return (
@@ -74,8 +88,10 @@ const SearchBarDoctor = () => {
                             id="date"
                             value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)}
-                            className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                            className={`w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1] ${formErrors.date ? 'border-red-500' : ''}`}
+                            required
                         />
+                        {formErrors.date && <small className="text-red-500">Date is required.</small>}
                     </div>
 
                     {/* Time Picker */}
@@ -86,8 +102,10 @@ const SearchBarDoctor = () => {
                             id="time"
                             value={selectedTime}
                             onChange={(e) => setSelectedTime(e.target.value)}
-                            className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                            className={`w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1] ${formErrors.appointmentTime ? 'border-red-500' : ''}`}
+                            required
                         />
+                        {formErrors.appointmentTime && <small className="text-red-500">Time is required.</small>}
                     </div>
 
                     {/* Search Button */}

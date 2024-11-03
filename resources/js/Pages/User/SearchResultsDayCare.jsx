@@ -28,6 +28,7 @@ const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date
         try {
             const response = await fetch(route('searchDayCareCenter', { dayCareCenterCity, dayCareCenterName,  start_date, end_date}));
             const result = await response.json();
+            console.log(result);
             setDaycares(result.dayCareCenters);
         } catch (error) {
             console.error('Error fetching daycares:', error);
@@ -68,7 +69,10 @@ const SearchResultsDaycare = ({ dayCareCenterCity, dayCareCenterName, start_date
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {daycares.map((daycare) => (
                             <div key={daycare.dayCareCenterId} className="bg-gray-100 shadow-md rounded-lg p-6 hover:shadow-lg transition">
-                                <h3 className="text-xl font-semibold text-center text-[#156862] mb-2">{daycare.dayCareCenterName}</h3>
+                                <h3 className="text-xl font-semibold text-center text-[#156862] mb-2">Name : {daycare.dayCareCenterName}</h3>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">City : {daycare.dayCareCenterCity}</h4>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">Address : {daycare.dayCareCenterAddress}</h4>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">Contact No : {daycare.dayCareCenterContactNumber}</h4>
                                 <div className="text-center mt-4">
                                     <button
                                         onClick={() => handleBookAppointment(daycare.dayCareCenterId)}

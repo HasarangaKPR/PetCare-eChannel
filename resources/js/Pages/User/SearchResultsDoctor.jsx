@@ -28,6 +28,7 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorName, doctorCity }) 
         try {
             const response = await fetch(route('searchDoctor', { appointmentTime, date, doctorName, doctorCity }));
             const result = await response.json();
+            console.log(result);
             setDoctors(result.doctors);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -68,6 +69,11 @@ const SearchResultsDoctor = ({ appointmentTime, date, doctorName, doctorCity }) 
                         {doctors.map((doctor) => (
                             <div key={doctor.doctorId} className="bg-gray-100 shadow-md rounded-lg p-6 hover:shadow-lg transition">
                                 <h3 className="text-xl font-semibold text-center text-[#156862] mb-2">{doctor.name}</h3>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">Open Time : {doctor.openTime}</h4>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">Close Time : {doctor.closeTime}</h4>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">City : {doctor.city}</h4>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">Address : {doctor.address}</h4>
+                                <h4 className="text-sm font-semibold text-center text-[#156862] mb-2">Contact No : {doctor.contact}</h4>
                                 <div className="text-center mt-4">
                                     <button
                                         onClick={() => handleBookAppointment(doctor.doctorId)}

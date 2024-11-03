@@ -76,6 +76,9 @@ class DoctorController extends Controller
             $doctorContactNumber = Doctor::where('doctorId', $doctorId)->value('doctorContactNumber');
             $openTime = Doctor::where('doctorId', $doctorId)->value('openTime');
             $closeTime = Doctor::where('doctorId', $doctorId)->value('closeTime');
+            $address = Doctor::where('doctorId', $doctorId)->value('doctorAddress');
+            $city = Doctor::where('doctorId', $doctorId)->value('doctorCity');
+            
     
             // Check if the appointment time is within the doctor's working and available time
             if ($isBooked || $appointmentTime < $openTime || $appointmentTime > $closeTime) {               
@@ -87,6 +90,8 @@ class DoctorController extends Controller
                                     'openTime' => $doctor->openTime,
                                     'closeTime' => $doctor->closeTime,
                                     'contact' => $doctor->doctorContactNumber,
+                                    'city' => $city,
+                                    'address' => $address,
                                 ];
             }
         }
