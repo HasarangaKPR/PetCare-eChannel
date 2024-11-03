@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AdProfile = ({ id }) => {
+const AdProfile = ({ adId }) => {
     const [ad, setAd] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -9,7 +9,7 @@ const AdProfile = ({ id }) => {
     // Fetch the single ad data
     useEffect(() => {
         axios
-            .get(`/selling/home/${id}`)
+            .get(`/selling/home/${adId}`)
             .then((response) => {
                 setAd(response.data);
                 setLoading(false);
@@ -18,7 +18,7 @@ const AdProfile = ({ id }) => {
                 setError('Failed to load ad. Please try again.');
                 setLoading(false);
             });
-    }, [id]);
+    }, [adId]);
 
     if (loading) return <div className="text-center py-10">Loading...</div>;
 
