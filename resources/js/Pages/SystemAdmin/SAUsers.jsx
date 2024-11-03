@@ -18,9 +18,7 @@ const SAUsers = () => {
 
     const fetchUsers = async () => {
         try {
-            //const id = 2;
-            //const response = await fetch(route('viewDoctors', { id }));
-            const response = await fetch(route('viewDoctors'));
+            const response = await fetch(route('allUsers'));
             const data = await response.json();
             setUsers(data.users);
         } catch (error) {
