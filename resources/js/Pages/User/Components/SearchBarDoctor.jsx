@@ -7,24 +7,58 @@ const SearchBarDoctor = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [isDoctorAvailable, setIsDoctorAvailable] = useState(true);
+    const [doctors, setDoctors] = useState([]); // State for doctors based on city selection
+    const [loading, setLoading] = useState(false); // State to manage loading while fetching data
 
-    // State to hold form data to be passed as props
     const [searchData, setSearchData] = useState({
         doctorCity: '',
-        doctorDistrict: '',
+        doctorName: '',
         date: '',
         appointmentTime: ''
     });
 
-    const handleSearch = () => {
-        // Update searchData state with the current form values
-        setSearchData({
-            doctorCity: selectedCity,
-            doctorDistrict: selectedDoctor,
-            date: selectedDate,
-            appointmentTime: selectedTime
-        });
+    const [formErrors, setFormErrors] = useState({
+        date: false,
+        appointmentTime: false
+    });
 
+    useEffect(() => {
+        // Fetch doctors when selectedCity changes
+        const fetchUsers = async () => {
+            setLoading(true); // Set loading to true before fetching
+            try {
+                const response = await fetch(route('cityDoctors', { city: selectedCity }));
+                const result = await response.json();
+                setDoctors(result.doctors); // Assuming result.doctors is the array of doctor objects
+                console.log(result);
+            } catch (error) {
+                console.error('Error fetching doctors:', error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching
+            }
+        };
+
+            fetchUsers();
+        
+    }, [selectedCity]);
+    
+
+    const handleSearch = () => {
+        const errors = {
+            date: !selectedDate,
+            appointmentTime: !selectedTime
+        };
+
+        setFormErrors(errors);
+
+        if (!errors.date && !errors.appointmentTime) {
+            setSearchData({
+                doctorCity: selectedCity,
+                doctorName: selectedDoctor,
+                date: selectedDate,
+                appointmentTime: selectedTime
+            });
+        }
     };
 
     return (
@@ -41,28 +75,26 @@ const SearchBarDoctor = () => {
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
                         >
                             <option value="">Select City</option>
-                            <option value="new_york">New York</option>
-                            <option value="los_angeles">Los Angeles</option>
-                            <option value="chicago">Chicago</option>
-                            <option value="houston">Houston</option>
+                            <option value="Matara">Matara</option>
+                            <option value="Galle">Galle</option>
+                            <option value="Kandy">Kandy</option>
+                            <option value="Colombo">Colombo</option>
                         </select>
                     </div>
 
                     {/* Doctor Dropdown */}
                     <div className="flex-1">
-                        <label htmlFor="doctor" className="text-sm font-medium text-white mb-2 block">Doctor District</label>
+                        <label htmlFor="doctorName" className="text-sm font-medium text-white mb-2 block">Doctor Name</label>
                         <select
-                            id="doctor"
+                            id="doctorName"
                             value={selectedDoctor}
                             onChange={(e) => setSelectedDoctor(e.target.value)}
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
                         >
                             <option value="">Select Doctor</option>
-                            <option value="Dr. Smith">Dr. Smith</option>
-                            <option value="Dr. Johnson">Dr. Johnson</option>
-                            <option value="Dr. Lee">Dr. Lee</option>
-                            <option value="Dr. Patel">Dr. Patel</option>
-                            <option value="Dr. Garcia">Dr. Garcia</option>
+                            {doctors.map((doctor) => (
+                                <option key={doctor.id} value={doctor.doctorName}>{doctor.doctorName}</option>
+                            ))}
                         </select>
                     </div>
 
@@ -74,8 +106,10 @@ const SearchBarDoctor = () => {
                             id="date"
                             value={selectedDate}
                             onChange={(e) => setSelectedDate(e.target.value)}
-                            className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                            className={`w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1] ${formErrors.date ? 'border-red-500' : ''}`}
+                            required
                         />
+                        {formErrors.date && <small className="text-red-500">Date is required.</small>}
                     </div>
 
                     {/* Time Picker */}
@@ -86,8 +120,10 @@ const SearchBarDoctor = () => {
                             id="time"
                             value={selectedTime}
                             onChange={(e) => setSelectedTime(e.target.value)}
-                            className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                            className={`w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1] ${formErrors.appointmentTime ? 'border-red-500' : ''}`}
+                            required
                         />
+                        {formErrors.appointmentTime && <small className="text-red-500">Time is required.</small>}
                     </div>
 
                     {/* Search Button */}
@@ -109,9 +145,9 @@ const SearchBarDoctor = () => {
 
             {/* Pass searchData as props to SearchResultsDoctor with key to ensure rerender */}
             <SearchResultsDoctor
-                key={`${searchData.doctorCity}-${searchData.doctorDistrict}-${searchData.date}-${searchData.appointmentTime}`}
+                key={`${searchData.doctorCity}-${searchData.doctorName}-${searchData.date}-${searchData.appointmentTime}`}
                 doctorCity={searchData.doctorCity}
-                doctorDistrict={searchData.doctorDistrict}
+                doctorName={searchData.doctorName}
                 date={searchData.date}
                 appointmentTime={searchData.appointmentTime}
             />

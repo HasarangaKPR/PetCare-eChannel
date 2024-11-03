@@ -12,6 +12,12 @@ class DayCareCenterBooking extends Model
     protected $table = 'daycarecenterbookings';
 
     protected $fillable = [
+        'dayCareCenterId',
+        'dayCareCenterName',
+        'dayCareCenterEmail',
+        'userId',
+        'customersName',
+        'customersEmail',
         'room_number',
         'start_date',
         'end_date',

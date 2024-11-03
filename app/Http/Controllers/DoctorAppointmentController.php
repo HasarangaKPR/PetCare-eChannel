@@ -35,9 +35,15 @@ class DoctorAppointmentController extends Controller
         $appointmentTime = Carbon::createFromFormat('H:i', $appointmentTime);
         $endTime = $appointmentTime->copy()->addMinutes($averageTime);
 
-        //get customer name
+        //get customer name & email
         $userId = auth()->id();
         $customerName = User::where('id', $userId)->value('name');
+        $customerEmail = User::where('id', $userId)->value('email');
+
+
+        //get doctor name & email
+        $doctorName = Doctor::where('doctorId', $doctorId)->value('doctorName');
+        $doctorEmail = Doctor::where('doctorId', $doctorId)->value('doctorEmail');
 
         
         // Check if the time slot is already booked
@@ -68,12 +74,14 @@ class DoctorAppointmentController extends Controller
             'date' => $validatedData['date'],
             'appointmentTime' => $validatedData['appointmentTime'],
             'endTime' => $endTime,
-            //'status' => $validatedData['status'],
             'customerName' => $customerName,
-            
+            'customerEmail' => $customerEmail,
+            'doctorName' => $doctorName,
+            'doctorEmail' => $doctorEmail,
+             //'status' => $validatedData['status'],
         ]);
          //return redirect()->route('dashboard')->with('success', 'Added successfully.');
-         return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.']);
+         return response()->json(['success' => true , 'message' => 'The appointment has been successfully created.'], 201);
         }
 
     }
@@ -86,17 +94,35 @@ class DoctorAppointmentController extends Controller
 
         //get all appointments for the doctor
         $appointments = DoctorAppointment::where('doctorId', $doctorId)
-        ->orderBy('date', 'asc')
-        ->orderBy('appointmentTime', 'asc')
-        ->get();
+                        ->orderBy('date', 'asc')
+                        ->orderBy('appointmentTime', 'asc')
+                        ->get();
         return response()->json(['appointments' => $appointments]);
     }
     
     public function displayToUserDoctorAppointment(Request $request)
     {
-        $userId = $request->input('userId');
+        $userId = auth()->id();
 
-        $appointments = DoctorAppointment::where('userId', $userId)->get();
+        $appointments = DoctorAppointment::where('userId', $userId)
+                        ->orderBy('date', 'asc')
+                        ->orderBy('appointmentTime', 'asc')
+                        ->get();
+        
         return response()->json(['appointments' => $appointments]);
+    }
+
+    public function doctorSummary(Request $request){
+        
+        $userId = auth()->id();
+        $doctorId = Doctor::where('userId', $userId)->value('doctorId');
+
+        $totalCount = DoctorAppointment::where('doctorId', $doctorId)->count();
+        
+        $todayCount = DoctorAppointment::where('doctorId', $doctorId)
+            ->whereDate('date', Carbon::today())
+            ->count();
+
+        return response()->json(['totalCount' => $totalCount, 'todayCount' => $todayCount]);
     }
 }

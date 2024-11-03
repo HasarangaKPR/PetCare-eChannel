@@ -34,10 +34,10 @@ const DProfile = () => {
                         <table className="min-w-full table-auto bg-[#DEF2F1] ">
                             <thead>
                                 <tr className="bg-[#156862] text-white">
-                                    <th className="px-6 py-3 text-left text-sm font-medium ">Patient Name</th>
+                                    <th className="px-6 py-3 text-left text-sm font-medium ">Customer Name</th>
                                     <th className="px-6 py-3 text-left text-sm font-medium ">Date</th>
                                     <th className="px-6 py-3 text-left text-sm font-medium ">Time</th>
-                                    <th className="px-6 py-3 text-left text-sm font-medium ">Contact Number</th>
+                                    <th className="px-6 py-3 text-left text-sm font-medium ">Customer Email</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,7 +46,8 @@ const DProfile = () => {
                                         <td className="px-6 py-4 text-sm whitespace-nowrap">{appointment.customerName}</td>
                                         <td className="px-6 py-4 text-sm whitespace-nowrap">{appointment.date}</td>
                                         <td className="px-6 py-4 text-sm whitespace-nowrap">{appointment.appointmentTime}</td>
-                                        <td className="px-6 py-4 text-sm whitespace-nowrap">{appointment.status}</td>
+                                        <td className="px-6 py-4 text-sm whitespace-nowrap">{appointment.customerEmail
+                                        }</td>
                                     </tr>
                                 ))}
                             </tbody>

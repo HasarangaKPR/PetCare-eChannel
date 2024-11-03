@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
-import AddDoctorModal from './Components/AddDoctorModal'; // Import the AddDoctorModal component
 import { Head } from '@inertiajs/react';
-import './SAdashboard.css'; 
 import AddUserModal from './Components/AddUserModel';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const SAUsers = () => {
     const [users, setUsers] = useState([]);
@@ -17,8 +18,9 @@ const SAUsers = () => {
 
     const fetchUsers = async () => {
         try {
-            const id = 2;
-            const response = await fetch(route('viewDoctors', { id }));
+            //const id = 2;
+            //const response = await fetch(route('viewDoctors', { id }));
+            const response = await fetch(route('viewDoctors'));
             const data = await response.json();
             setUsers(data.users);
         } catch (error) {
@@ -40,6 +42,7 @@ const SAUsers = () => {
             <div className="flex flex-col h-screen">
                 <Header />
                 <div className="flex flex-grow">
+                <ToastContainer position="top-right" autoClose={5000} />
                     <SideList />
                     <div className="flex-grow p-6">
                         <div className="flex justify-between items-center mb-4">

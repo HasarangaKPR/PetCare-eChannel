@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Doctor;
+use App\Models\DayCareCenter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
@@ -36,26 +37,30 @@ class UserController extends Controller
                     'userId' => $user->id,
                 ]);
             }
+            if ($validatedData['userType'] == 'daycare') {
+                DayCareCenter::create([
+                    'userId' => $user->id,
+                ]);
+            }
             
         });
 
 
-
-
-
-
-
-
-
-
-
         //return redirect()->route('dashboard')->with('success', 'Added successfully.');
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true], 201);
 
     }
     public function allUsers()
     {
         $users = User::all();
         return response()->json(['users' => $users]);
+    }
+
+    public function adminSummary(){
+        
+        $userCount = User::count();
+        $doctorCount = User::where('userType', 'doctor')->count();
+        $daycareCount = User::where('userType', 'daycare')->count();
+        return response()->json(['userCount' => $userCount, 'doctorCount' => $doctorCount, 'daycareCount' => $daycareCount]);
     }
 }

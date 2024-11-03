@@ -10,20 +10,28 @@ use Carbon\Carbon;
 
 class DoctorController extends Controller
 {
-        public function updateDoctor(Request $request)
+    public function updateDoctor(Request $request)
     {
         $validatedData = $request->validate([
             'doctorName' => 'required|string|max:255',
-            'doctorDistrict' => 'required|string|max:255',
+            'doctorAddress' => 'required|string|max:255',
             'doctorCity' => 'required|string|max:255',
             'doctorContactNumber' => 'required|string|max:255|regex:/^\+?[0-9]{7,15}$/',
             'doctorEmail' => 'required|string|email|max:255',
             'averageTime' => 'required|integer',
             'openTime' => 'required|date_format:H:i',
             'closeTime' => 'required|date_format:H:i',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Add validation for profile photo
         ]);
 
+            $photoPath = null;
+            if ($request->hasFile('photo')) {
+                $photoPath = $request->file('photo')->store('photos', 'public');
+                $validatedData['photo'] = $photoPath; // Add the photo path to the data
+            }
+
         //get logged doctorId
+        //$userId = $request->input('userId');
         $userId = auth()->id();
         $doctorId = Doctor::where('userId', $userId)->first();
 
@@ -31,18 +39,18 @@ class DoctorController extends Controller
         $doctorId->update($validatedData);
 
         // Return a success response
-        return response()->json(['success' => true, 'message' => 'Successfully Updated.']);
+        // return response()->json(['success' => true, 'message' => 'Successfully Updated.']);
     }
 
         public function searchDoctor(Request $request)
     {
-        $district = $request->input('doctorDistrict');
+        $doctorName = $request->input('doctorName');
         $city = $request->input('doctorCity');
 
         $query = Doctor::query();
 
-        if ($district) {
-            $query->where('doctorDistrict', $district);
+        if ($doctorName) {
+            $query->where('doctorName', $doctorName);
         }
         if ($city) {
             $query->where('doctorCity', $city);
@@ -68,6 +76,9 @@ class DoctorController extends Controller
             $doctorContactNumber = Doctor::where('doctorId', $doctorId)->value('doctorContactNumber');
             $openTime = Doctor::where('doctorId', $doctorId)->value('openTime');
             $closeTime = Doctor::where('doctorId', $doctorId)->value('closeTime');
+            $address = Doctor::where('doctorId', $doctorId)->value('doctorAddress');
+            $city = Doctor::where('doctorId', $doctorId)->value('doctorCity');
+            
     
             // Check if the appointment time is within the doctor's working and available time
             if ($isBooked || $appointmentTime < $openTime || $appointmentTime > $closeTime) {               
@@ -79,6 +90,8 @@ class DoctorController extends Controller
                                     'openTime' => $doctor->openTime,
                                     'closeTime' => $doctor->closeTime,
                                     'contact' => $doctor->doctorContactNumber,
+                                    'city' => $city,
+                                    'address' => $address,
                                 ];
             }
         }
@@ -95,6 +108,19 @@ class DoctorController extends Controller
     {
         $doctors = User::where('userType', 'doctor')->get();
         return response()->json(['users' => $doctors]);
+    }
+
+    public function cityDoctors(Request $request)
+    {
+        $city = $request->input('city');
+
+        if ($city) {
+            $doctors = Doctor::where('doctorCity', $city)->get();
+        } else {
+            $doctors = Doctor::all();
+        }
+
+        return response()->json(['doctors' => $doctors]);
     }
 
     public function deleteDoctor(Request $request, $userId) {

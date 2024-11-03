@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
 import { Head } from '@inertiajs/react';
-import './SAdashboard.css'; 
 import AddDaycareModal from './Components/AddDaycareModal';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const SADoctors = () => {
+const SADaycareAdmin = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+
+
+    
 
     useEffect(() => {
         fetchUsers();
@@ -16,10 +20,9 @@ const SADoctors = () => {
 
     const fetchUsers = async () => {
         try {
-            const id = 2;
-            const response = await fetch(route('viewDoctors', { id }));
+            const response = await fetch(route('viewDayCare'));
             const data = await response.json();
-            setUsers(data.users);
+            setUsers(data.daycares);
         } catch (error) {
             console.error('Error fetching users:', error);
         } finally {
@@ -39,6 +42,7 @@ const SADoctors = () => {
             <div className="flex flex-col h-screen">
                 <Header />
                 <div className="flex flex-grow">
+                <ToastContainer position="top-right" autoClose={5000} />
                     <SideList />
                     <div className="flex-grow p-6">
                         <div className="flex justify-between items-center mb-4">
@@ -90,4 +94,4 @@ const SADoctors = () => {
     );
 };
 
-export default SADoctors;
+export default SADaycareAdmin;

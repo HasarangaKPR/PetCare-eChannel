@@ -13,10 +13,10 @@ const SearchBarServices = () => {
                         className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
                     >
                         <option value="">Select City</option>
-                        <option value="city1">City 1</option>
-                        <option value="city2">City 2</option>
-                        <option value="city3">City 3</option>
-                        <option value="city4">City 4</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Colombo">Colombo</option>
                     </select>
                 </div>
 

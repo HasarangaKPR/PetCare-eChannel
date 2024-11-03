@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id('doctorId');
             $table->integer('userId');
             $table->string('doctorName')->nullable();
-            $table->string('doctorDistrict')->nullable();
+            $table->string('doctorAddress')->nullable();
             $table->string('doctorCity')->nullable();
             $table->string('doctorContactNumber')->nullable();
             $table->string('doctorEmail')->nullable();
             $table->integer('averageTime')->nullable();
             $table->time('openTime')->nullable();
             $table->time('closeTime')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

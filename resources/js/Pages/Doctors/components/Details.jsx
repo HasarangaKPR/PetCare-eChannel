@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react'; // Replace with your actual form library
+import { ToastContainer, toast } from 'react-toastify'; // Import toast components
+import 'react-toastify/dist/ReactToastify.css'; // Import CSS for styling
 
 const Details = () => {
     const { data, setData, put, processing, errors, reset } = useForm({
         doctorName: '',
-        doctorDistrict: '',
+        doctorAddress: '',
         doctorCity: '',
         doctorContactNumber: '',
         doctorEmail: '',
@@ -17,13 +19,14 @@ const Details = () => {
         e.preventDefault();
         // Replace 'updateEndpoint' with your actual update API endpoint
         put(route('updateDoctor'), {
-            //onFinish: () => reset(),
+            onFinish: () => toast.success('Doctor Data updated Successfully!'),
         });
      
     };
 
     return (
         <div className="bg-[#DEF2F1] p-6 rounded-lg shadow-md">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h2 className="text-2xl font-semibold text-[#08101A] mb-4">Additional Information</h2>
             <form onSubmit={submit}>
                 <div className="flex flex-col">
@@ -41,32 +44,38 @@ const Details = () => {
                 </div>
 
                 <div className="flex flex-col mt-4">
-                    <label htmlFor="doctorDistrict" className="font-medium text-[#333]">Doctor District</label>
+                    <label htmlFor="doctorAddress" className="font-medium text-[#333]">Doctor Address</label>
                     <input
                         type="text"
-                        id="doctorDistrict"
-                        name="doctorDistrict"
-                        value={data.doctorDistrict}
+                        id="doctorAddress"
+                        name="doctorAddress"
+                        value={data.doctorAddress}
                         className="mt-2 p-3 rounded-md border border-gray-300"
-                        onChange={(e) => setData('doctorDistrict', e.target.value)}
+                        onChange={(e) => setData('doctorAddress', e.target.value)}
                         required
                     />
-                    {errors.doctorDistrict && <span className="text-red-500">{errors.doctorDistrict}</span>}
+                    {errors.doctorAddress && <span className="text-red-500">{errors.doctorAddress}</span>}
                 </div>
 
                 <div className="flex flex-col mt-4">
                     <label htmlFor="doctorCity" className="font-medium text-[#333]">Doctor City</label>
-                    <input
-                        type="text"
+                    <select
                         id="doctorCity"
                         name="doctorCity"
                         value={data.doctorCity}
                         className="mt-2 p-3 rounded-md border border-gray-300"
                         onChange={(e) => setData('doctorCity', e.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Select City</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Colombo">Colombo</option>
+                    </select>
                     {errors.doctorCity && <span className="text-red-500">{errors.doctorCity}</span>}
                 </div>
+
 
                 <div className="flex flex-col mt-4">
                     <label htmlFor="doctorContactNumber" className="font-medium text-[#333]">Doctor Contact Number</label>
