@@ -65,11 +65,6 @@ class DoctorController extends Controller
         foreach ($doctors as $doctor) {
             $doctorId = $doctor->doctorId;
     
-            // Check if the doctor has a booking at the given date & time
-            $isBooked = DoctorAppointment::where('doctorId', $doctorId)
-                ->where('date', $date)
-                ->where('appointmentTime', $appointmentTime)
-                ->exists();
     
             // Get doctor details
             $doctorName = Doctor::where('doctorId', $doctorId)->value('doctorName');
@@ -78,7 +73,18 @@ class DoctorController extends Controller
             $closeTime = Doctor::where('doctorId', $doctorId)->value('closeTime');
             $address = Doctor::where('doctorId', $doctorId)->value('doctorAddress');
             $city = Doctor::where('doctorId', $doctorId)->value('doctorCity');
+
+
+            //Set end time for the appointment
+            $averageTime=Doctor::where('doctorId', $doctorId)->value('averageTime');
+            $appointmentTime = $request->input('appointmentTime');
+            $appointmentTime = Carbon::createFromFormat('H:i', $appointmentTime);
+            $endTime = $appointmentTime->copy()->addMinutes($averageTime);
+
+            $isBooked = DoctorAppointment::where('doctorId', $doctorId)->where('date', $date)
+            ->whereRaw('appointmentTime < ? AND endTime > ?', [$endTime, $appointmentTime])->exists();
             
+            $appointmentTime = $request->input('appointmentTime');
     
             // Check if the appointment time is within the doctor's working and available time
             if ($isBooked || $appointmentTime < $openTime || $appointmentTime > $closeTime) {               
