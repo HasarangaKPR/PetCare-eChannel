@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchResultsDoctor from '../SearchResultsDoctor';
 
 const SearchBarDoctor = () => {
@@ -7,8 +7,9 @@ const SearchBarDoctor = () => {
     const [selectedDate, setSelectedDate] = useState('');
     const [selectedTime, setSelectedTime] = useState('');
     const [isDoctorAvailable, setIsDoctorAvailable] = useState(true);
+    const [doctors, setDoctors] = useState([]); // State for doctors based on city selection
+    const [loading, setLoading] = useState(false); // State to manage loading while fetching data
 
-    // State to hold form data to be passed as props
     const [searchData, setSearchData] = useState({
         doctorCity: '',
         doctorName: '',
@@ -21,8 +22,28 @@ const SearchBarDoctor = () => {
         appointmentTime: false
     });
 
+    useEffect(() => {
+        // Fetch doctors when selectedCity changes
+        const fetchUsers = async () => {
+            setLoading(true); // Set loading to true before fetching
+            try {
+                const response = await fetch(route('cityDoctors', { city: selectedCity }));
+                const result = await response.json();
+                setDoctors(result.doctors); // Assuming result.doctors is the array of doctor objects
+                console.log(result);
+            } catch (error) {
+                console.error('Error fetching doctors:', error);
+            } finally {
+                setLoading(false); // Set loading to false after fetching
+            }
+        };
+
+            fetchUsers();
+        
+    }, [selectedCity]);
+    
+
     const handleSearch = () => {
-        // Check for validation
         const errors = {
             date: !selectedDate,
             appointmentTime: !selectedTime
@@ -31,7 +52,6 @@ const SearchBarDoctor = () => {
         setFormErrors(errors);
 
         if (!errors.date && !errors.appointmentTime) {
-            // Update searchData state with the current form values
             setSearchData({
                 doctorCity: selectedCity,
                 doctorName: selectedDoctor,
@@ -70,13 +90,12 @@ const SearchBarDoctor = () => {
                             value={selectedDoctor}
                             onChange={(e) => setSelectedDoctor(e.target.value)}
                             className="w-full border rounded-lg py-2 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#22AAA1]"
+                            // disabled={loading || !doctors.length}
                         >
                             <option value="">Select Doctor</option>
-                            <option value="Dr. Smith">Dr. Smith</option>
-                            <option value="AAAA">AAAA</option>
-                            <option value="Dr. Lee">Dr. Lee</option>
-                            <option value="Dr. Patel">Dr. Patel</option>
-                            <option value="Dr. Garcia">Dr. Garcia</option>
+                            {doctors.map((doctor) => (
+                                <option key={doctor.id} value={doctor.doctorName}>{doctor.doctorName}</option>
+                            ))}
                         </select>
                     </div>
 
