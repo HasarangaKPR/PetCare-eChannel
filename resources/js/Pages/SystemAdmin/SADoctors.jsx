@@ -3,8 +3,9 @@ import Header from './Components/Header';
 import SideList from './Components/SideList';
 import AddDoctorModal from './Components/AddDoctorModal'; // Import the AddDoctorModal component
 import { Head } from '@inertiajs/react';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 
 
 const SADoctors = () => {
@@ -37,22 +38,16 @@ const SADoctors = () => {
 
     const handleDeleteDoctor = async (userId) => {
         try {
-            const response = await fetch(`/deleteDoctor/${userId}`, {
-                method: 'DELETE',
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                setMessage(data.message); // Assuming setMessage is defined in your context
-            } else {
-                const errorData = await response.json();
-                setMessage(`Error: ${errorData.message}`);
+            const response = await axios.delete(`/deleteDoctor/${userId}`);
+            if (response.status === 200) {
+                toast.success('Doctor Deleted Successfully!');
             }
-        } catch (error) {
-            setMessage(`Request failed: ${error.message}`);
+            } 
+            catch (error) {
+
         }
     };
-    
+  
 
     return (
         <>

@@ -132,7 +132,7 @@ class DoctorController extends Controller
     public function deleteDoctor(Request $request, $userId) {
         // Get doctor associated with the user
         $doctor = Doctor::where('userId', $userId)->first();
-        $user = User::find($userId);
+        $user = User::where('id', $userId)->first();
     
             //delete data from doctor & user tables
             $user->delete();
