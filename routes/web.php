@@ -59,4 +59,5 @@ Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
 Route::get('/selling/home/{adId}',[PetAdController::class, 'showAd'])->name('showAd');
 Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updateAd');
 Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
+Route::get('/SearchPet', [PetAdController::class, 'searchPet'])->name('SearchPet');
 
