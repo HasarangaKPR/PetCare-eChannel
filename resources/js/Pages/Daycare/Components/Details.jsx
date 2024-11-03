@@ -53,17 +53,23 @@ const Details = () => {
 
                 <div className="flex flex-col mt-4">
                     <label htmlFor="dayCareCenterCity" className="font-medium text-[#333]">Daycare Center City</label>
-                    <input
-                        type="text"
+                    <select
                         id="dayCareCenterCity"
                         name="dayCareCenterCity"
                         value={data.dayCareCenterCity}
                         className="mt-2 p-3 rounded-md border border-gray-300"
                         onChange={(e) => setData('dayCareCenterCity', e.target.value)}
                         required
-                    />
+                    >
+                        <option value="">Select City</option>
+                        <option value="Matara">Matara</option>
+                        <option value="Galle">Galle</option>
+                        <option value="Kandy">Kandy</option>
+                        <option value="Colombo">Colombo</option>
+                    </select>
                     {errors.dayCareCenterCity && <span className="text-red-500">{errors.dayCareCenterCity}</span>}
                 </div>
+
 
                 <div className="flex flex-col mt-4">
                     <label htmlFor="dayCareCenterContactNumber" className="font-medium text-[#333]">Daycare Center Contact Number</label>
