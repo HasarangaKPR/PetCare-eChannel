@@ -77,6 +77,8 @@ const Home = () => {
                                     <h2 className="text-xl font-semibold text-green-600">{ad.price}</h2>
                                     <p className="text-gray-600">{ad.breed}</p>
                                     <p className="text-gray-400">{ad.location}</p>
+                                    <p className="text-gray-400">{ad.seller_name}</p>
+                                    <p className="text-gray-400">{ad.phone_number}</p>
                                     <div className="mt-2 flex justify-between items-center text-gray-400 text-sm">
                                         <span>{ad.time}</span>
                                     </div>
