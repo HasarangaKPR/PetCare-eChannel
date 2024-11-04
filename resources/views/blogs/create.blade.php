@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Blog</title>
     <style>
+        /* General styling */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f0f4f8;
@@ -14,9 +15,16 @@
         }
         h1 {
             text-align: center;
-            color: #22AAA1;
+            color: #ecf1f0;
             margin-bottom: 20px;
             font-size: 2.5em;
+        }
+        /* Header styling */
+        header {
+            background-color: #22AAA1;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
         form {
             max-width: 600px;
@@ -66,6 +74,19 @@
             background-color: #357ABD;
             transform: translateY(-2px);
         }
+        footer {
+            border-top: 4px solid #22AAA1;
+            padding: 20px;
+            text-align: center;
+            background-color: #156862;
+            color: white;
+            margin-top: 6px;
+        }
+        .flex {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
         @media (max-width: 600px) {
             form {
                 padding: 20px;
@@ -77,6 +98,13 @@
     </style>
 </head>
 <body>
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to Create Blogs</h1>
+        <p>Your one-stop destination for pet care tips, stories, and resources!</p>
+    </header>
+
+    <!-- Form Section -->
     <h1>Create a New Blog</h1>
     <form action="/blogs" method="POST" enctype="multipart/form-data">
         @csrf
@@ -95,15 +123,14 @@
         <button type="submit">Post Blog</button>
     </form>
 
-    <footer style="border-top: 4px solid #22AAA1; padding: 20px; text-align: center; background-color: #156862; color: white; margin-top: 6px;">
+    <!-- Footer Section -->
+    <footer>
         <p>&copy; Copyright 2024 PetCare. All rights reserved.</p>
-        <div class="flex justify-center space-x-4 mt-4">
-            <a href="#" style="color: white; margin: 0 10px;">Facebook</a>
-            <a href="#" style="color: white; margin: 0 10px;">Twitter</a>
-            <a href="#" style="color: white; margin: 0 10px;">Instagram</a>
+        <div class="flex">
+            <a href="#" style="color: white;">Facebook</a>
+            <a href="#" style="color: white;">Twitter</a>
+            <a href="#" style="color: white;">Instagram</a>
         </div>
     </footer>
-    
 </body>
 </html>
-
