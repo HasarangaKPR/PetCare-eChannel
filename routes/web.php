@@ -60,7 +60,7 @@ Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('del
 Route::get('/ads/{adId}', [PetAdController::class, 'showAd'])->name('ads.show');
 
 //search pet
-Route::get('/SearchPet', [PetAdController::class, 'searchPet'])->name('SearchPet'); 
+//Route::get('/SearchPet', [PetAdController::class, 'searchPet'])->name('SearchPet'); 
 
 
 

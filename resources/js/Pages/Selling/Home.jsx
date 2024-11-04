@@ -3,29 +3,10 @@ import logo from './Assets/image.png';
 import { Link } from '@inertiajs/react';
 
 const Home = () => {
-    // Simulate fetching ads data (replace with actual API fetch in future)
-    /*const [ads, setAds] = useState([]);
-
-    useEffect(() => {
-        // Simulated data (Replace with API call to get ads when backend is ready)
-        const fetchedAds = [
-            {
-                id: 1,
-                price: '80,000 LKR',
-                breed: 'Golden Retriever',
-                location: 'Moratuwa',
-                time: '1 Day ago',
-                image: '/path/to/image1.jpg', // Replace with actual image path
-            },
-            // Add more ads here as needed
-        ];
-        setAds(fetchedAds);
-    }, []);*/
     const [ads, setAds] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch data from API endpoint
         const fetchAds = async () => {
             try {
                 const response = await fetch('/ViewallAd'); // Replace with your API endpoint
@@ -75,30 +56,36 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto p-4">
                     <h1 className="text-3xl font-bold mb-6">Available Pets for Sale</h1>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {ads.map((ad) => (
-                            <div key={ad.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
-                                <img
-                                    src={ad.pet_photos}
-                                    alt={ad.breed}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <div className="p-4">
-                                    <h2 className="text-xl font-semibold text-green-600">{ad.price}</h2>
-                                    <p className="text-gray-600">{ad.breed}</p>
-                                    <p className="text-gray-400">{ad.location}</p>
-                                    <div className="mt-2 flex justify-between items-center text-gray-400 text-sm">
-                                        <span>{ad.time}</span>
+                        {loading ? (
+                            <p>Loading ads...</p>
+                        ) : (
+                            ads.map((ad) => (
+                                <div key={ad.id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+                                    <img
+                                        src={ad.pet_photos} // Ensure this path is correct
+                                        alt={ad.breed}
+                                        className="w-full h-48 object-cover"
+                                    />
+                                    <div className="p-4">
+                                        <h2 className="text-xl font-semibold text-green-600">{ad.price}</h2>
+                                        <p className="text-gray-600">{ad.breed}</p>
+                                        <p className="text-gray-400">{ad.location}</p>
+                                        <p className="text-gray-400">Age: {ad.age} years</p> {/* New field */}
+                                        <p className="text-gray-400">Description: {ad.description}</p> {/* New field */}
+                                        <div className="mt-2 flex justify-between items-center text-gray-400 text-sm">
+                                            <span>{ad.time}</span>
+                                        </div>
+                                    </div>
+                                    <div className="p-4 border-t">
+                                        <Link href={`/selling/adprofile/${ad.id}`} className="w-full">
+                                            <button className="w-full bg-teal-500 text-white py-2 rounded-3xl hover:bg-teal-600">
+                                                View Details
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
-                                <div className="p-4 border-t">
-                                    <Link href={`/selling/adprofile/${ad.id}`} className="w-full">
-                                        <button className="w-full bg-teal-500 text-white py-2 rounded-3xl hover:bg-teal-600">
-                                            View Details
-                                        </button>
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
+                            ))
+                        )}
                     </div>
                 </div>
             </main>
@@ -116,3 +103,4 @@ const Home = () => {
 };
 
 export default Home;
+
