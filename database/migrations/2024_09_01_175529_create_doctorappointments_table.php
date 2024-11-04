@@ -13,12 +13,16 @@ return new class extends Migration
     {
         Schema::create('doctorappointments', function (Blueprint $table) {
             $table->id('appointmentId');
-            $table->string('userId');
-            $table->string('doctorId');
-            $table->date('date');
-            $table->time('appointmentTime');
-            $table->time('endTime');
-            $table->string('status');
+            $table->integer('doctorId')->nullable();
+            $table->string('doctorName')->nullable();
+            $table->string('doctorEmail')->nullable();
+            $table->string('userId')->nullable();
+            $table->string('customerName')->nullable();
+            $table->string('customerEmail')->nullable();
+            $table->date('date')->nullable();
+            $table->time('appointmentTime')->nullable();
+            $table->time('endTime')->nullable();
+           $table->string('status')->nullable();
             $table->timestamps();
         });
     }

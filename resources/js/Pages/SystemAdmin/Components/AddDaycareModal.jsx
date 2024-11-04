@@ -1,26 +1,60 @@
-import { useForm } from '@inertiajs/react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 
 export default function AddDaycareModal({ isOpen, onClose, onAddDoctor }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const [formData, setFormData] = useState({
         name: '',
         email: '',
         password: '',
         password_confirmation: '',
-        userType: 'test',
-        profile_picture: null,
+        userType: 'daycare',
+        //profile_picture: null,
     });
+    const [errors, setErrors] = useState({});
+    const [processing, setProcessing] = useState(false);
 
-    const submit = (e) => {
+    const handleChange = (e) => {
+        const { name, value, files } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: files ? files[0] : value,
+        }));
+    };
+
+    const submit = async (e) => {
         e.preventDefault();
-        post(route('addUser'), {
-            onFinish: () => {
-                onAddDoctor(data);
-                reset('password', 'password_confirmation', 'profile_picture');
-            },
-        });
+        setProcessing(true);
+        setErrors({});
+
+        try {
+            const formDataObj = new FormData();
+            Object.keys(formData).forEach((key) => {
+                formDataObj.append(key, formData[key]);
+            });
+
+            const response = await axios.post(route('addUser'), formDataObj, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            
+
+            if (response.status === 201) {
+                console.log(response);
+                toast.success('Daycare Center added successfully');
+                onAddDoctor(formData);
+            }
+        } catch (error) {
+            if (error.response && error.response.data.errors) {
+                setErrors(error.response.data.errors);
+            } else {
+                toast.error('An error occurred. Please try again.');
+            }
+        } finally {
+            setProcessing(false);
+        }
     };
 
     return (
@@ -33,11 +67,11 @@ export default function AddDaycareModal({ isOpen, onClose, onAddDoctor }) {
                             <TextInput
                                 id="name"
                                 name="name"
-                                value={data.name}
+                                value={formData.name}
                                 className="mt-1 block w-full"
                                 autoComplete="name"
                                 isFocused={true}
-                                onChange={(e) => setData('name', e.target.value)}
+                                onChange={handleChange}
                                 required
                             />
                             <InputError message={errors.name} className="mt-2" />
@@ -49,10 +83,10 @@ export default function AddDaycareModal({ isOpen, onClose, onAddDoctor }) {
                                 id="email"
                                 type="email"
                                 name="email"
-                                value={data.email}
+                                value={formData.email}
                                 className="mt-1 block w-full"
                                 autoComplete="username"
-                                onChange={(e) => setData('email', e.target.value)}
+                                onChange={handleChange}
                                 required
                             />
                             <InputError message={errors.email} className="mt-2" />
@@ -64,10 +98,10 @@ export default function AddDaycareModal({ isOpen, onClose, onAddDoctor }) {
                                 id="password"
                                 type="password"
                                 name="password"
-                                value={data.password}
+                                value={formData.password}
                                 className="mt-1 block w-full"
                                 autoComplete="new-password"
-                                onChange={(e) => setData('password', e.target.value)}
+                                onChange={handleChange}
                                 required
                             />
                             <InputError message={errors.password} className="mt-2" />
@@ -79,10 +113,10 @@ export default function AddDaycareModal({ isOpen, onClose, onAddDoctor }) {
                                 id="password_confirmation"
                                 type="password"
                                 name="password_confirmation"
-                                value={data.password_confirmation}
+                                value={formData.password_confirmation}
                                 className="mt-1 block w-full"
                                 autoComplete="new-password"
-                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                onChange={handleChange}
                                 required
                             />
                             <InputError message={errors.password_confirmation} className="mt-2" />
@@ -95,7 +129,7 @@ export default function AddDaycareModal({ isOpen, onClose, onAddDoctor }) {
                                 type="file"
                                 name="profile_picture"
                                 className="mt-1 block w-full"
-                                onChange={(e) => setData('profile_picture', e.target.files[0])}
+                                onChange={handleChange}
                             />
                             <InputError message={errors.profile_picture} className="mt-2" />
                         </div> */}
