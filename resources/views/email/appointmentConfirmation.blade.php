@@ -13,5 +13,6 @@
         <li>Time: {{ $appointment->appointmentTime }} to {{ $appointment->endTime }}</li>
     </ul>
     <p>Thank you for booking with us.</p>
+    <p>Best regards,<br>Team</p>
 </body>
 </html>
