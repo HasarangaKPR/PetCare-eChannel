@@ -8,6 +8,9 @@ use App\Models\Doctor;
 use App\Models\DayCareCenter;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DoctorRegistrationConfirmationMail;
+use App\Mail\DayCareCenterConfirmationMail ;
 
 class UserController extends Controller
 {
@@ -30,17 +33,20 @@ class UserController extends Controller
                 'email' => $validatedData['email'],
                 'password' => Hash::make($validatedData['password']),
             ]);
-    
+            
             // Create the doctor record linked to the user
             if ($validatedData['userType'] == 'doctor') {
                 Doctor::create([
                     'userId' => $user->id,
                 ]);
+                Mail::to($user->email)->send(new DoctorRegistrationConfirmationMail($user));
             }
             if ($validatedData['userType'] == 'daycare') {
                 DayCareCenter::create([
                     'userId' => $user->id,
                 ]);
+
+                Mail::to($user->email)->send(new DayCareCenterConfirmationMail($user));
             }
             
         });
