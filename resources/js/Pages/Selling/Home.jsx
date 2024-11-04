@@ -74,7 +74,9 @@ const Home = () => {
                                     className="w-full h-48 object-cover"
                                 />
                                 <div className="p-4">
+
                                     <h2 className="text-xl font-semibold text-green-600">{ad.price}</h2>
+                                    <p className="text-gray-600">{ad.pet_name}</p>
                                     <p className="text-gray-600">{ad.breed}</p>
                                     <p className="text-gray-400">{ad.location}</p>
                                     <p className="text-gray-400">{ad.seller_name}</p>
@@ -83,13 +85,7 @@ const Home = () => {
                                         <span>{ad.time}</span>
                                     </div>
                                 </div>
-                                <div className="p-4 border-t">
-                                    <Link href={`/selling/adprofile/${ad.adId}`} className="w-full">
-                                        <button className="w-full bg-teal-500 text-white py-2 rounded-3xl hover:bg-teal-600">
-                                            View Details
-                                        </button>
                                     </Link>
-                                </div>
                             </div>
                         ))}
                     </div>
@@ -109,3 +105,4 @@ const Home = () => {
 };
 
 export default Home;
+
