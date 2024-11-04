@@ -210,3 +210,6 @@ Route::get('/user/searchresults', function () {
     return Inertia::render('User/SearchResultsDoctor');
 })->name('user.searchresults');
 
+Route::get('/adshome', function () {
+    return Inertia::render('Selling/Home');
+})->name('adshome');
