@@ -58,7 +58,7 @@ class PetAdController extends Controller
 
     ]);
     
-    return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
+    //return response()->json(['success'=>true,'message' => 'Ad posted successfully']);
     }
     //final code but want to add images
     public function updateAd(Request $request,PetAd $adId){
