@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\DayCareCenterBooking;
 use App\Models\DayCareCenter;
 use App\Models\User;
+use App\Mail\BookingConfirmationMail;
+use Illuminate\Support\Facades\Mail;
+
 
 class DayCareCenterBookingController extends Controller
 {
@@ -89,6 +92,7 @@ class DayCareCenterBookingController extends Controller
         'end_date' => $validatedData['end_date'],
         'room_number' => $roomNumber,
     ]);
+    Mail::to($customersEmail)->send(new BookingConfirmationMail($booking));
 
     return response()->json(['message' => 'Room booked successfully', 'room_number' => $booking->room_number], 201);
 }
