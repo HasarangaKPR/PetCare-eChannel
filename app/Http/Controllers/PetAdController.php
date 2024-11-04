@@ -141,11 +141,11 @@ class PetAdController extends Controller
          return response()->json($petAd);
     }
     public function searchPet(Request $request) {
-        $petTypeInput = $request->input('pet_type'); // Changed the variable name to avoid conflict
+        $petTypeInput = $request->input('breed'); // Changed the variable name to avoid conflict
         $query = PetAd::query();
     
         if ($petTypeInput) {
-            $query->where('pet_type', $petTypeInput);
+            $query->where('breed', $petTypeInput);
         }
     
         $pets = $query->get(); // Fetch the results

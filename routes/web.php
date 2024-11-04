@@ -56,7 +56,9 @@ Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updat
 Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
 
 // view details page
- //Route::get('/showAd/{adId}', [PetAdController::class, 'showAd'])->name('showAd');
+// In routes/web.php
+Route::get('/ads/{adId}', [PetAdController::class, 'showAd'])->name('ads.show');
 
- //use App\Http\Controllers\BlogController;
+
+
 
