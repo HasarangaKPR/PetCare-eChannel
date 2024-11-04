@@ -57,3 +57,6 @@ Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('del
 
 // view details page
  //Route::get('/showAd/{adId}', [PetAdController::class, 'showAd'])->name('showAd');
+
+ //use App\Http\Controllers\BlogController;
+
