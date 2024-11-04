@@ -93,7 +93,7 @@ const SearchBarDoctor = () => {
                         >
                             <option value="">Select Doctor</option>
                             {doctors.map((doctor) => (
-                                <option key={doctor.id} value={doctor.doctorName}>{doctor.doctorName}</option>
+                                <option key={doctor.id} value={doctor.doctorName}>Dr. {doctor.doctorName}</option>
                             ))}
                         </select>
                     </div>

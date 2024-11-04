@@ -111,15 +111,20 @@ Route::get('/viewDoctors', [DoctorController::class, 'viewDoctors'])->name('view
 Route::delete('/deleteDoctor/{userId}', [DoctorController::class, 'deleteDoctor'])->name('deleteDoctor/{userId}');
 
 //Add Doctors Appointments
+Route::middleware(['auth', 'verified'])->group(function () {
 Route::post('/addDoctorAppointment', [DoctorAppointmentController::class, 'addDoctorAppointment'])->name('addDoctorAppointment');
 Route::get('/displayToDoctorAppointment', [DoctorAppointmentController::class, 'displayToDoctorAppointment'])->name('displayToDoctorAppointment');
 Route::get('/displayToUserDoctorAppointment', [DoctorAppointmentController::class, 'displayToUserDoctorAppointment'])->name('displayToUserDoctorAppointment');
+});
+
 
 //Add DayCareCenter & Search DayCareCenter
 Route::put('/updateDayCareCenter', [DayCareCenterController::class, 'updateDayCareCenter'])->name('updateDayCareCenter');
 Route::get('/searchDayCareCenter', [DayCareCenterController::class, 'searchDayCareCenter'])->name('searchDayCareCenter');
 Route::get('/cityDaycare', [DayCareCenterController::class, 'cityDaycare'])->name('cityDaycare');
+Route::middleware(['auth', 'verified'])->group(function () {
 Route::post('/bookroom', [DayCareCenterBookingController::class, 'bookRoom'])->name('bookroom');
+});
 Route::get('/viewDayCare', [DayCareCenterController::class, 'viewDayCare'])->name('viewDayCare');
 Route::delete('/deleteDayCare/{userId}', [DayCareCenterController::class, 'deleteDayCare'])->name('deleteDayCare/{userId}');
 
