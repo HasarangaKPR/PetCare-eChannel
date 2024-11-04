@@ -85,7 +85,6 @@ const Home = () => {
                                         <span>{ad.time}</span>
                                     </div>
                                 </div>
-                                    </Link>
                             </div>
                         ))}
                     </div>
