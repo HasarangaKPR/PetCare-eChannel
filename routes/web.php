@@ -1,5 +1,20 @@
 <?php
 
+
+
+
+
+
+
+//Blogs
+
+use App\Http\Controllers\BlogController;
+
+Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/blogs/create', [BlogController::class, 'create']);
+Route::post('/blogs', [BlogController::class, 'store']);
+
+
 use App\Http\Controllers\PetAdController;
 use App\Http\Controllers\ProfileController;
 use App\Models\PetAd;
@@ -218,4 +233,5 @@ Route::get('/user/searchresults', function () {
 Route::get('/adshome', function () {
     return Inertia::render('Selling/Home');
 })->name('adshome');
+
 
