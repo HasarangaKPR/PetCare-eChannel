@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from'../SystemAdmin/Components/Header';
+
 
 const PostAd = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -35,10 +39,13 @@ const PostAd = () => {
             onSuccess: () => reset(),
             onError: () => console.error("Error submitting form")
         });
+        toast.success('Ad Posted successfully.');
     };
 
     return (
-        <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+        
+        <><Header /><div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h1 className="text-2xl font-bold mb-6">Post a New Pet Ad</h1>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 {/* Pet Information */}
@@ -50,8 +57,7 @@ const PostAd = () => {
                             type="text"
                             value={data.pet_name}
                             onChange={(e) => setData('pet_name', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.pet_name && <p className="text-red-500">{errors.pet_name}</p>}
                     </div>
 
@@ -77,8 +83,7 @@ const PostAd = () => {
                             type="text"
                             value={data.breed}
                             onChange={(e) => setData('breed', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.breed && <p className="text-red-500">{errors.breed}</p>}
                     </div>
 
@@ -88,8 +93,7 @@ const PostAd = () => {
                             type="number"
                             value={data.age}
                             onChange={(e) => setData('age', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.age && <p className="text-red-500">{errors.age}</p>}
                     </div>
 
@@ -103,8 +107,7 @@ const PostAd = () => {
                                     value="Male"
                                     checked={data.gender === 'Male'}
                                     onChange={(e) => setData('gender', e.target.value)}
-                                    className="mr-1"
-                                />
+                                    className="mr-1" />
                                 Male
                             </label>
                             <label>
@@ -114,8 +117,7 @@ const PostAd = () => {
                                     value="Female"
                                     checked={data.gender === 'Female'}
                                     onChange={(e) => setData('gender', e.target.value)}
-                                    className="mr-1"
-                                />
+                                    className="mr-1" />
                                 Female
                             </label>
                         </div>
@@ -123,13 +125,12 @@ const PostAd = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block text-sm font-medium">Price (in USD)</label>
+                        <label className="block text-sm font-medium">Price</label>
                         <input
                             type="number"
                             value={data.price}
                             onChange={(e) => setData('price', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.price && <p className="text-red-500">{errors.price}</p>}
                     </div>
 
@@ -138,8 +139,7 @@ const PostAd = () => {
                         <textarea
                             value={data.description}
                             onChange={(e) => setData('description', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.description && <p className="text-red-500">{errors.description}</p>}
                     </div>
 
@@ -148,8 +148,7 @@ const PostAd = () => {
                         <input
                             type="file"
                             onChange={handleFileChange}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.pet_photos && <p className="text-red-500">{errors.pet_photos}</p>}
                     </div>
                 </div>
@@ -163,8 +162,7 @@ const PostAd = () => {
                             type="text"
                             value={data.seller_name}
                             onChange={(e) => setData('seller_name', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.seller_name && <p className="text-red-500">{errors.seller_name}</p>}
                     </div>
 
@@ -174,8 +172,7 @@ const PostAd = () => {
                             type="text"
                             value={data.phone_number}
                             onChange={(e) => setData('phone_number', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.phone_number && <p className="text-red-500">{errors.phone_number}</p>}
                     </div>
 
@@ -185,8 +182,7 @@ const PostAd = () => {
                             type="text"
                             value={data.location}
                             onChange={(e) => setData('location', e.target.value)}
-                            className="mt-1 block w-full p-2 border rounded-md"
-                        />
+                            className="mt-1 block w-full p-2 border rounded-md" />
                         {errors.location && <p className="text-red-500">{errors.location}</p>}
                     </div>
                 </div>
@@ -202,7 +198,7 @@ const PostAd = () => {
                     </button>
                 </div>
             </form>
-        </div>
+        </div></>
     );
 };
 

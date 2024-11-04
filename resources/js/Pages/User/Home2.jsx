@@ -119,7 +119,7 @@ export default function Home2({ auth, laravelVersion, phpVersion }) {
                                 </Link>
 
                                 {/* Card 4 */}
-                                <Link href="/selling-ads" className="flex items-center bg-white shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
+                                <a href={route('adshome')} target="_blank" rel="noopener noreferrer" className="flex items-center bg-white shadow-lg p-4 rounded-3xl hover:shadow-2xl transition-shadow">
                                     <img
                                         src={icon2}
                                         alt="Selling Ads Icon"
@@ -129,7 +129,7 @@ export default function Home2({ auth, laravelVersion, phpVersion }) {
                                         <h3 className="font-bold text-lg">Buying & Selling</h3>
                                         <p className="text-sm text-gray-600">Buy or Sell a</p>
                                     </div>
-                                </Link>
+                                </a>
                     
                             </div>
 
