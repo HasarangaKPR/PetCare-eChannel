@@ -27,12 +27,7 @@ const SideList = () => {
                         Bookings
                     </Link>
                 </li>
-                <li className={`flex items-center p-3 mb-2 rounded-lg transition-all duration-300 ${url === '/user/services' ? 'bg-[#156862] text-white' : 'hover:bg-[#DEF2F1] hover:text-black'}`}>
-                    <FaUsers className={`mr-3 ${url === '/user/services' ? 'text-white' : 'text-gray-500'}`} />
-                    <Link href="/user/services" className={`font-medium ${url === '/user/services' ? 'text-white' : 'text-gray-500'}`}>
-                        Services
-                    </Link>
-                </li>
+               
             </ul>
         </nav>
     );
