@@ -80,7 +80,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
       Route::get('/user/profile', function () {
         return Inertia::render('UserDashboard/UProfile');
-    })->name('daycare.profile');
+    })->name('user.profile');
 
     Route::get('/user/appointments', function () {
         return Inertia::render('UserDashboard/UAppointments');

@@ -38,30 +38,12 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                                 {auth.user ? (
                                     <div className="flex space-x-12 mx-4">
                                         {/* User logged-in links */}
+                                        
                                         <Link
-                                            href={route('login')}
-                                            className="px-3 py-2 text-[#22AAA1] hover:text-white"
-                            
-                                        >
-                                            Appointments
-                                        </Link>
-                                        <Link
-                                            href={route('login')}
+                                            href={route('user.profile')}
                                             className="px-3 py-2 text-[#22AAA1] hover:text-white"
                                         >
-                                            Bookings
-                                        </Link>
-                                        <Link
-                                            href={route('login')}
-                                            className="px-3 py-2 text-[#22AAA1] hover:text-white"
-                                        >
-                                            Services
-                                        </Link>
-                                        <Link
-                                            href={route('login')}
-                                            className="px-3 py-2 text-[#22AAA1] hover:text-white"
-                                        >
-                                            SellingAds
+                                            Dashboard
                                         </Link>
                                         <Link
                                             href={route('logout')} method="post"
@@ -135,8 +117,8 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                                         className="mr-4"
                                     />
                                     <div>
-                                        <h3 className="font-bold text-lg">Pet Services</h3>
-                                        <p className="text-sm text-gray-600">Pet Care Services</p>
+                                        <h3 className="font-bold text-lg">Blogs</h3>
+                                        <p className="text-sm text-gray-600">Our Latest Blogs</p>
                                     </div>
                                 </Link>
 
