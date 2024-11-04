@@ -22,7 +22,7 @@ const PostAd = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+
         // Create a FormData object to send files correctly
         const formData = new FormData();
         Object.keys(data).forEach((key) => {
@@ -180,7 +180,7 @@ const PostAd = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block text-sm font-medium">Location</label>
+                        <label className="block text-sm font-medium">City</label>
                         <input
                             type="text"
                             value={data.location}
@@ -207,3 +207,4 @@ const PostAd = () => {
 };
 
 export default PostAd;
+
