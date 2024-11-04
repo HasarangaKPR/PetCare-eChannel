@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\PetAdController;
 use App\Http\Controllers\ProfileController;
+use App\Models\PetAd;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -14,6 +16,26 @@ use App\Http\Controllers\DayCareCenterBookingController;
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+//routes for selling page
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/selling/home', function () {
+        return Inertia::render('Selling/Home');
+    })->name('selling.home');
+
+    Route::get('/selling/postad', function () {
+        return Inertia::render('Selling/PostAd');
+    })->name('selling.postad');
+
+    Route::get('/selling/adprofile', function () {
+        return Inertia::render('Selling/AdProfile');
+    })->name('selling.adprofile');
+
+
+
+});
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -98,6 +120,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
 require __DIR__.'/auth.php';
 
 
+//add post delete update view route 
+Route::get('/ViewallAd', [PetAdController::class, 'index'])->name('ViewallAd'); 
+Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
+Route::get('/showAd',[PetAdController::class, 'showAd'])->name('showAd');
+Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updateAd');
+Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
+
+// view details page
+// In routes/web.php
+Route::get('/ads/{adId}', [PetAdController::class, 'showAd'])->name('ads.show');
+
+//search pet
+//Route::get('/SearchPet', [PetAdController::class, 'searchPet'])->name('SearchPet'); 
+
+
+
+
+
 //Add or Display Users
 Route::post('/addUser', [UserController::class, 'addUser'])->name('addUser');
 Route::get('/allUsers', [UserController::class, 'allUsers'])->name('allUsers');
@@ -169,3 +209,4 @@ Route::get('/home3', function () {
 Route::get('/user/searchresults', function () {
     return Inertia::render('User/SearchResultsDoctor');
 })->name('user.searchresults');
+

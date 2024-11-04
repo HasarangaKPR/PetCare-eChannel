@@ -2,15 +2,29 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\PetAdController;
+
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorAppointmentController;
 use App\Http\Controllers\DayCareCenterController;
 use App\Http\Controllers\DayCareCenterBookingController;
 
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+
+//add pet ad edit ad delete ad update ad
+Route::get('/ViewallAd', [PetAdController::class, 'index'])->name('ViewallAd'); 
+Route::post('/CreateAd',[PetAdController::class, 'store'])->name('CreateAd');
+Route::get('/showAd',[PetAdController::class, 'showAd'])->name('showAd');
+Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updateAd');
+Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
+Route::get('/SearchPet', [PetAdController::class, 'searchPet'])->name('SearchPet'); 
 
 //Add or Display Users
 Route::post('/addUser', [UserController::class, 'addUser'])->name('addUser');
