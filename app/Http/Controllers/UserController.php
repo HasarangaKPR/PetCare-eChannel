@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\DoctorRegistrationConfirmationMail;
+use App\Mail\DayCareCenterConfirmationMail ;
 
 class UserController extends Controller
 {
@@ -38,12 +39,14 @@ class UserController extends Controller
                 Doctor::create([
                     'userId' => $user->id,
                 ]);
-                //Mail::to($user->email)->send(new DoctorRegistrationConfirmationMail($user));
+                Mail::to($user->email)->send(new DoctorRegistrationConfirmationMail($user));
             }
             if ($validatedData['userType'] == 'daycare') {
                 DayCareCenter::create([
                     'userId' => $user->id,
                 ]);
+
+                Mail::to($user->email)->send(new DayCareCenterConfirmationMail($user));
             }
             
         });
