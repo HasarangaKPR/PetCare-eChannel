@@ -14,7 +14,7 @@
         }
         h1 {
             text-align: center;
-            color: #184375;
+            color: #22AAA1;
             margin-bottom: 20px;
             font-size: 2.5em;
         }

@@ -14,7 +14,7 @@
         }
         h1 {
             text-align: center;
-            color: #4A90E2;
+            color: #22AAA1;
             margin-bottom: 20px;
             font-size: 2.5em;
         }
@@ -30,7 +30,7 @@
             display: block;
             margin-bottom: 10px;
             font-weight: bold;
-            color: #4A90E2;
+            color: #22AAA1;
         }
         input[type="text"],
         input[type="date"],
@@ -47,14 +47,14 @@
         input[type="text"]:focus,
         input[type="date"]:focus,
         textarea:focus {
-            border-color: #4A90E2;
+            border-color: #22AAA1;
             box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
             outline: none;
         }
         button {
             width: 100%;
             padding: 12px;
-            background-color: #4A90E2;
+            background-color: #22AAA1;
             color: white;
             border: none;
             border-radius: 6px;
