@@ -11,9 +11,12 @@ class DayCareCenter extends Model
 
     protected $table = 'daycarecenters';
 
+    protected $primaryKey = 'dayCareCenterId';
+
     protected $fillable = [
+        'userId',
         'dayCareCenterName',
-        'dayCareCenterDistrict',
+        'dayCareCenterAddress',
         'dayCareCenterCity',
         'dayCareCenterContactNumber',
         'dayCareCenterEmail',

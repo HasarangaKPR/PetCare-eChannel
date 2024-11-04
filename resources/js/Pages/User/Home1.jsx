@@ -15,6 +15,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
         document.getElementById('docs-card-content')?.classList.add('!flex-row');
         document.getElementById('background')?.classList.add('!hidden');
     };
+    
 
     return (
         <>
@@ -25,12 +26,13 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                         {/* Header adjusted to be full width, sticky, and at the top */}
                         <header className="sticky top-0 left-0 w-full flex items-center justify-between py-4 bg-[#0D1B2A]">
                             <div className="flex items-center mx-4 w-64">
+                                <Link href='/'>
                                 <img
                                     src={logo}
                                     alt="Company Logo"
                                     onError={handleImageError}
-                
                                 />
+                                </Link>
                             </div>
                             <nav className="flex flex-1 justify-end space-x-8"> {/* Center the nav items */}
                                 {auth.user ? (
@@ -93,6 +95,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                                     src={banner1}
                                     alt="Banner Image"
                                     className="w-full h-auto object-cover"
+                                    
                             />
 
                             {/* Cards Section */}
@@ -103,6 +106,7 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                                         src={icon3}
                                         alt="Service Icon"
                                         className="mr-4"
+            
                                     />
                                     <div>
                                         <h3 className="font-bold text-lg text-white">Doctor Channeling</h3>
@@ -152,7 +156,8 @@ export default function Home1({ auth, laravelVersion, phpVersion }) {
                             </div>
 
                             <div className='px-8'>
-                                <SearchBarDoctor/>
+                            <SearchBarDoctor />
+
                             </div>
 
                             <BlogSection/>

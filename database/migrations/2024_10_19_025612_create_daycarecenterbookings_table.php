@@ -13,11 +13,15 @@ return new class extends Migration
     {
         Schema::create('daycarecenterbookings', function (Blueprint $table) {
             $table->id('bookingID');
-            $table->integer('dayCareCenterId');
-            $table->integer('userId');
-            $table->date('startDate');
-            $table->date('endDate');
-            $table->string('status');
+            $table->integer('dayCareCenterId'); // Daycare center ID
+            $table->String('dayCareCenterName'); // Daycare center Name
+            $table->string('dayCareCenterEmail'); // Daycare center Address
+            $table->integer('userId'); // User ID
+            $table->string('customersName'); // Customer name
+            $table->string('customersEmail'); // Customer email
+            $table->integer('room_number'); // Room number
+            $table->date('start_date'); // Booking start date
+            $table->date('end_date'); // Booking end date
             $table->timestamps();
         });
     }

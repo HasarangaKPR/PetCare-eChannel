@@ -3,7 +3,10 @@ import Header from './Components/Header';
 import SideList from './Components/SideList';
 import AddDoctorModal from './Components/AddDoctorModal'; // Import the AddDoctorModal component
 import { Head } from '@inertiajs/react';
-import './SAdashboard.css'; 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
+
 
 const SADoctors = () => {
     const [users, setUsers] = useState([]);
@@ -16,8 +19,7 @@ const SADoctors = () => {
 
     const fetchUsers = async () => {
         try {
-            const id = 2;
-            const response = await fetch(route('viewDoctors', { id }));
+            const response = await fetch(route('viewDoctors'));
             const data = await response.json();
             setUsers(data.users);
         } catch (error) {
@@ -33,12 +35,27 @@ const SADoctors = () => {
         setIsModalOpen(false); // Close the modal after submission
     };
 
+
+    const handleDeleteDoctor = async (userId) => {
+        try {
+            const response = await axios.delete(`/deleteDoctor/${userId}`);
+            if (response.status === 200) {
+                toast.success('Doctor Deleted Successfully!');
+            }
+            } 
+            catch (error) {
+
+        }
+    };
+  
+
     return (
         <>
             <Head title="Doctors" />
             <div className="flex flex-col h-screen">
                 <Header />
                 <div className="flex flex-grow">
+                <ToastContainer position="top-right" autoClose={5000} />
                     <SideList />
                     <div className="flex-grow p-6">
                         <div className="flex justify-between items-center mb-4">
@@ -67,7 +84,10 @@ const SADoctors = () => {
                                         <td className="p-3">{user.email}</td>
                                         <td className="p-3">{user.created_at}</td>
                                         <td className="p-3">
-                                            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors">
+                                        <button 
+                                                className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors"
+                                                onClick={() => handleDeleteDoctor(user.id)} // Call delete function
+                                            >
                                                 Delete
                                             </button>
                                         </td>

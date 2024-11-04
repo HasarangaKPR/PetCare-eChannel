@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Header from './Components/Header';
 import SideList from './Components/SideList';
 import { Head } from '@inertiajs/react';
-import './SAdashboard.css'; 
 import AddDaycareModal from './Components/AddDaycareModal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const SADoctors = () => {
+const SADaycareAdmin = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
+
+
+    
 
     useEffect(() => {
         fetchUsers();
@@ -16,16 +20,29 @@ const SADoctors = () => {
 
     const fetchUsers = async () => {
         try {
-            const id = 2;
-            const response = await fetch(route('viewDoctors', { id }));
+            const response = await fetch(route('viewDayCare'));
             const data = await response.json();
-            setUsers(data.users);
+            setUsers(data.daycares);
         } catch (error) {
             console.error('Error fetching users:', error);
         } finally {
             setLoading(false);
         }
     };
+
+
+    const handleDeleteDoctor = async (userId) => {
+        try {
+            const response = await axios.delete(`/deleteDayCare/${userId}`);
+            if (response.status === 200) {
+                toast.success('DayCare Center Deleted Successfully!');
+            }
+            } 
+            catch (error) {
+
+        }
+    };
+
 
     // Function to handle adding a new doctor (after the form is submitted)
     const handleAddDoctor = (newDoctor) => {
@@ -39,6 +56,7 @@ const SADoctors = () => {
             <div className="flex flex-col h-screen">
                 <Header />
                 <div className="flex flex-grow">
+                <ToastContainer position="top-right" autoClose={5000} />
                     <SideList />
                     <div className="flex-grow p-6">
                         <div className="flex justify-between items-center mb-4">
@@ -67,7 +85,9 @@ const SADoctors = () => {
                                         <td className="p-3">{user.email}</td>
                                         <td className="p-3">{user.created_at}</td>
                                         <td className="p-3">
-                                            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors">
+                                            <button className="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600 transition-colors"
+                                                    onClick={() => handleDeleteDoctor(user.id)}
+                                            >
                                                 Delete
                                             </button>
                                         </td>
@@ -90,4 +110,4 @@ const SADoctors = () => {
     );
 };
 
-export default SADoctors;
+export default SADaycareAdmin;
