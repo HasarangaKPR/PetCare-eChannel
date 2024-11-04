@@ -59,6 +59,8 @@ Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('del
 // In routes/web.php
 Route::get('/ads/{adId}', [PetAdController::class, 'showAd'])->name('ads.show');
 
+//search pet
+Route::get('/SearchPet', [PetAdController::class, 'searchPet'])->name('SearchPet'); 
 
 
 
