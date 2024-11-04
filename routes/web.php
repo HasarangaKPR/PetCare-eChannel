@@ -60,3 +60,10 @@ Route::get('/selling/home/{adId}',[PetAdController::class, 'showAd'])->name('sho
 Route::put('/updateAd/{adId}',[PetAdController::class, 'updateAd'])->name('updateAd');
 Route::delete('/deleteAd/{adId}',[PetAdController::class, 'destroy'])->name('deleteAd');
 
+// view details page
+// In routes/web.php
+Route::get('/ads/{adId}', [PetAdController::class, 'showAd'])->name('ads.show');
+
+
+
+
