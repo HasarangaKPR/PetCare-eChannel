@@ -10,26 +10,26 @@ const BlogSection = () => {
         {
             image: [image1],
             date: 'June 2, 2023',
-            title: 'Lorem ipsum dolor sit amet consectetur.',
-            description: 'Lorem ipsum dolor sit amet. Vitae eu iaculis orci elit eget.',
+            title: 'German Shepherd',
+            description: 'The German Shepherd, also known in Britain as an Alsatian, is a German breed of working dog of medium to large size.',
         },
         {
             image: [image2],
             date: 'June 2, 2023',
-            title: 'Lorem ipsum dolor sit amet consectetur.',
-            description: 'Lorem ipsum dolor sit amet. Vitae eu iaculis orci elit eget.',
+            title: 'Siberian Husky',
+            description: 'The Siberian Husky is a medium-sized working sled dog breed. The breed belongs to the Spitz genetic family.',
         },
         {
             image: [image3],
             date: 'June 2, 2023',
-            title: 'Lorem ipsum dolor sit amet consectetur.',
-            description: 'Lorem ipsum dolor sit amet. Vitae eu iaculis orci elit eget.',
+            title: 'Alaskan Malamute',
+            description: 'The Alaskan Malamute is a large breed of dog that was originally bred for its strength and endurance,',
         },
         {
             image: [image4],
             date: 'June 2, 2023',
-            title: 'Lorem ipsum dolor sit amet consectetur.',
-            description: 'Lorem ipsum dolor sit amet. Vitae eu iaculis orci elit eget.',
+            title: 'Scottish folds',
+            description: 'Scottish folds are rare felines, prized for their huggable good looks and sweet personalities. ',
         },
     ];
 
