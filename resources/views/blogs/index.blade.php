@@ -76,8 +76,8 @@
                     @endif
                     <div class="blog-content">
                         <h2 class="blog-title">{{ $blog->title }}</h2>
-                        <p class="blog-description"><strong>Description:</strong> {{ $blog->description }}</p>
-                        <p class="blog-date"><strong>Date:</strong> {{ $blog->date }}</p>
+                        <p class="blog-description"><strong> </strong> {{ $blog->description }}</p>
+                        <p class="blog-date"><strong> </strong> {{ $blog->date }}</p>
                     </div>
                 </div>
             @endforeach
