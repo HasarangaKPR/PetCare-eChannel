@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog List</title>
     <style>
+        /* General styling */
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f8ff;
@@ -14,9 +15,16 @@
         }
         h1 {
             text-align: center;
-            color: #22AAA1;
+            color: #ecf1f0;
             margin-bottom: 20px;
             font-size: 2.5em;
+        }
+        /* Header styling */
+        header {
+            background-color: #22AAA1;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
         .blog-container {
             max-width: 1200px;
@@ -63,10 +71,24 @@
             height: auto;
             border-bottom: 4px solid #f6ad55;
         }
+        footer {
+            border-top: 4px solid #22AAA1;
+            padding: 20px;
+            text-align: center;
+            background-color: #156862;
+            color: white;
+            margin-top: 6px;
+        }
     </style>
 </head>
 <body>
-    <h1>Blogs</h1>
+    <!-- Header Section -->
+    <header>
+        <h1>Welcome to PetCare Blog</h1>
+        <p>Your one-stop destination for pet care tips, stories, and resources!</p>
+    </header>
+
+    
     <div class="blog-container">
         <div class="blog-grid">
             @foreach ($blogs as $blog)
@@ -76,15 +98,15 @@
                     @endif
                     <div class="blog-content">
                         <h2 class="blog-title">{{ $blog->title }}</h2>
-                        <p class="blog-description"><strong> </strong> {{ $blog->description }}</p>
-                        <p class="blog-date"><strong> </strong> {{ $blog->date }}</p>
+                        <p class="blog-description"><strong></strong> {{ $blog->description }}</p>
+                        <p class="blog-date"><strong></strong> {{ $blog->date }}</p>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
 
-    <footer style="border-top: 4px solid #22AAA1; padding: 20px; text-align: center; background-color: #156862; color: white; margin-top: 6px;">
+    <footer>
         <p>&copy; Copyright 2024 PetCare. All rights reserved.</p>
         <div class="flex justify-center space-x-4 mt-4">
             <a href="#" style="color: white; margin: 0 10px;">Facebook</a>
@@ -92,7 +114,7 @@
             <a href="#" style="color: white; margin: 0 10px;">Instagram</a>
         </div>
     </footer>
-    
 </body>
 </html>
+
 
