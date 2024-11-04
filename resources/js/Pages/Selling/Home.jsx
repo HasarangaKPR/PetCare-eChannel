@@ -74,9 +74,7 @@ const Home = () => {
                                     className="w-full h-48 object-cover"
                                 />
                                 <div className="p-4">
-
                                     <h2 className="text-xl font-semibold text-green-600">{ad.price}</h2>
-                                    <p className="text-gray-600">{ad.pet_name}</p>
                                     <p className="text-gray-600">{ad.breed}</p>
                                     <p className="text-gray-400">{ad.location}</p>
                                     <p className="text-gray-400">{ad.seller_name}</p>
