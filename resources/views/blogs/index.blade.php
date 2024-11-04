@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #e9eef2;
+            background-color: #f0f8ff;
             color: #333;
             margin: 0;
             padding: 20px;
@@ -16,57 +16,72 @@
             text-align: center;
             color: #184375;
             margin-bottom: 20px;
+            font-size: 2.5em;
         }
         .blog-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
-            background-color: rgb(36, 211, 100);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
         }
         .blog-post {
-            margin-bottom: 20px;
-            padding: 15px;
-            border: 1px solid #75ece0;
-            border-radius: 5px;
-            background-color: #80e3ea;
+            background: linear-gradient(145deg, #e0e7ff, #ffecd1);
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
             transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid #ffb6b9;
         }
         .blog-post:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
-        h2 {
-            color: #333;
+        .blog-content {
+            padding: 20px;
+        }
+        .blog-title {
+            font-size: 1.5em;
+            color: #2d3748;
             margin-top: 0;
         }
-        p {
-            margin: 5px 0;
+        .blog-description {
+            font-size: 1em;
+            color: #4a5568;
+            margin-bottom: 10px;
+        }
+        .blog-date {
+            font-size: 0.85em;
+            color: #718096;
+            margin-top: 8px;
         }
         img {
-            border-radius: 5px;
-            margin-top: 10px;
-            display: block;
-            max-width: 100%;
+            width: 100%;
             height: auto;
+            border-bottom: 4px solid #f6ad55;
         }
     </style>
 </head>
 <body>
-    <h1>Blog List</h1>
+    <h1>Our Blog Posts</h1>
     <div class="blog-container">
-        @foreach ($blogs as $blog)
-            <div class="blog-post">
-                <h2>{{ $blog->title }}</h2>
-                <p><strong>Description:</strong> {{ $blog->description }}</p>
-                <p> </p>
-                <p><strong>Date:</strong> {{ $blog->date }}</p>
-                @if ($blog->image)
-                    <img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image">
-                @endif
-            </div>
-        @endforeach
+        <div class="blog-grid">
+            @foreach ($blogs as $blog)
+                <div class="blog-post">
+                    @if ($blog->image)
+                        <img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image">
+                    @endif
+                    <div class="blog-content">
+                        <h2 class="blog-title">{{ $blog->title }}</h2>
+                        <p class="blog-description"><strong>Description:</strong> {{ $blog->description }}</p>
+                        <p class="blog-date"><strong>Date:</strong> {{ $blog->date }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 </body>
 </html>
