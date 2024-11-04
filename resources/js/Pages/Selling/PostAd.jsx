@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Header from'../SystemAdmin/Components/Header';
 
 const PostAd = () => {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -22,6 +25,7 @@ const PostAd = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        toast.success('Ad Posted successfully.');
 
         // Create a FormData object to send files correctly
         const formData = new FormData();
@@ -39,6 +43,7 @@ const PostAd = () => {
 
     return (
         <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+            <ToastContainer position="top-right" autoClose={5000} />
             <h1 className="text-2xl font-bold mb-6">Post a New Pet Ad</h1>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 {/* Pet Information */}
