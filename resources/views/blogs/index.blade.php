@@ -66,7 +66,7 @@
     </style>
 </head>
 <body>
-    <h1>Our Blog Posts</h1>
+    <h1>Blogs</h1>
     <div class="blog-container">
         <div class="blog-grid">
             @foreach ($blogs as $blog)

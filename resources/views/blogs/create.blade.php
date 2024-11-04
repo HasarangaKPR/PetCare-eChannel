@@ -6,60 +6,73 @@
     <title>Create Blog</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #24c17d;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
             color: #333;
             margin: 0;
             padding: 20px;
         }
         h1 {
             text-align: center;
-            color: #1d0c68;
+            color: #4A90E2;
             margin-bottom: 20px;
+            font-size: 2.5em;
         }
         form {
             max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
-            background-color: #c3e6e6;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: bold;
+            color: #4A90E2;
         }
         input[type="text"],
         input[type="date"],
         textarea,
         input[type="file"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            transition: border-color 0.3s;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-size: 16px;
         }
         input[type="text"]:focus,
         input[type="date"]:focus,
         textarea:focus {
             border-color: #4A90E2;
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
             outline: none;
         }
         button {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #4A90E2;
             color: white;
             border: none;
-            border-radius: 4px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s;
         }
         button:hover {
-            background-color: #1a8d4e;
+            background-color: #357ABD;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
