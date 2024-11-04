@@ -169,7 +169,7 @@ const PostAd = () => {
                     </div>
 
                     <div className="mb-4">
-                        <label className="block text-sm font-medium">Phone Number</label>
+                        <label className="block text-sm font-medium">Contact Number</label>
                         <input
                             type="text"
                             value={data.phone_number}
