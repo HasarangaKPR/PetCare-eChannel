@@ -94,6 +94,16 @@
 
         <button type="submit">Post Blog</button>
     </form>
+
+    <footer style="border-top: 4px solid #22AAA1; padding: 20px; text-align: center; background-color: #156862; color: white; margin-top: 6px;">
+        <p>&copy; Copyright 2024 PetCare. All rights reserved.</p>
+        <div class="flex justify-center space-x-4 mt-4">
+            <a href="#" style="color: white; margin: 0 10px;">Facebook</a>
+            <a href="#" style="color: white; margin: 0 10px;">Twitter</a>
+            <a href="#" style="color: white; margin: 0 10px;">Instagram</a>
+        </div>
+    </footer>
+    
 </body>
 </html>
 
