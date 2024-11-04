@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Mail;
-
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,15 +14,14 @@ class DoctorRegistrationConfirmationMail extends Mailable
     use Queueable, SerializesModels;
     
     public $user;
-    public $doctor;
+    //public $doctor;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user,$doctor)
+    public function __construct($user)
     {
         $this->user = $user;
-        $this->doctor = $doctor;
     }
 
     /**
@@ -57,7 +56,7 @@ class DoctorRegistrationConfirmationMail extends Mailable
     public function build()
     {
         return $this->view('email.DoctorRegistrationConfirmationMail')
-                    ->with(['user' => $this ->user])
-                    ->with(['doctor'=> $this -> doctor]);
+                    ->with(['user' => $this ->user]);
+
     }
 }
