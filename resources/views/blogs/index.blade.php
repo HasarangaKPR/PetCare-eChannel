@@ -83,6 +83,15 @@
             @endforeach
         </div>
     </div>
+
+    <footer className="py-16 text-center text-sm text-white bg-[#156862] mt-6">
+        <p>©Copyright 2024 PetCare. All right reserved.</p>
+        <div className="flex justify-center space-x-4 mt-4">
+            <a href="#" className="text-white">Facebook</a>
+            <a href="#" className="text-white">Twitter</a>
+            <a href="#" className="text-white">Instagram</a>
+        </div>
+    </footer>
 </body>
 </html>
 
